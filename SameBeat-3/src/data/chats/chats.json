@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "lastMessage": "Hey! How are you?",
+    "timestamp": "10:30 AM",
+    "unreadCount": 2
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "lastMessage": "See you later!",
+    "timestamp": "Yesterday",
+    "unreadCount": 0
+  },
+  {
+    "id": 3,
+    "userId": 3,
+    "lastMessage": "Are we still meeting tonight?",
+    "timestamp": "9:12 PM",
+    "unreadCount": 5
+  },
+  {
+    "id": 4,
+    "userId": 4,
+    "lastMessage": "I sent the files already.",
+    "timestamp": "Monday",
+    "unreadCount": 1
+  },
+  {
+    "id": 5,
+    "userId": 5,
+    "lastMessage": "That playlist was amazing 😭",
+    "timestamp": "2:40 PM",
+    "unreadCount": 0
+  },
+  {
+    "id": 6,
+    "userId": 6,
+    "lastMessage": "Can you call me later?",
+    "timestamp": "11:45 AM",
+    "unreadCount": 3
+  },
+  {
+    "id": 7,
+    "userId": 7,
+    "lastMessage": "Let's work on the UI tomorrow.",
+    "timestamp": "Yesterday",
+    "unreadCount": 0
+  },
+  {
+    "id": 8,
+    "userId": 8,
+    "lastMessage": "OMG SAMEBEAT LOOKS INSANE",
+    "timestamp": "5 mins ago",
+    "unreadCount": 7
+  },
+  {
+    "id": 9,
+    "userId": 9,
+    "lastMessage": "The animations feel so smooth.",
+    "timestamp": "8:01 AM",
+    "unreadCount": 0
+  },
+  {
+    "id": 10,
+    "userId": 10,
+    "lastMessage": "Can you review my component?",
+    "timestamp": "Sunday",
+    "unreadCount": 4
+  },
+  {
+    "id": 11,
+    "userId": 11,
+    "lastMessage": "Spotify wishes it looked like this.",
+    "timestamp": "1 hour ago",
+    "unreadCount": 2
+  },
+  {
+    "id": 12,
+    "userId": 12,
+    "lastMessage": "I'll send the assets later.",
+    "timestamp": "Friday",
+    "unreadCount": 0
+  }
+]

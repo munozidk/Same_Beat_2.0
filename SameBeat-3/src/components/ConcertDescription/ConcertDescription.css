@@ -1,0 +1,17 @@
+.description-container {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #D9D9D9;
+}
+
+.description-text {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #D9D9D9;
+    opacity: 0.8;
+}
