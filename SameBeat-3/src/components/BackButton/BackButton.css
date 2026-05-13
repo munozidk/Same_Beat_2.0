@@ -1,0 +1,22 @@
+.back-button {
+    width: 44px;
+    height: 44px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 1000;
+}
+
+.back-button:active {
+    transform: scale(0.9);
+}
+
+.back-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+

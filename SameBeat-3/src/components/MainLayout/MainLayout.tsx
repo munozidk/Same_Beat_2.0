@@ -10,7 +10,7 @@ import './MainLayout.css';
 
 interface MainLayoutProps {
     children: React.ReactNode;
-} 
+}
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const location = useLocation();

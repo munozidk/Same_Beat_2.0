@@ -1,0 +1,21 @@
+.concert-details-screen {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.details-scroll-content {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+}
+
+.details-scroll-content::-webkit-scrollbar {
+    display: none;
+}
+
+.ticket-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}

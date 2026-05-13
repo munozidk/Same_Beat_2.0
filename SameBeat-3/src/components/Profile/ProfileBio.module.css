@@ -1,0 +1,74 @@
+.container {
+  padding: 0 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.location {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 8px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.bioText {
+  font-size: 14px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 20px;
+  max-width: 600px;
+}
+
+.musicInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 8px 16px;
+  border-radius: 20px;
+  width: fit-content;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.playIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.songName {
+  font-weight: 600;
+  color: #fff;
+  font-size: 14px;
+}
+
+.artistName {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+}
+
+@media (max-width: 768px) {
+  .location {
+    font-size: 12px;
+  }
+  
+  .bioText {
+    font-size: 13px;
+    margin-bottom: 15px;
+  }
+
+  .musicInfo {
+    padding: 6px 12px;
+  }
+
+  .songName {
+    font-size: 12px;
+  }
+
+  .artistName {
+    font-size: 11px;
+  }
+}

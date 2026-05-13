@@ -1,0 +1,11 @@
+.communities-screen {
+    display: flex;
+    flex-direction: column;
+}
+
+.communities-content {
+    flex: 1;
+    padding: 20px 24px;
+    position: relative;
+    z-index: 10;
+}
