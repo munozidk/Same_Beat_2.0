@@ -1,4 +1,6 @@
 import "./LiveMap.css"
+import { useEffect } from "react"
+import { useMap } from "react-leaflet"
 
 // Hook de react-router-dom
 // useNavigate sirve para navegar
@@ -138,6 +140,7 @@ const usersNearby = [
   }
 ]
 
+
 /* 
   ICONO PERSONALIZADO
   
@@ -157,6 +160,21 @@ const customIcon = new L.Icon({
 
   iconSize: [52, 52]
 })
+
+function FixMapSize() {
+
+  const map = useMap()
+
+  useEffect(() => {
+
+    setTimeout(() => {
+      map.invalidateSize()
+    }, 100)
+
+  }, [map])
+
+  return null
+}
 
 /* 
   Props del componente
@@ -259,23 +277,21 @@ const LiveMap = ({
           MAPCONTAINER
           
           Contenedor principal
-          del mapa
+          del mapa centrado
         */}
         <MapContainer
+        center={userPosition}
+        zoom={14}
+        scrollWheelZoom={true}
+        className="live-map"
+      >
 
-          /* 
-            Centro inicial del mapa
-          */
-          center={userPosition}
+        <FixMapSize />
 
-          /* Nivel de zoom */
-          zoom={14}
-
-          /* Permite zoom con scroll */
-          scrollWheelZoom={true}
-
-          className="live-map"
-        >
+        <TileLayer
+          attribution="&copy; CARTO"
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+        />
 
           {/* 
             TILELAYER
