@@ -1,0 +1,137 @@
+.match-screen {
+    display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+
+    padding: 16px;
+
+    gap: 18px;
+
+    overflow: hidden;
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    .match-screen {
+
+        padding: 12px;}
+    }
+
+
+@media (min-width: 1024px) {
+    .match-screen {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+.match-screen__header {
+    text-align: center;
+}
+
+.match-screen__header h1 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--white);
+}
+
+.match-screen__header p {
+    font-size: 0.9rem;
+    color: var(--text-icon-purple);
+}
+
+  .match-card {
+
+     border-radius: 28px;
+}
+
+  .match-card img {
+
+     object-fit: cover;
+}
+
+
+.match-screen__card-container {
+    flex: 1;
+
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 0;
+}
+
+.match-screen__empty {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+}
+
+.match-screen__reset-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--lime-green);
+    color: black;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.match-screen__actions {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.swipe-btn {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.swipe-btn.nope {
+    background: rgba(255, 77, 77, 0.2);
+    color: #ff4d4d;
+    border: 1px solid #ff4d4d;
+}
+
+.swipe-btn.like {
+    background: rgba(198, 255, 52, 0.2);
+    color: var(--lime-green);
+    border: 1px solid var(--lime-green);
+}
+
+.swipe-btn:hover {
+    transform: scale(1.1);
+}
+
+.match-screen__mobile-suggestions {
+    display: flex;
+    flex-direction: column;
+
+    gap: 80px;
+}
+
+.match-screen__mobile-suggestions {
+    display: flex;
+    flex-direction: column;
+
+    gap: 70px;
+
+    padding-top: 50px;
+}
