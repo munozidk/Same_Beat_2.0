@@ -7,7 +7,7 @@ const BottomNav: React.FC = () => {
     const navigate = useNavigate();
     const { pathname } = useLocation();
 
-    const isHomeActive = pathname === '/';
+    const isHomeActive = pathname === '/home';
     const isConcertsActive =
         pathname === '/concerts' || /^\/concert(\/|$)/.test(pathname);
     const isDiscoverActive = pathname === '/discover';
@@ -19,7 +19,7 @@ const BottomNav: React.FC = () => {
                 <button
                     type="button"
                     className={`nav-btn${isHomeActive ? ' active-btn' : ''}`}
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/home')}
                     aria-current={isHomeActive ? 'page' : undefined}
                     aria-label="Home"
                 >

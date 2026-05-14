@@ -4,14 +4,15 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     color: white;
 }
 
 .share-count {
-    font-size: 12px;
+    font-size: 15px;
     font-weight: 600;
-    padding-top: 50px;
+    padding: 0px;
+    line-height: 1;
 }
 
 .repeat-active {
