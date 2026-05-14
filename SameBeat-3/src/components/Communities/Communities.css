@@ -4,17 +4,18 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: auto;
-  min-height: 0;
+  height: 300px;      /* ← altura fija, ajusta al gusto */
   padding: 24px;
-  overflow: visible;
+  overflow: hidden;   /* el card no se desborda */
+  flex-shrink: 0;
 
-  /* PC (por defecto): glass frame */
   border-radius: 50px 50px 0px 50px;
-  background: rgba(102, 101, 101, 0.25);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow:
     inset 0 1px 2px rgba(255, 255, 255, 0.25),
-    inset 0 4px 10px rgba(0, 0, 0, 0.25);
+    inset 0 4px 10px rgba(0, 0, 0, 0.25),
+    0 8px 32px rgba(0, 0, 0, 0.35);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
@@ -27,22 +28,23 @@
   flex-shrink: 0;
 }
 
-/* Sin scroll interno: crece con el contenido; el scroll es el de .chat-screen__content-scrollable */
+/* Sin scroll interno: crece con el contenido */
 .communities-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
   height: auto;
-  overflow-y: visible;
+  overflow-y: auto;
   overflow-x: visible;
   padding-right: 0;
   flex: none;
 }
 
-/* Móvil / tablet: integrado al fondo, sin marco flotante */
+/* Móvil / tablet: sin marco */
 @media (max-width: 1023px) {
   .section-container {
     background: transparent;
+    border: none;
     box-shadow: none;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -92,4 +94,11 @@
 
 .avatar-group img:first-child {
   margin-left: 0;
+}
+.communities-list::-webkit-scrollbar {
+  width: 6px;
+}
+.communities-list::-webkit-scrollbar-thumb {
+  background: rgb(198, 255, 52);
+  border-radius: 999px;
 }
