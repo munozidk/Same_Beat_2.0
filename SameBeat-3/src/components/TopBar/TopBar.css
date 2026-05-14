@@ -27,6 +27,14 @@
     color: white;
 }
 
+.topbar__center {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .topbar__input {
     flex: 1;
@@ -105,6 +113,23 @@
     width: 100%;
     height: 100%;
 
+    object-fit: cover;
+}
+
+/* Avatar en TopBar (no depender de estilos de ChatPreview en otras pantallas) */
+.topbar .profile__avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid #c5ff34d5;
+    box-shadow: 0 0 15px rgba(185, 255, 64, 0.35);
+}
+
+.topbar .profile__avatar img {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 

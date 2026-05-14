@@ -17,7 +17,7 @@ export default function App() {
     <FilterProvider>
       <Router>
         <MainLayout>
-          <Routes>
+          <Routes> 
             <Route path="/home" element={<HomeScreen />} />
             <Route path="/concerts" element={<Concerts />} />
             <Route path="/concert/:id" element={<ConcertDetails />} />
@@ -25,9 +25,9 @@ export default function App() {
             <Route path="/concert/:id/communities" element={<Communities />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/profile" element={<ProfileScreen />} />
-            <Route path="/profile" element={<ChatScreen />} />
-            <Route path="/profile" element={<MapScreen />} />
-            <Route path="/profile" element={<MatchScreen />} />
+            <Route path="/Chat" element={<ChatScreen />} />
+            <Route path="/Map" element={<MapScreen />} />
+            <Route path="/Match" element={<MatchScreen />} />
           </Routes>
         </MainLayout>
       </Router>
