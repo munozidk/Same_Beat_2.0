@@ -87,8 +87,8 @@
 .suggestion-card__overlay {
     position: absolute;
 
-    bottom: -12px;
-    left: 26px;
+    bottom: -60px;
+    left: 20px;
 
     width: 75%;
     height: 80px;
@@ -97,7 +97,7 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
 
     color: white;
 
@@ -119,7 +119,7 @@
 
     clip-path: path("M55.7314 0H10.9764C4.91428 0 0 4.91428 0 10.9763V70.6855H154.312V25.5148C154.312 19.4527 149.398 14.5384 143.336 14.5384H80.4568C77.4228 14.5384 74.5242 13.2826 72.4491 11.0692L66.4083 4.62563C63.6416 1.67441 59.7767 0 55.7314 0Z");
     
-    scale: 1.13;
+    scale: 1.30;
 
     transform-origin: bottom left;
 }
@@ -140,13 +140,16 @@
 }
 
 .suggestion-card__overlay h3 {
-    font-size: 13px;
-    line-height: 2;
+    transform: scale(0.85);   /* escala solo el título */
+    font-size: 12px;         /* tamaño base */
+    margin: 0;
+   
 }
 
 .suggestion-card__overlay p {
-    font-size: 12px;
-    line-height: 1.1;
+    transform: scale(0.75);   /* escala solo el párrafo */
+    line-height: 0.80;        /* un poco más aire */
+    margin: 0;
 }
 
 /* ADD CARD */

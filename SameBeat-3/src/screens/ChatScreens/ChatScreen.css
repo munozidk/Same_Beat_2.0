@@ -12,8 +12,6 @@
 
     position: relative;
 
-    /* IMPORTANTE */
-    overflow: hidden;
 }
 
 .chat-screen-wrapper {
