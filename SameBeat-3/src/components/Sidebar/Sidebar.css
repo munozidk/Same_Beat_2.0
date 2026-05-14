@@ -4,7 +4,7 @@
 
 .sidebar {
     width: 255px;
-    min-height: 100vh;
+    min-height: 100px;
 
     display: flex;
     flex-direction: column;
@@ -28,13 +28,14 @@
 
 .sidebar::after {
     content: '';
+
     position: absolute;
 
     top: 130px;
-    left: 12px;
+    left: 15px;
 
-    width: calc(100% - 24px);
-    height: calc(100vh - 160px);
+    width: 79%;
+    height: 88%;
 
     background: linear-gradient(
         180deg,
@@ -57,7 +58,7 @@
 .sidebar__logo {
 
     height: 110px;
-
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,7 +69,7 @@
 .sidebar__logo-img {
     width: 120px;
     height: auto;
-
+    justify-content: center;
     object-fit: contain;
 
     z-index: 2;
@@ -79,9 +80,11 @@
 .sidebar__nav {
     display: flex;
     flex-direction: column;
+
     gap: 20px;
-    padding-top: 0px;
-    margin-top:0;
+
+    padding-top: 30px;
+
     position: relative;
 }
 
@@ -267,4 +270,105 @@
     opacity: 1;
 
     transform: scale(1);
+}
+
+/* =========================
+   DROPDOWN CREATE
+========================= */
+
+.sidebar__dropdown {
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+/* MENU */
+
+.sidebar__dropdown-menu {
+
+    width: 200px;
+
+    margin-left: 22px;
+
+    padding: 18px 0;
+
+    border-radius: 0px 0px 30px 30px;
+
+    background: linear-gradient(
+        180deg,
+        #140028 0%,
+        #24004e 100%
+    );
+
+    border: 1px solid rgba(198,255,52,0.2);
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.35),
+        inset 0 0 12px rgba(127,59,237,0.3);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    animation: dropdownFade 0.25s ease;
+}
+
+/* ITEMS */
+
+.sidebar__dropdown-item {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 12px 24px;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.sidebar__dropdown-item:hover {
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: #d9ff57;
+}
+
+/* ANIMACIÓN */
+
+@keyframes dropdownFade {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-10px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
 }
