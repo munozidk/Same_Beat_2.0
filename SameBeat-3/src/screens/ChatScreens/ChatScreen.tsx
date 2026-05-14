@@ -88,7 +88,8 @@ const ChatScreen = ({
         <main className="chat-screen__main">
           {/* Fijo arriba: barra con buscador */}
           <div className="chat-screen__top">
-            <TopBar>
+            <TopBar title="Chats" />
+            {/* <TopBar>
               <SearchBar
                 value={search}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
@@ -96,7 +97,7 @@ const ChatScreen = ({
                 }
                 placeholder="Buscar chats..."
               />
-            </TopBar>
+            </TopBar> */}
           </div>
 
           {/* Un solo scroll: sugerencias, comunidades y chats directos (sin scrolls internos) */}
