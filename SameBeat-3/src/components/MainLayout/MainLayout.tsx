@@ -1,11 +1,14 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar';
+import Sidebar from '../SideBar/Sidebar';
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
 import HeaderConcerts from '../HeaderConcerts/HeaderConcerts';
 import BottomNav from '../BottomNav/BottomNav';
+import ChatList from '../ChatList/ChatList';
+import NowPlaying from '../NowPLaying/NowPlaying';
 import { useFilter } from '../../contexts/FilterContext';
+import { chats, users, songs } from '../../data/index';
 import './MainLayout.css';
 
 interface MainLayoutProps {
@@ -17,9 +20,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const isConcertsScreen = location.pathname === '/concerts';
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
 
+    const chatPreviews = chats.slice(0, 3).map(chat => {
+        const user = users.find(u => u.id === chat.userId)
+        return {
+            id: chat.id,
+            name: user?.username ?? 'Unknown',
+            image: user?.image ?? ''
+        }
+    })
+
     return (
         <div className="app-container screen-container">
-            {/* Desktop Layout (Dashboard style) */}
+            {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
                     <HeaderConcerts />
@@ -51,20 +63,16 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
                     <aside className="right-panel">
                         <section className="right-panel-top">
-                            <div className="user-names-placeholder">
-                                {/* Space for User names / Community components */}
-                            </div>
+                            <ChatList chats={chatPreviews} />
                         </section>
                         <section className="right-panel-bottom">
-                            <div className="now-playing-placeholder">
-                                {/* Space for "Now Playing" and Player controls */}
-                            </div>
+                            <NowPlaying songs={songs} />
                         </section>
                     </aside>
                 </div>
             </div>
 
-            {/* Mobile Layout (Standard SPA style) */}
+            {/* Mobile Layout */}
             <div className="mobile-layout">
                 <main className="mobile-main-content">
                     {isConcertsScreen && (
