@@ -20,6 +20,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const isConcertsScreen = location.pathname === '/concerts';
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
 
+    // Rutas donde SÍ se muestra el panel derecho (NowPlaying + ChatList)
+    // Del resto de pantallas (chats, map, etc.) se oculta
+    const showRightPanel = ['/home', '/concerts', '/profile', '/discover'].includes(location.pathname);
     const chatPreviews = chats.slice(0, 3).map(chat => {
         const user = users.find(u => u.id === chat.userId)
         return {
@@ -31,6 +34,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     return (
         <div className="app-container screen-container">
+
             {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
@@ -62,14 +66,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         </section>
                     </main>
 
-                    <aside className="right-panel">
-                        <section className="right-panel-top">
-                            <ChatList chats={chatPreviews} />
-                        </section>
-                        <section className="right-panel-bottom">
-                            <NowPlaying songs={songs} />
-                        </section>
-                    </aside>
+                    {/* Panel derecho: solo en home, concerts, profile, discovery */}
+                    {showRightPanel && (
+                        <aside className="right-panel">
+                            <section className="right-panel-top">
+                                <ChatList chats={chatPreviews} />
+                            </section>
+                            <section className="right-panel-bottom">
+                                <NowPlaying songs={songs} />
+                            </section>
+                        </aside>
+                    )}
                 </div>
             </div>
 
@@ -95,6 +102,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </main>
                 <BottomNav />
             </div>
+
         </div>
     );
 };
