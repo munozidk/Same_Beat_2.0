@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomeScreen from './screens/Home/HomeScreen';
-import Discover from './screens/Discover/Discover';
+import Discover from './screens/Discover/DiscoverScreen';
 import Concerts from './screens/Concerts/Concerts';
 import ConcertDetails from './screens/ConcertDetails/ConcertDetails';
 import ConcertDescription from './screens/ConcertDescription/ConcertDescription';
@@ -18,8 +18,9 @@ export default function App() {
     <FilterProvider>
       <Router>
         <MainLayout>
-          <Routes>
+          <Routes> 
             <Route path="/home" element={<HomeScreen />} />
+            <Route path='/discover' element={<Discover/>}/>
             <Route path="/concerts" element={<Concerts />} />
             <Route path="/concert/:id" element={<ConcertDetails />} />
             <Route path="/concert/:id/description" element={<ConcertDescription />} />
@@ -33,6 +34,10 @@ export default function App() {
             <Route path="/create/song" element={<div>SONG</div>} />
             <Route path="/create/video" element={<div>VIDEO</div>} />
             <Route path="/create/photo" element={<div>PHOTO</div>} />
+
+            <Route path="/Chat" element={<ChatScreen />} />
+            <Route path="/Map" element={<MapScreen />} />
+            <Route path="/Match" element={<MatchScreen />} />
           </Routes>
         </MainLayout>
       </Router>

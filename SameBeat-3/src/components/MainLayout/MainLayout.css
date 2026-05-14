@@ -33,8 +33,6 @@
     display: none;
 }
 
-
-
 /* Desktop Layout Configuration */
 @media (min-width: 768px) {
     .mobile-layout {
@@ -48,20 +46,37 @@
         height: 100%;
     }
 
-    .header {
-        height: 100px; /* Adjusted to fit the new header design better */
-        width: 100%;
-        background: transparent;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        flex-shrink: 0;
-    }
-
     .desktop-body {
         flex: 1;
         display: flex;
         overflow: hidden;
+        height: 100vh;
+        /* ✅ ocupa toda la pantalla */
+    }
+
+    /* Sidebar */
+    .sidebar {
+        height: 100vh;
+        /* ✅ llega hasta arriba */
+        flex-shrink: 0;
+        width: 240px;
+        /* ajusta según tu diseño */
+        background: transparent;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Header solo en el contenido central */
+    .header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: auto;
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .center-content {
@@ -87,6 +102,7 @@
         flex: 1;
         overflow: hidden;
     }
+
     .main-content-scroll {
         height: 100%;
         overflow-y: auto;
@@ -97,13 +113,16 @@
         display: none;
     }
 
+    /* Right Panel */
     .right-panel {
-        width: 25%;
+        width: 16%;
         min-width: 280px;
         max-width: 400px;
-        height: 100%;
+        height: 100vh;
+        /* ✅ también ocupa toda la altura */
         display: flex;
         flex-direction: column;
+
         background: transparent;
         border-left: 1px solid rgba(255, 255, 255, 0.05);
     }
@@ -119,4 +138,3 @@
         padding: 20px;
     }
 }
-

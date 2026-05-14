@@ -1,0 +1,29 @@
+.discover-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  padding: 24px;
+  overflow-y: auto; /* scroll si hay más contenido */
+}
+
+/* Título */
+.discover-screen__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 0 0 16px 0;
+}
+
+/* Grid de discover cards */
+.discover-screen__grid {
+  display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  margin-top: 5px;          /* separa del filtro toco ponerlo de 5px para que en el repsonsive no se oculten los filtros */
+}
+
+/* La tarjeta mantiene su tamaño natural */
+.discover-screen__grid > * {
+  max-width: 300px;
+}

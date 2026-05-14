@@ -38,7 +38,7 @@ export default function PostCard({ post }: Props) {
 
           <button onClick={() => setShowComments(!showComments)} className="icon-btn">
                 <span className="icon-text">
-                    <MessageCircle size={22} color="#C6FF34" />
+                    <MessageCircle size={22} color="white" />
                         <span className="count">{comments.length}</span>
                 </span>
             </button>

@@ -28,7 +28,6 @@
 
 .sidebar::after {
     content: '';
-
     position: absolute;
 
     top: 130px;
@@ -80,11 +79,9 @@
 .sidebar__nav {
     display: flex;
     flex-direction: column;
-
     gap: 20px;
-
-    padding-top: 30px;
-
+    padding-top: 0px;
+    margin-top:0;
     position: relative;
 }
 
