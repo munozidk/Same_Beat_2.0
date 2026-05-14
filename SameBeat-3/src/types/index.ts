@@ -13,6 +13,9 @@ export interface Post {
   likes: number
   reposts: number
   comments: Comment[]
+  mediaImage?: string | null   
+  mediaVideo?: string | null   
+  mediaSong?: string | null    
 }
 
 export interface Song {

@@ -4,6 +4,7 @@
     background: transparent;
     color: #D9D9D9;
     overflow: hidden;
+    position: relative;
 }
 
 /* Desktop Layout - Default Hidden */
@@ -31,6 +32,13 @@
 
 .mobile-main-content::-webkit-scrollbar {
     display: none;
+}
+
+.mobile-concerts-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 14px 12px;
 }
 
 /* Desktop Layout Configuration */
@@ -86,10 +94,13 @@
         overflow: hidden;
     }
 
-    .filters {
+    .concerts-controls {
         padding: 20px 40px;
         flex-shrink: 0;
         background: transparent;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
     }
 
     .filters-container {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import ProfileUsername from '../../components/Profile/ProfileUsername';
 import ProfileHeaderInfo from '../../components/Profile/ProfileHeaderInfo';
 import ProfileBio from '../../components/Profile/ProfileBio';
@@ -12,6 +13,8 @@ import styles from './ProfileScreen.module.css';
 
 const ProfileScreen: React.FC = () => {
   const { userProfile } = data;
+  const navigate = useNavigate();
+
   const storiesData = data.concerts.map(c => ({
     id: c.id,
     title: c.artist,
@@ -20,6 +23,7 @@ const ProfileScreen: React.FC = () => {
     subtitle: c.tour,
     caption: c.tour
   }));
+
   const [selectedStory, setSelectedStory] = useState<any>(null);
 
   const handleStoryClick = (id: number) => {
@@ -62,7 +66,7 @@ const ProfileScreen: React.FC = () => {
           />
           
           <ProfileActions 
-            onEdit={() => console.log('Edit Profile')}
+            onEdit={() => navigate('/profile/edit')}   
             onMessages={() => console.log('Messages')}
           />
 

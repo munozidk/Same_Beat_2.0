@@ -1,0 +1,16 @@
+.edit-profile-screen {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 90px;
+}
+
+.edit-profile-screen::-webkit-scrollbar {
+  width: 6px;
+}
+
+.edit-profile-screen::-webkit-scrollbar-thumb {
+  background: #C6FF34;
+  border-radius: 6px;
+}
