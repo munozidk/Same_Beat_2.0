@@ -1,10 +1,5 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './screens/Home/Home';
+import HomeScreen from './screens/Home/HomeScreen';
 import Discover from './screens/Discover/Discover';
 import Concerts from './screens/Concerts/Concerts';
 import ConcertDetails from './screens/ConcertDetails/ConcertDetails';
@@ -14,19 +9,14 @@ import ProfileScreen from './screens/Profile/ProfileScreen';
 import MainLayout from './components/MainLayout/MainLayout';
 import { FilterProvider } from './contexts/FilterContext';
 
-
-// ==========================================
-// VERSION DEL EQUIPO 
-// ==========================================
-
 export default function App() {
   return (
     <FilterProvider>
       <Router>
         <MainLayout>
-          <Routes>
-            <Route path="/home" element={<Home />} /> 
-            <Route path="/concerts" element={<Concerts />} /> 
+          <Routes> 
+            <Route path="/home" element={<HomeScreen />} />
+            <Route path="/concerts" element={<Concerts />} />
             <Route path="/concert/:id" element={<ConcertDetails />} />
             <Route path="/concert/:id/description" element={<ConcertDescription />} />
             <Route path="/concert/:id/communities" element={<Communities />} />
@@ -38,6 +28,3 @@ export default function App() {
     </FilterProvider>
   );
 }
-
-
-
