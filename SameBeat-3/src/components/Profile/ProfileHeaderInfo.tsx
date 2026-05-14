@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './ProfileHeaderInfo.module.css';
-
+import profile from "../../assets/profile.jpg"
 interface ProfileHeaderInfoProps {
   name: string;
   age: number;
@@ -17,17 +17,23 @@ const ProfileHeaderInfo: React.FC<ProfileHeaderInfoProps> = ({
   concerts 
 }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.avatarSection}>
-        <div className={styles.avatarWrapper}>
-          <img 
-            src="https://randomuser.me/api/portraits/women/65.jpg" 
-            alt={name} 
-            className={styles.avatar}
-          />
-        </div>
+  <div className={styles.container}>
+
+    <div className={styles.avatarSection}>
+
+      <div className={styles.avatarWrapper}>
+
+        <img
+          src={profile}
+          alt="profile"
+          className={styles.avatar}
+        />
+
       </div>
-      
+
+    </div>
+    
+          
       <div className={styles.infoSection}>
         <div className={styles.nameAge}>
           <span className={styles.name}>{name}</span>

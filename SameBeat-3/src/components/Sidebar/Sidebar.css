@@ -1,41 +1,37 @@
-/* SIDEBAR IZQUIERDO (Desktop solo) */
-
-/* SIDEBAR IZQUIERDO */
+/* =========================
+   SIDEBAR
+========================= */
 
 .sidebar {
-    width: 255px;
-    min-height: 100px;
+
+    width: 280px;
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
+    align-items: center;
 
-    padding: 24px 16px;
+    padding: 24px 0;
 
     position: relative;
 
     overflow: visible;
 }
 
-.sidebar__top {
-    display: flex;
-    flex-direction: column;
-
-    gap: 30px;
-
-    position: relative;
-    z-index: 2;
-}
+/* =========================
+   GLASS FRAME
+========================= */
 
 .sidebar::after {
+
     content: '';
 
     position: absolute;
 
-    top: 130px;
-    left: 15px;
+    top: 220px;
 
-    width: 79%;
-    height: 88%;
+    width: 220px;
+    height: 68%;
 
     background: linear-gradient(
         180deg,
@@ -53,173 +49,148 @@
         0 8px 32px rgba(0, 0, 0, 0.25),
         inset -2px 4px 5px 0px rgba(127, 59, 237, 0.4);
 
+    z-index: 0;
 }
+
+/* =========================
+   TODO ENCIMA DEL FRAME
+========================= */
+
+.sidebar > * {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+/* =========================
+   LOGO
+========================= */
 
 .sidebar__logo {
 
-    height: 110px;
-    
+    height: 152px;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    z-index: 2;
+
+    margin-top: 75px;
 }
 
 .sidebar__logo-img {
+
     width: 120px;
-    height: auto;
-    justify-content: center;
+
     object-fit: contain;
-
-    z-index: 2;
-
 }
 
-/* Navegación del sidebar */
+/* =========================
+   TOP
+========================= */
+
+.sidebar__top {
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================
+   NAV
+========================= */
+
 .sidebar__nav {
+
     display: flex;
     flex-direction: column;
 
     gap: 20px;
 
-    padding-top: 30px;
-
     position: relative;
+
+    top: -155px;
 }
 
-.sidebar__nav-btn {
-    display: flex;
-    align-items: center;
-    padding: 10px 14px;
-    width: 200px;
-    margin-left: 22px;
-    background: linear-gradient(180deg, 
-        #030008 0%, 
-        #090119 33%, 
-        #4107ad 100%);
-    border: 1px solid rgba(198, 255, 52, 0.2);
-    border-radius: 25px 25px 0px 25px;
-    color: var(--text-icon-purple);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: var(--transition);
-    box-shadow: 
-        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
-        0 1px 4px 0 #57349D inset,
-        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
-    z-index: 2;
-}
-
-.sidebar__nav-btn:hover {
-    background: linear-gradient(180deg, 
-        #030008 0%, 
-        #090119 33%, 
-        #2F057F 100%);
-    border-color: rgba(198, 255, 52, 0.4);
-    transform: translateY(-2px);
-}
-
-.sidebar__nav-btn i {
-    width: 20px;
-    height: 20px;
-}
-
-.sidebar__nav-btn span {
-    flex: 1;
-}
-
-/* Estado activo */
-.sidebar__nav-btn--active {
-    border-color: rgba(198, 255, 52, 0.5);
-    background: linear-gradient(180deg,
-        #0a0020 0%,
-        #130035 33%,
-        #3d0aaa 100%);
-}
-
-/* Botón crear en sidebar */
-.sidebar__logout-btn {
-    display: flex;
-    gap: 60px;
-    margin-top: 20px;
-    align-items: center;
-    padding: 10px 14px;
-    margin-left: 22px;
-    width: 200px;
-    background: linear-gradient(135deg, var(--lime-green) 0%, var(--lime-light) 100%);
-    border: 1px solid rgba(198, 255, 52, 0.2);
-    border-radius: 75px 75px 0px 75px;
-    color: #000;
-    font-weight: 600;
-    font-size: 14px;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 
-        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
-        0 1px 4px 0 #57349D inset,
-        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
-    z-index: 1;
-}
-
-.sidebar__logout-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 15px 0 #18210199, 
-                -2px -4px 4px 0 var(--lime-green), 
-                0 1px 4px 0 var(--lime-light);
-}
-
-.sidebar__logout-btn:active {
-    transform: translateY(-1px);
-}
-
-/*  BURBUJA GLASS */
-.sidebar__bubble {
-    margin-left: 3.1%;
-    position: absolute;
-    width: 49px;
-    height: 49px;
-    border-radius: 50%;
-    pointer-events: none;
-
-    background: rgba(255, 255, 255, 0.12);
-    backdrop-filter: blur(0.5px);
-    -webkit-backdrop-filter: blur(0.5px);
-
-    border: 1px solid rgba(255, 255, 255, 0.241);
-
-    box-shadow: 
-        inset 2px 2px 2px #7f3bedd4,
-        inset -2px -2px 6px rgba(0, 0, 0, 0.218),
-        0 8px 20px rgba(0,0,0,0.4);
-
-    opacity: 0;
-    transition: all 0.2s ease;
-    z-index: 10;
-}
-
-/* Bubble effect */
+/* =========================
+   BOTONES
+========================= */
 
 .sidebar__nav-btn {
 
+    width: 190px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 45px;
+
+    padding: 18px;
+
     position: relative;
+
+    left: 11px;
 
     overflow: visible;
 
-    z-index: 1;
+    background: linear-gradient(
+        180deg,
+        #030008 0%,
+        #090119 33%,
+        #4107ad 100%
+    );
+
+    border: 1px solid rgba(
+        198,
+        255,
+        52,
+        0.2
+    );
+
+    border-radius: 25px 25px 0px 25px;
+
+    color: var(--text-icon-purple);
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
+        0 1px 4px 0 #57349D inset,
+        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
 }
 
-/* TODOS LOS ELEMENTOS ENCIMA */
+/* =========================
+   CONTENIDO ENCIMA
+========================= */
 
 .sidebar__nav-btn > * {
 
     position: relative;
 
-    z-index: 2;
+    z-index: 3;
 }
 
-/* BURBUJA */
+/* =========================
+   TEXTO
+========================= */
+
+.sidebar__nav-btn span {
+
+    flex: 1;
+
+    text-align: left;
+}
+
+/* =========================
+   BURBUJA GLASS
+========================= */
 
 .sidebar__nav-btn::before {
 
@@ -234,11 +205,17 @@
 
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(
+        255,
+        255,
+        255,
+        0.12
+    );
 
     backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
 
-    border: 1px solid rgba(255, 255, 255, 0.24);
+   
 
     box-shadow:
         inset 2px 2px 2px #7f3bedd4,
@@ -249,12 +226,40 @@
 
     transform: scale(0.5);
 
-    transition: all 0.3s cubic-bezier(0.34, 1.5, 0.64, 1);
+    transition: all 0.3s cubic-bezier(
+        0.34,
+        1.5,
+        0.64,
+        1
+    );
 
-    z-index: 0;
+    z-index: 1;
 }
 
-/* HOVER */
+/* =========================
+   HOVER
+========================= */
+
+.sidebar__nav-btn:hover {
+
+    background: linear-gradient(
+        180deg,
+        #030008 0%,
+        #090119 33%,
+        #2F057F 100%
+    );
+
+    border-color: rgba(
+        198,
+        255,
+        52,
+        0.4
+    );
+
+    transform: translateY(-2px);
+}
+
+/* BURBUJA HOVER */
 
 .sidebar__nav-btn:hover::before {
 
@@ -263,7 +268,28 @@
     transform: scale(1);
 }
 
-/* ACTIVO */
+/* =========================
+   ACTIVO
+========================= */
+
+.sidebar__nav-btn.active {
+
+    border-color: rgba(
+        198,
+        255,
+        52,
+        0.6
+    );
+
+    background: linear-gradient(
+        180deg,
+        #0a0020 0%,
+        #130035 33%,
+        #3d0aaa 100%
+    );
+}
+
+/* BURBUJA ACTIVA */
 
 .sidebar__nav-btn.active::before {
 
@@ -273,28 +299,94 @@
 }
 
 /* =========================
-   DROPDOWN CREATE
+   LOGOUT
+========================= */
+
+.sidebar__logout-btn {
+
+    width: 190px;
+    height: 52px;
+
+    margin-top: 50px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding:  18px;
+    left: 15px;
+
+    border: none;
+
+    border-radius: 75px 75px 0px 75px;
+
+    background: linear-gradient(
+        135deg,
+        var(--lime-green) 0%,
+        var(--lime-light) 100%
+    );
+
+    color: #000;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
+        0 1px 4px 0 #57349D inset,
+        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sidebar__logout-btn span {
+
+    flex: 1;
+
+    text-align: left;
+}
+
+.sidebar__logout-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 15px 0 #18210199,
+        -2px -4px 4px 0 var(--lime-green),
+        0 1px 4px 0 var(--lime-light);
+}
+
+/* =========================
+   DROPDOWN
 ========================= */
 
 .sidebar__dropdown {
 
-    position: relative;
+    width: 190px;
 
     display: flex;
     flex-direction: column;
 
-    gap: 12px;
+    gap: 10px;
 }
 
-/* MENU */
+/* =========================
+   MENU
+========================= */
 
 .sidebar__dropdown-menu {
 
-    width: 200px;
+    position: absolute;
 
-    margin-left: 22px;
+    bottom: -105px;
 
-    padding: 18px 0;
+    left: 8px;
+
+    width: 100%;
+
+    padding: 14px 0;
 
     border-radius: 0px 0px 30px 30px;
 
@@ -304,21 +396,32 @@
         #24004e 100%
     );
 
-    border: 1px solid rgba(198,255,52,0.2);
-
-    box-shadow:
-        0 10px 35px rgba(0,0,0,0.35),
-        inset 0 0 12px rgba(127,59,237,0.3);
+    border: 1px solid rgba(
+        198,
+        255,
+        52,
+        0.2
+    );
 
     display: flex;
     flex-direction: column;
 
-    gap: 10px;
+    gap: 8px;
 
-    animation: dropdownFade 0.25s ease;
+    z-index: 100;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.35),
+        inset 0 0 12px rgba(
+            127,
+            59,
+            237,
+            0.3
+        );
 }
-
-/* ITEMS */
+/* =========================
+   ITEMS
+========================= */
 
 .sidebar__dropdown-item {
 
@@ -333,11 +436,11 @@
     display: flex;
     align-items: center;
 
-    gap: 14px;
+    gap: 12px;
 
-    padding: 12px 24px;
+    padding: 12px 20px;
 
-    font-size: 16px;
+    font-size: 15px;
 
     cursor: pointer;
 
@@ -346,29 +449,12 @@
 
 .sidebar__dropdown-item:hover {
 
-    background:
-        rgba(255,255,255,0.08);
+    background: rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
 
     color: #d9ff57;
-}
-
-/* ANIMACIÓN */
-
-@keyframes dropdownFade {
-
-    from {
-
-        opacity: 0;
-
-        transform:
-            translateY(-10px);
-    }
-
-    to {
-
-        opacity: 1;
-
-        transform:
-            translateY(0);
-    }
 }
