@@ -23,6 +23,11 @@
   }
 }
 
+/* Barra superior (TopBar + búsqueda): no hace scroll con el feed */
+.chat-screen__top {
+  flex-shrink: 0;
+}
+
 /* MAIN */
 .chat-screen__main {
   display: flex;
@@ -67,22 +72,32 @@
   }
 }
 
-/* MOBILE */
+/* MOBILE: un solo scroll en .chat-screen__content-scrollable; TopBar fija arriba del main */
 @media (max-width: 768px) {
     .chat-screen {
         display: flex;
         flex-direction: column;
         padding: 14px;
-        overflow-y: auto;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
     }
 
     .chat-screen__right-panel {
         display: none !important;
     }
 
+    .chat-screen__main {
+        min-height: 0;
+        overflow: hidden;
+    }
+
     .chat-screen__content-scrollable {
-        overflow: visible;
-        padding-right: 0;
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 10px;
     }
 }
 

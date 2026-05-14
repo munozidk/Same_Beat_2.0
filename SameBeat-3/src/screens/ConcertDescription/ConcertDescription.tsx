@@ -36,7 +36,14 @@ const ConcertDescriptionScreen: React.FC = () => {
                 description={concert.description || ""}
                 assistants={concert.capacity}
                 onClose={() => navigate(-1)}
-                onViewCommunities={() => navigate(`/concert/${concert.id}/communities`)}
+                onViewCommunities={() => {
+                    /* Navegación según ancho: móvil → pantalla dedicada; escritorio → feed de chats */
+                    if (typeof window !== 'undefined' && window.innerWidth <= 768) {
+                        navigate(`/concert/${concert.id}/communities`);
+                    } else {
+                        navigate('/chats');
+                    }
+                }}
             />
         </motion.div>
     );
