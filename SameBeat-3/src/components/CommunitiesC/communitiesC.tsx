@@ -1,14 +1,8 @@
 import "./Communities.css"
 
-// Importamos communities desde el index de data
-import { communities } from "../../data"
-
-// Interface que define la estructura de una comunidad
-interface Community {
-  id: number
-  name: string
-  members: number[]
-}
+// Importamos el archivo JSON
+// donde están guardadas las comunidades
+import communities from "../../data/chats/communities.json"
 
 /* 
   Componente Communities
@@ -51,7 +45,7 @@ const Communities = () => {
           Recorre cada comunidad
           del array communities
         */}
-        {(communities as Community[]).map((community) => (
+        {communities.map((community) => (
 
           /* 
             Cada comunidad se muestra
@@ -83,7 +77,7 @@ const Communities = () => {
                 member representa el número
                 del usuario/avatar
               */}
-              {community.members.map((member: number) => (
+              {community.members.map((member) => (
 
                 <img
 
