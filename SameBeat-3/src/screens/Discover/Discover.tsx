@@ -1,13 +1,12 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Ticket } from 'lucide-react';
-import { useFilter } from '../../contexts/FilterContext';
+import TopBar from '../../components/TopBar/TopBar';
 import './Discover.css';
 
-const Discover: React.FC = () => {
-    const navigate = useNavigate();
-    const { allGenres, selectedGenres, toggleGenre } = useFilter();
-
+const Discover = () => {
+  return (
+    <div className="discover-screen">
+      <TopBar title="Music" />
+    </div>
+  );
 };
 
 export default Discover;

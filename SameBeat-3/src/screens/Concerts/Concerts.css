@@ -1,3 +1,18 @@
+.concerts-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 0 40px 20px;
+}
+
+@media (max-width: 767px) {
+    .concerts-page {
+        padding: 0 14px 14px;
+    }
+}
+
 .concerts-list {
     flex: 1;
     overflow-y: auto;

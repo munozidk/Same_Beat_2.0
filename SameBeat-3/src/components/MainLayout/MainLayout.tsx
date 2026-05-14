@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import Sidebar from '../SideBar/Sidebar';
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
-import HeaderConcerts from '../HeaderConcerts/HeaderConcerts';
+import TopBar from '../TopBar/TopBar';
 import BottomNav from '../BottomNav/BottomNav';
 import ChatList from '../ChatList/ChatList';
 import NowPlaying from '../NowPLaying/NowPlaying';
@@ -42,7 +42,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
                     <main className="center-content">
                         {isConcertsScreen && (
-                            <section className="filters">
+                            <section className="concerts-controls">
+                                <TopBar title="Concerts" />
                                 <div className="filters-container">
                                     <LocationToggle />
                                     <FilterBar 
@@ -76,15 +77,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             <div className="mobile-layout">
                 <main className="mobile-main-content">
                     {isConcertsScreen && (
-                        <div className="mobile-filters-top">
-                            <div className="flex justify-center py-4">
-                                <LocationToggle />
+                        <div className="mobile-concerts-stack">
+                            <TopBar title="Concerts" />
+                            <div className="mobile-filters-top">
+                                <div className="flex justify-center py-4">
+                                    <LocationToggle />
+                                </div>
+                                <FilterBar 
+                                    genres={allGenres} 
+                                    selectedGenres={selectedGenres} 
+                                    onToggleGenre={toggleGenre} 
+                                />
                             </div>
-                            <FilterBar 
-                                genres={allGenres} 
-                                selectedGenres={selectedGenres} 
-                                onToggleGenre={toggleGenre} 
-                            />
                         </div>
                     )}
                     {children}

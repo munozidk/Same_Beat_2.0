@@ -1,0 +1,14 @@
+.discover-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 100%;
+  box-sizing: border-box;
+  padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .discover-screen {
+    padding: 0 14px 14px;
+  }
+}
