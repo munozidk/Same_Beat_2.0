@@ -1,0 +1,49 @@
+.screenContainer {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background: transparent;
+  position: relative;
+}
+
+.backButton {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  z-index: 100;
+}
+
+.profileCard {
+  width: 100%;
+  max-width: 800px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+}
+
+.contentScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-bottom: 60px;
+}
+
+.contentScroll::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .screenContainer {
+    padding: 0;
+  }
+  
+  .profileCard {
+    border-radius: 0;
+    max-width: none;
+    height: 100vh;
+  }
+}

@@ -1,0 +1,30 @@
+.communities-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.communities-content {
+  flex: 1;
+  min-height: 0;          /* ← agrega esta */
+  padding: 0 0 20px;
+  overflow-y: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.communities-screen .section-title {
+  display: none;
+}
+
+/* En móvil el section-container no debe tener altura fija */
+.communities-screen .section-container {
+  height: auto;
+  overflow: visible;
+}
+
+.communities-screen .communities-list {
+  height: auto;
+  overflow: visible;
+}

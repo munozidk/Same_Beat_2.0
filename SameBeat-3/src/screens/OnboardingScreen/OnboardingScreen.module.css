@@ -1,0 +1,636 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==================================================
+   MAIN WRAPPER
+================================================== */
+
+.onboardingScreen{
+  width:100%;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:#05010F;
+  font-family:'Poppins', sans-serif;
+}
+
+/* ==================================================
+   SVG GOO FILTER
+================================================== */
+
+.onb-goo-svg{
+  position:absolute;
+  width:0;
+  height:0;
+}
+
+/* ==================================================
+   GOOEY BACKGROUND
+================================================== */
+
+.onb-gooey-container{
+  position:absolute;
+  inset:-20%;
+  overflow:hidden;
+  filter:url(#goo);
+  opacity:.55;
+  z-index:0;
+}
+
+.onb-blob{
+  position:absolute;
+  width:850px;
+  height:550px;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.8;
+}
+
+.onb-blob1{
+  background:#7E3BED;
+  top:-250px;
+  left:-250px;
+  animation:onbMove1 8s infinite alternate ease-in-out;
+}
+
+.onb-blob2{
+  background:#462389;
+  bottom:-300px;
+  right:-250px;
+  animation:onbMove2 9s infinite alternate ease-in-out;
+}
+
+.onb-blob3{
+  background:#2B1257;
+  top:15%;
+  left:30%;
+  animation:onbMove3 10s infinite alternate ease-in-out;
+}
+
+.onb-blob4{
+  background:#C6FF34;
+  opacity:.08;
+  top:-150px;
+  right:5%;
+  animation:onbMove4 12s infinite alternate ease-in-out;
+}
+
+.onb-blob5{
+  position:absolute;
+  width:900px;
+  height:900px;
+  border-radius:50%;
+  background:#120923;
+  bottom:-300px;
+  left:25%;
+  filter:blur(70px);
+  animation:onbMove5 10s infinite alternate ease-in-out;
+}
+
+/* ==================================================
+   ANIMATIONS
+================================================== */
+
+@keyframes onbMove1{
+  to{
+    transform:
+      translate(300px,250px)
+      scale(1.2)
+      rotate(180deg);
+  }
+}
+
+@keyframes onbMove2{
+  to{
+    transform:
+      translate(-250px,-200px)
+      scale(1.15)
+      rotate(-180deg);
+  }
+}
+
+@keyframes onbMove3{
+  to{
+    transform:
+      translate(220px,-120px)
+      rotate(120deg);
+  }
+}
+
+@keyframes onbMove4{
+  to{
+    transform:
+      translate(-180px,180px)
+      rotate(-120deg);
+  }
+}
+
+@keyframes onbMove5{
+  to{
+    transform:
+      translate(-200px,-150px)
+      scale(1.1);
+  }
+}
+
+/* ==================================================
+   MAIN CONTAINER
+================================================== */
+
+.onb-container{
+  width:100%;
+  max-width:1440px;
+  min-height:100vh;
+
+  margin:0 auto;
+
+  position:relative;
+  z-index:2;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding-top:36px;
+}
+
+/* ==================================================
+   BOTTOM CIRCLE
+================================================== */
+
+.onb-bottom-circle{
+  position:absolute;
+
+  width:850px;
+  height:850px;
+
+  border-radius:50%;
+
+  bottom:-620px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(126,59,237,.45) 0%,
+      rgba(126,59,237,.18) 45%,
+      transparent 75%
+    );
+
+  filter:blur(30px);
+
+  z-index:1;
+}
+
+/* ==================================================
+   LOGO
+================================================== */
+
+.onb-logo{
+  width:400px;
+  position:relative;
+  z-index:20;
+  margin-bottom:-50px;
+}
+
+/* ==================================================
+   CARDS CONTAINER
+================================================== */
+
+.onb-cards{
+  position:relative;
+  width:100%;
+  height:550px;
+  margin-top:-10px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+/* ==================================================
+   CARDS
+================================================== */
+
+.onb-card{
+  position:absolute;
+
+  width:250px;
+  height:350px;
+  text-align:center;
+  align-items:center;
+
+  border-radius:42px;
+
+  padding:26px 22px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.12) 0%,
+      rgba(255,255,255,.04) 100%
+    );
+
+  backdrop-filter:blur(24px);
+
+  border:1px solid rgba(255,255,255,.08);
+
+  box-shadow:
+    0 0 40px rgba(0,0,0,.25),
+    inset 0 0 12px rgba(255,255,255,.05);
+
+  transition:.45s ease;
+
+  cursor:pointer;
+}
+
+/* ==================================================
+   CARD POSITIONS
+================================================== */
+
+.card-main{
+  transform:scale(1);
+  opacity:1;
+  z-index:20;
+}
+
+.card-1{
+  transform:
+    translateX(-330px)
+    rotate(-10deg)
+    scale(.82);
+
+  opacity:.12;
+}
+
+.card-2{
+  transform:
+    translateX(-170px)
+    rotate(-6deg)
+    scale(.92);
+
+  opacity:.35;
+}
+
+.card-4{
+  transform:
+    translateX(170px)
+    rotate(6deg)
+    scale(.92);
+
+  opacity:.35;
+}
+
+.card-5{
+  transform:
+    translateX(330px)
+    rotate(10deg)
+    scale(.82);
+
+  opacity:.12;
+}
+
+/* ==================================================
+   ICON
+================================================== */
+
+.onb-icon-circle{
+  width:68px;
+  height:68px;
+
+  border-radius:50%;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  font-size:2rem;
+
+  background:
+    rgba(255,255,255,.08);
+
+  margin-bottom:28px;
+
+  border:
+    1px solid rgba(255,255,255,.08);
+}
+
+/* ==================================================
+   CARD TEXT
+================================================== */
+
+.onb-card h2{
+  color:white;
+  font-size:1.9rem;
+  line-height:1.1;
+  margin-bottom:18px;
+  font-weight:700;
+}
+
+.onb-card h2 span{
+  color:#C6FF34;
+}
+
+.onb-card p{
+  color:#E4E4E4;
+  font-size:.82rem;
+  line-height:1.5;
+  text-align:center;
+}
+
+/* ==================================================
+   MASCOT
+================================================== */
+
+.onb-mascot{
+  width:220px;
+
+  position:absolute;
+
+  bottom:90px;
+  left:50%;
+
+  transform:translateX(-50%);
+
+  z-index:25;
+}
+
+/* ==================================================
+   BUTTON
+================================================== */
+
+.onb-btn{
+  position:absolute;
+
+  bottom:50px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  width:220px;
+  height:62px;
+
+  border:none;
+
+  border-radius:18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #7E3BED 0%,
+      #9F5BFF 100%
+    );
+
+  color:white;
+
+  font-size:1rem;
+  font-weight:600;
+
+  cursor:pointer;
+
+  z-index:20;
+
+  transition:.35s ease;
+
+  box-shadow:
+    0 15px 35px rgba(126,59,237,.35);
+}
+
+.onb-btn:hover{
+  transform:
+    translateX(-50%)
+    translateY(-4px);
+
+  box-shadow:
+    0 20px 45px rgba(126,59,237,.5);
+}
+
+.onb-btn:hover{
+  background:#C6FF34;
+  color:#120923;
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width:900px){
+
+  .onb-logo{
+    width:280px;
+  }
+
+  .onb-cards{
+    height:350px;
+  }
+
+  .onb-card{
+    width:235px;
+    height:380px;
+    padding:22px 18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+  }
+
+  .onb-card h2{
+    font-size:1.5rem;
+  }
+
+  .card-1{
+    transform:
+      translateX(-290px)
+      rotate(-6deg)
+      scale(.82);
+  }
+
+  .card-2{
+    transform:
+      translateX(-145px)
+      rotate(-3deg)
+      scale(.92);
+  }
+
+  .card-4{
+    transform:
+      translateX(145px)
+      rotate(3deg)
+      scale(.92);
+  }
+
+  .card-5{
+    transform:
+      translateX(290px)
+      rotate(6deg)
+      scale(.82);
+  }
+
+  .onb-mascot{
+    width:170px;
+    bottom:72px;
+  }
+}
+
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width:600px){
+
+  .onb-container{
+
+  padding-top:28px;
+  justify-content:center;
+  padding-bottom:40px;
+}
+
+  .onb-logo{
+    width:185px;
+  }
+
+  .onb-cards{
+    height:420px;
+    margin-top:12px;
+    overflow:hidden;
+  }
+
+  .onb-card{
+    width:230px;
+    height:340px;
+    padding:20px 18px;
+  }
+
+  .onb-icon-circle{
+    display:none;
+  }
+
+  .onb-card h2{
+    font-size:1.8rem;
+    margin-bottom:16px;
+  }
+
+  .card-main{
+    transform:scale(1);
+    opacity:1;
+  }
+
+  .card-1{
+    transform:
+      translateX(-190px)
+      rotate(-10deg)
+      scale(.75);
+
+    opacity:.12;
+  }
+
+  .card-2{
+    transform:
+      translateX(-110px)
+      rotate(-6deg)
+      scale(.86);
+
+    opacity:.35;
+  }
+
+  .card-4{
+    transform:
+      translateX(110px)
+      rotate(6deg)
+      scale(.86);
+
+    opacity:.35;
+  }
+
+  .card-5{
+    transform:
+      translateX(190px)
+      rotate(10deg)
+      scale(.75);
+
+    opacity:.12;
+  }
+
+  .onb-mascot{
+    width:190px;
+    bottom:90px;
+  }
+
+  .onb-btn{
+    bottom:45px;
+    padding:14px 34px;
+    font-size:.95rem;
+  }
+}
+
+/* ==================================================
+   EXTRA SMALL
+================================================== */
+
+@media (max-width:390px){
+
+  .onb-logo{
+    width:170px;
+  }
+
+  .onb-card{
+    width:200px;
+    height:300px;
+  }
+
+  .onb-card h2{
+    font-size:1.5rem;
+  }
+
+  .onb-card p{
+    font-size:.78rem;
+  }
+
+  .onb-mascot{
+    width:160px;
+  }
+}
+
+/* ==================================================
+   RESPONSIVE MOBILE
+================================================== */
+
+@media (max-width: 900px){
+
+  .onb-container{
+
+    justify-content: center;
+
+    padding-top: 0;
+
+    padding-bottom: 40px;
+
+    min-height: 100vh;
+  }
+
+  .onb-cards{
+
+    margin-top: 0;
+
+    height: auto;
+
+    min-height: 420px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+  }
+
+  .onb-card{
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%) !important;
+  }
+
+}

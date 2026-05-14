@@ -1,0 +1,126 @@
+.discover-card {
+  width: 100%;
+  background: rgba(68, 68, 68, 0.05);
+  border-radius: 43px 43px 43px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 7px 5px;
+  gap: 23px;
+}
+
+/* Imagen principal */
+.discover-card__cover-wrapper {
+  position: relative;
+  width: 100%;
+  border-radius: 43px;
+  overflow: hidden;
+}
+
+.discover-card__cover {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 43px;
+  display: block;
+}
+
+.discover-card__cover-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90%;
+  background: linear-gradient(
+    to top,
+    rgba(68, 43, 115, 0.90) 2%,
+    rgba(170, 170, 170, 0) 100%
+  );
+  border-radius: 43px;
+}
+
+/* Info sobre la imagen */
+.discover-card__info {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.discover-card__artist-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid #C6FF34;
+  object-fit: cover;
+}
+
+.discover-card__song-name {
+  color: white;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  margin: 0;
+}
+
+.discover-card__artists {
+  font-size: 12px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: white;
+  margin: 0;
+}
+
+.discover-card__artists a {
+  color: white;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Controles del reproductor */
+.discover-card__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 8px 0;
+  width: 100%;
+}
+
+.discover-card__ctrl-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.discover-card__ctrl-btn:hover {
+  color: #C6FF34;
+  transform: scale(1.1);
+}
+
+.discover-card__play-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C6FF34, #D5FF6B);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(198, 255, 52, 0.4);
+}
+
+.discover-card__play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(198, 255, 52, 0.5);
+}

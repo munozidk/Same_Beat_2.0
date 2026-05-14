@@ -1,0 +1,127 @@
+.chat-screen {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    height: 100vh;
+
+    position: relative;
+
+}
+
+.chat-screen-wrapper {
+
+  width: 100%;
+  height: 100vh;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .chat-screen {
+    grid-template-columns: 1fr 340px;
+    padding: 1.5rem 1.5rem 1.5rem 0;
+  }
+}
+
+/* Barra superior (TopBar + búsqueda): no hace scroll con el feed */
+.chat-screen__top {
+  flex-shrink: 0;
+}
+
+/* MAIN */
+
+.chat-screen__main {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+    height: 100%;
+
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+/* SOLO ESTA PARTE HACE SCROLL */
+.chat-screen__content-scrollable {
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+    padding-right: 10px;
+}
+
+
+/* SCROLL */
+.chat-screen__content-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-screen__content-scrollable::-webkit-scrollbar-thumb {
+  background: rgb(198, 255, 52);
+  border-radius: 999px;
+}
+/* RIGHT PANEL */
+.chat-screen__right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .chat-screen__right-panel {
+    display: flex;
+  }
+}
+
+/* MOBILE: un solo scroll en .chat-screen__content-scrollable; TopBar fija arriba del main */
+@media (max-width: 768px) {
+    .chat-screen {
+        display: flex;
+        flex-direction: column;
+        padding: 14px;
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .chat-screen__right-panel {
+        display: none !important;
+    }
+
+    .chat-screen__main {
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    .chat-screen__content-scrollable {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding-right: 10px;
+    }
+}
+

@@ -1,0 +1,49 @@
+/* Estilos extraídos del diseño de Figma */
+.location-toggle-container {
+  width: 361px;
+  height: 50px;
+  position: relative;
+  background: linear-gradient(360deg, rgba(198, 255, 52, 0.70) 0%, rgba(119, 153, 31, 0.70) 81%);
+  box-shadow: 0px 5px 10px rgba(24, 33, 0, 0.6), 
+              inset -2px -4px 4px rgba(220, 255, 130, 0.8), 
+              inset 0px 1px 5px rgba(235, 245, 208, 0.8);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  
+    
+}
+
+.location-toggle-label {
+  flex: 1;
+  z-index: 10;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 250;
+  color: #EBDFD3;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  position: relative;
+}
+
+.location-toggle-label.inactive {
+  opacity: 0.6;
+}
+
+.location-toggle-pill {
+  position: absolute;
+  width: 179px;
+  height: 42px;
+  background: #462389;
+  box-shadow: 0px 5px 10px rgba(24, 33, 0, 0.4), 
+              inset -2px -4px 4px #7E3BED, 
+              inset 0px 1px 4px rgba(126, 59, 237, 0.57);
+  border-radius: 20px;
+  z-index: 5;
+}

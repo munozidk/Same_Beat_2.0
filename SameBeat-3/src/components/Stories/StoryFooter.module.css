@@ -1,0 +1,48 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px 40px;
+  z-index: 10;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.captionContainer {
+  background: rgba(110, 140, 80, 0.6); /* Greenish tint to match bottom image bar */
+  padding: 10px 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.captionText {
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding-bottom: 60px;
+  }
+  
+  .captionContainer {
+    width: 90%;
+    text-align: center;
+    padding: 12px 20px;
+  }
+  
+  .captionText {
+    font-size: 12px;
+  }
+}

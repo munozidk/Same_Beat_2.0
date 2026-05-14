@@ -1,0 +1,84 @@
+:root {
+    --primary-purple: #7E3BED;
+    --secondary-purple: #6735BC;
+    --dark-purple: #462389;
+    --darker-purple: #2F057F;
+    --darkest-bg: #0A0217;
+    --lime-green: #C6FF34;
+    --lime-light: #D5FF6B;
+    --cream: #EBDFD3;
+    --white: #FFFFFF;
+    --shadow-dark: #18210199;
+    --border-glow: #57349D;
+    --text-icon-purple: #DDCEFC;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Hide scrollbars globally but keep functionality */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  body {
+    background-color: var(--darkest-bg);
+    color: var(--white);
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+.screen-container {
+    width: 100%;
+    min-height: 100vh;
+    background:
+        radial-gradient(50% 20% at 50% 3%, 
+            rgba(255,255,255,0.75) 0%, 
+            rgba(200,150,255,0.55) 18%, 
+            rgba(120, 0, 255, 0.35) 40%, 
+            transparent 70%
+        ),
+        radial-gradient(55% 38% at 50% 13%, 
+            rgba(170, 90, 255, 0.75) 0%, 
+            rgba(120, 0, 255, 0.45) 30%, 
+            rgba(60, 0, 120, 0.25) 60%, 
+            transparent 80%
+        ),
+        radial-gradient(85% 45% at 50% 38%, 
+            rgba(25, 0, 50, 0.7) 0%, 
+            rgba(40, 0, 80, 0.5) 30%, 
+            transparent 75%
+        ),
+        radial-gradient(circle at 40% 70%, 
+            rgba(120, 0, 255, 0.6) 0%, 
+            transparent 60%
+        ),
+        radial-gradient(circle at 50% 110%, 
+            rgba(90, 0, 200, 0.9) 0%, 
+            transparent 70%
+        ),
+        radial-gradient(circle at 90% 85%, 
+            rgba(119, 206, 6, 0.9) 0%, 
+            rgba(106, 182, 8, 0.4) 25%, 
+            transparent 60%
+        ),
+        linear-gradient(180deg, #05050f 0%, #120a2a 40%, #2a0066 100%);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+}

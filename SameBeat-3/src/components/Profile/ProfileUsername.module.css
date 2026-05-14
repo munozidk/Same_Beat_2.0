@@ -1,0 +1,21 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 20px 10px;
+}
+
+.username {
+  font-size: 36px;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+  .username {
+    font-size: 24px;
+  }
+}

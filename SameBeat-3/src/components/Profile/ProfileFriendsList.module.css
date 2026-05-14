@@ -1,0 +1,39 @@
+.container {
+  width: 100%;
+  padding: 10px 20px;
+  overflow: hidden;
+}
+
+.scrollWrapper {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE interface */
+}
+
+.scrollWrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, etc. */
+}
+
+.friendAvatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .scrollWrapper {
+    justify-content: center;
+  }
+}

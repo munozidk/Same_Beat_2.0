@@ -1,0 +1,51 @@
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.imageCarousel {
+  width: 100%;
+  height: 100%;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  background: #111;
+}
+
+.storyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* personaliza la barra de progreso de Swiper */
+.swiper-pagination-progressbar {
+  position: absolute;
+  top: 100px;
+  left: 40px;
+  right: 40px;
+  width: calc(100% - 80px);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.swiper-pagination-progressbar-fill {
+  background: #fff;
+}
+
+@media (max-width: 768px) {
+  .swiper-pagination-progressbar {
+    top: 50px;
+    left: 20px;
+    right: 20px;
+    width: calc(100% - 40px);
+  }
+}

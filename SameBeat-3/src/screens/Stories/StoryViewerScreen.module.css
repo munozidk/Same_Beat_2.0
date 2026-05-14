@@ -1,0 +1,80 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(circle at center, rgba(58, 28, 95, 0.9) 0%, rgba(0, 0, 0, 0.95) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  backdrop-filter: blur(15px);
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
+  height: 90vh;
+  position: relative;
+  background: #000;
+  border-radius: 30px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.imageCarousel {
+  width: 100%;
+  height: 100%;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 100%;
+  background: #111;
+}
+
+.storyImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Customizing Swiper Progress Bar */
+.progressBar {
+  position: absolute !important;
+  top: 100px !important;
+  left: 40px !important;
+  right: 40px !important;
+  width: calc(100% - 80px) !important;
+  height: 3px !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-radius: 2px !important;
+  z-index: 20 !important;
+  overflow: hidden !important;
+}
+
+.progressBar :global(.swiper-pagination-progressbar-fill) {
+  background: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    background: #000;
+  }
+  
+  .container {
+    max-width: none;
+    height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+
+  .progressBar {
+    top: 50px !important;
+    left: 20px !important;
+    right: 20px !important;
+    width: calc(100% - 40px) !important;
+  }
+}

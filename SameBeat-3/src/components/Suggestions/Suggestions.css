@@ -1,0 +1,252 @@
+/* SECTION */
+
+.suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* TITLE */
+
+.suggestions__title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+}
+
+/* HORIZONTAL SCROLL */
+
+.suggestions__scroll {
+    display: flex;
+    gap: 20px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding-bottom: 10px;
+
+    scroll-behavior: smooth;
+}
+
+.suggestions__scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.suggestions__scroll::-webkit-scrollbar-thumb {
+    background: rgba(198,255,52,0.4);
+    border-radius: 20px;
+}
+
+/* CARD */
+
+.suggestion-card {
+    min-width: 175px;
+    width: 175px;
+
+    height: 175px;
+    
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    cursor: pointer;
+
+    flex-shrink: 0;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background:
+        rgba(255,255,255,0.04);
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        inset 0 1px 2px rgba(255,255,255,0.08),
+        0 10px 25px rgba(0,0,0,0.25);
+}
+
+.suggestion-card:hover {
+    transform: translateY(-6px);
+
+    border-color: rgba(198,255,52,0.35);
+}
+
+/* IMAGE */
+
+.suggestion-card__image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+/* OVERLAY */
+
+.suggestion-card__overlay {
+    position: absolute;
+
+    bottom: -60px;
+    left: 20px;
+
+    width: 75%;
+    height: 80px;
+
+    padding: 18px 16px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    color: white;
+
+    z-index: 2;
+
+    background: linear-gradient(
+        135deg,
+        rgba(127, 59, 237, 0.45),
+        rgba(93, 8, 250, 0.82)
+    );
+
+    backdrop-filter: blur(100%);
+    border-radius: 0px 0px 20px 20px;
+    -webkit-backdrop-filter: blur(105px);
+
+    box-shadow:
+        inset 0 1px 1px rgba(255,255,255,0.15),
+        0 -10px 30px rgba(126, 59, 237, 0.2);
+
+    clip-path: path("M55.7314 0H10.9764C4.91428 0 0 4.91428 0 10.9763V70.6855H154.312V25.5148C154.312 19.4527 149.398 14.5384 143.336 14.5384H80.4568C77.4228 14.5384 74.5242 13.2826 72.4491 11.0692L66.4083 4.62563C63.6416 1.67441 59.7767 0 55.7314 0Z");
+    
+    scale: 1.30;
+
+    transform-origin: bottom left;
+}
+
+.suggestion-card::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background: linear-gradient(
+        to top,
+        rgba(10, 0, 30, 0.85),
+        transparent 45%
+    );
+
+    z-index: 1;
+}
+
+.suggestion-card__overlay h3 {
+    transform: scale(0.85);   /* escala solo el título */
+    font-size: 12px;         /* tamaño base */
+    margin: 0;
+   
+}
+
+.suggestion-card__overlay p {
+    transform: scale(0.75);   /* escala solo el párrafo */
+    line-height: 0.80;        /* un poco más aire */
+    margin: 0;
+}
+
+/* ADD CARD */
+
+.suggestion-card--add {
+
+    /* HIDDEN ON DESKTOP */
+    display: none !important;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9ff57 0%,
+            #a3d81b 100%
+        );
+
+    color: #121212;
+
+    border: 2px solid rgba(198,255,52,0.5);
+}
+
+.suggestion-card--add h3 {
+    font-size: 20px;
+    font-weight: 800;
+
+    text-align: center;
+}
+
+.suggestion-card__add-btn {
+    width: 70px;
+    height: 70px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,0.12);
+
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.15);
+}
+
+/* TABLET */
+
+@media (max-width: 1024px) {
+
+    .suggestion-card {
+        min-width: 190px;
+        height: 230px;
+    }
+}
+
+/* MOBILE */
+
+@media (max-width: 768px) {
+
+    /* SHOW ADD CARD ONLY ON MOBILE */
+
+    .suggestion-card--add {
+        display: flex !important;
+    }
+
+    /* HIDE TITLE */
+
+    .suggestions__title {
+        display: none;
+    }
+
+    /* MORE COMPACT */
+
+    .suggestions {
+        gap: 0;
+    }
+
+    .suggestions__scroll {
+        padding-bottom: 0;
+    }
+
+    .suggestion-card {
+        min-width: 150px;
+        width: 150px;
+        height: 190px;
+    }
+
+    .suggestion-card__overlay h3 {
+        font-size: 1rem;
+    }
+
+    .suggestion-card__overlay p {
+        font-size: 0.75rem;
+    }
+}

@@ -1,0 +1,460 @@
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+
+    width: 280px;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 24px 0;
+
+    position: relative;
+
+    overflow: visible;
+}
+
+/* =========================
+   GLASS FRAME
+========================= */
+
+.sidebar::after {
+
+    content: '';
+
+    position: absolute;
+
+    top: 220px;
+
+    width: 220px;
+    height: 68%;
+
+    background: linear-gradient(
+        180deg,
+        rgba(29, 3, 71, 0.5) 4.55%,
+        rgba(127, 59, 237, 0.35) 47.07%,
+        rgba(127, 59, 237, 0.6) 134.09%
+    );
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    border-radius: 45px 45px 45px 0px;
+
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset -2px 4px 5px 0px rgba(127, 59, 237, 0.4);
+
+    z-index: 0;
+}
+
+/* =========================
+   TODO ENCIMA DEL FRAME
+========================= */
+
+.sidebar > * {
+
+    position: relative;
+
+    z-index: 2;
+}
+
+/* =========================
+   LOGO
+========================= */
+
+.sidebar__logo {
+
+    height: 150px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 75px;
+}
+
+.sidebar__logo-img {
+
+    width: 120px;
+
+    object-fit: contain;
+}
+
+/* =========================
+   TOP
+========================= */
+
+.sidebar__top {
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.sidebar__nav {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+    position: relative;
+
+    top: -155px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.sidebar__nav-btn {
+
+    width: 190px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 45px;
+
+    padding: 18px;
+
+    position: relative;
+
+    left: 11px;
+
+    overflow: visible;
+
+    background: linear-gradient(
+        180deg,
+        #030008 0%,
+        #090119 33%,
+        #4107ad 100%
+    );
+
+    border: 1px solid rgba(
+        198,
+        255,
+        52,
+        0.2
+    );
+
+    border-radius: 25px 25px 0px 25px;
+
+    color: var(--text-icon-purple);
+
+    cursor: pointer;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
+        0 1px 4px 0 #57349D inset,
+        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* =========================
+   CONTENIDO ENCIMA
+========================= */
+
+.sidebar__nav-btn > * {
+
+    position: relative;
+
+    z-index: 3;
+}
+
+/* =========================
+   TEXTO
+========================= */
+
+.sidebar__nav-btn span {
+
+    flex: 1;
+
+    text-align: left;
+}
+
+/* =========================
+   BURBUJA GLASS
+========================= */
+
+.sidebar__nav-btn::before {
+
+    content: '';
+
+    position: absolute;
+
+    left: 0px;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.12
+    );
+
+    backdrop-filter: blur(0.5px);
+    -webkit-backdrop-filter: blur(0.5px);
+
+   
+
+    box-shadow:
+        inset 2px 2px 2px #7f3bedd4,
+        inset -2px -2px 6px rgba(0, 0, 0, 0.218),
+        0 8px 20px rgba(0,0,0,0.4);
+
+    opacity: 0;
+
+    transform: scale(0.5);
+
+    transition: all 0.3s cubic-bezier(
+        0.34,
+        1.5,
+        0.64,
+        1
+    );
+
+    z-index: 1;
+}
+
+/* =========================
+   HOVER
+========================= */
+
+.sidebar__nav-btn:hover {
+
+    background: linear-gradient(
+        180deg,
+        #030008 0%,
+        #090119 33%,
+        #2F057F 100%
+    );
+
+    border-color: rgba(
+        198,
+        255,
+        52,
+        0.4
+    );
+
+    transform: translateY(-2px);
+}
+
+/* BURBUJA HOVER */
+
+.sidebar__nav-btn:hover::before {
+
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+/* =========================
+   ACTIVO
+========================= */
+
+.sidebar__nav-btn.active {
+
+    border-color: rgba(
+        198,
+        255,
+        52,
+        0.6
+    );
+
+    background: linear-gradient(
+        180deg,
+        #0a0020 0%,
+        #130035 33%,
+        #3d0aaa 100%
+    );
+}
+
+/* BURBUJA ACTIVA */
+
+.sidebar__nav-btn.active::before {
+
+    opacity: 1;
+
+    transform: scale(1);
+}
+
+/* =========================
+   LOGOUT
+========================= */
+
+.sidebar__logout-btn {
+
+    width: 190px;
+    height: 52px;
+
+    margin-top: 50px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding:  18px;
+    left: 15px;
+
+    border: none;
+
+    border-radius: 75px 75px 0px 75px;
+
+    background: linear-gradient(
+        135deg,
+        var(--lime-green) 0%,
+        var(--lime-light) 100%
+    );
+
+    color: #000;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.25s ease;
+
+    box-shadow:
+        -2px -4px 4px 0 rgba(0, 0, 0, 0.25) inset,
+        0 1px 4px 0 #57349D inset,
+        -13px 40px 30px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sidebar__logout-btn span {
+
+    flex: 1;
+
+    text-align: left;
+}
+
+.sidebar__logout-btn:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 15px 0 #18210199,
+        -2px -4px 4px 0 var(--lime-green),
+        0 1px 4px 0 var(--lime-light);
+}
+
+/* =========================
+   DROPDOWN
+========================= */
+
+.sidebar__dropdown {
+
+    width: 190px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.sidebar__dropdown-menu {
+
+    position: absolute;
+
+    bottom: -105px;
+
+    left: 8px;
+
+    width: 100%;
+
+    padding: 14px 0;
+
+    border-radius: 0px 0px 30px 30px;
+
+    background: linear-gradient(
+        180deg,
+        #140028 0%,
+        #24004e 100%
+    );
+
+    border: 1px solid rgba(
+        198,
+        255,
+        52,
+        0.2
+    );
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    z-index: 100;
+
+    box-shadow:
+        0 10px 35px rgba(0,0,0,0.35),
+        inset 0 0 12px rgba(
+            127,
+            59,
+            237,
+            0.3
+        );
+}
+/* =========================
+   ITEMS
+========================= */
+
+.sidebar__dropdown-item {
+
+    width: 100%;
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 12px 20px;
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.sidebar__dropdown-item:hover {
+
+    background: rgba(
+        255,
+        255,
+        255,
+        0.08
+    );
+
+    color: #d9ff57;
+}

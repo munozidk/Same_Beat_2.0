@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  padding: 10px 0;
+  overflow: hidden;
+}
+
+.scrollWrapper {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding: 10px 20px;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE interface */
+}
+
+.scrollWrapper::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, etc. */
+}
+
+@media (max-width: 768px) {
+  .scrollWrapper {
+    padding: 10px 15px;
+    gap: 12px;
+  }
+}

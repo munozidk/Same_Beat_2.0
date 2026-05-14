@@ -1,0 +1,506 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ==================================================
+   WRAPPER
+================================================== */
+
+.signupScreen {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #120923;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* ==================================================
+   SVG
+================================================== */
+
+.svg-filter {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+
+/* ==================================================
+   GOOEY BACKGROUND
+================================================== */
+
+.gooey-container {
+  position: absolute;
+  top: -20%;
+  left: -20%;
+  width: 140%;
+  height: 140%;
+  overflow: hidden;
+  background: #120923;
+  filter: url(#goo);
+  isolation: isolate;
+  z-index: 0;
+}
+
+/* ==================================================
+   BLOBS
+================================================== */
+
+.blob {
+  position: absolute;
+  width: 900px;
+  height: 900px;
+  filter: blur(55px);
+  opacity: .82;
+  will-change: transform;
+  border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%;
+}
+
+.blob1 {
+  background: #7E3BED;
+  top: -300px;
+  left: -300px;
+  animation: move1 3s linear infinite alternate;
+}
+
+.blob2 {
+  background: #6735BC;
+  bottom: -350px;
+  right: -250px;
+  animation: move2 3.5s linear infinite alternate;
+}
+
+.blob3 {
+  background: #C6FF34;
+  top: 10%;
+  left: 25%;
+  animation: move3 4s linear infinite alternate;
+}
+
+.blob4 {
+  background: #EBDFD3;
+  top: -200px;
+  right: 10%;
+  opacity: 0.08;
+  animation: move4 4.5s linear infinite alternate;
+}
+
+.blob5 {
+  position: absolute;
+  width: 850px;
+  height: 850px;
+  background: #2B1257;
+  top: 35%;
+  left: 40%;
+  filter: blur(60px);
+  opacity: .75;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: move5 3.2s linear infinite alternate;
+}
+
+/* ==================================================
+   ANIMATIONS
+================================================== */
+
+@keyframes move1 {
+  0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  100% { transform: translate(420px, 300px) rotate(220deg) scale(1.35); }
+}
+
+@keyframes move2 {
+  0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  100% { transform: translate(-380px, -280px) rotate(-220deg) scale(1.3); }
+}
+
+@keyframes move3 {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  100% { transform: translate(320px, -260px) rotate(180deg); }
+}
+
+@keyframes move4 {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  100% { transform: translate(-300px, 300px) rotate(-180deg); }
+}
+
+@keyframes move5 {
+  0% { transform: translate(0px, 0px) rotate(0deg) scale(1); }
+  100% { transform: translate(-250px, -180px) rotate(180deg) scale(1.2); }
+}
+
+/* ==================================================
+   MAIN — centrado perfecto
+================================================== */
+
+.register-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 40px;
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* ==================================================
+   LEFT — misma altura que el formulario
+================================================== */
+
+.left-panel {
+  /* Igual ancho que el right-panel para equilibrio */
+  width: 420px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* La imagen se estira para igualar la altura del formulario */
+  align-self: stretch;
+}
+
+.left-art {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* Fuerza que no supere el alto del contenedor hermano */
+  max-height: 100%;
+}
+
+/* ==================================================
+   RIGHT
+================================================== */
+
+.right-panel {
+  width: 420px;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Centra el texto del título */
+  text-align: center;
+}
+
+.right-panel h1 {
+  font-size: 3.8rem;
+  color: white;
+  line-height: 1;
+  margin-bottom: 6px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #E3E3E3;
+  margin-bottom: 16px;
+  font-size: .88rem;
+  text-align: center;
+}
+
+/* ==================================================
+   FORM
+================================================== */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  width: 100%;
+}
+
+/* Dos columnas: first/last name y phone/email y password/confirm */
+.double-input {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 9px;
+  width: 100%;
+}
+
+/* ==================================================
+   INPUT — tamaño reducido para que todo quepa
+================================================== */
+
+.input-group {
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 13px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, .10);
+  border: 1px solid rgba(255, 255, 255, .08);
+  transition: .3s ease;
+  box-sizing: border-box;
+}
+
+.input-group:hover {
+  border-color: rgba(198, 255, 52, .45);
+}
+
+.input-group:focus-within {
+  border-color: rgba(198, 255, 52, 1);
+  box-shadow: 0 0 8px rgba(198, 255, 52, .25);
+}
+
+.input-group i {
+  color: #C6FF34;
+  font-size: .82rem;
+  flex-shrink: 0;
+}
+
+.input-group input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: .82rem;
+  font-family: 'Poppins', sans-serif;
+  min-width: 0; /* Evita overflow en grid */
+}
+
+.input-group input::placeholder {
+  color: #C4C4C4;
+}
+
+/* Date input — forzar color blanco en todos los browsers */
+.input-group--date input {
+  color-scheme: dark;
+  color: white;
+}
+
+/* ==================================================
+   CHECKBOX
+================================================== */
+
+.checkbox-group {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-top: 2px;
+  color: #EAEAEA;
+  font-size: .80rem;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+}
+
+.checkbox-group input {
+  margin-top: 2px;
+  flex-shrink: 0;
+  accent-color: #C6FF34;
+  width: 14px;
+  height: 14px;
+}
+
+.link-terms,
+.link-privacy {
+  color: #C6FF34;
+  text-decoration: none;
+}
+
+/* ==================================================
+   ERROR
+================================================== */
+
+.error-message {
+  color: #ff8d8d;
+  font-size: .80rem;
+  margin-top: -2px;
+  text-align: center;
+}
+
+/* ==================================================
+   BUTTON
+================================================== */
+
+.create-btn {
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: #7E3BED;
+  color: white;
+  font-size: .95rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: .3s ease;
+  margin-top: 4px;
+}
+
+.create-btn:hover:not(:disabled) {
+  background: #C6FF34;
+  color: #120923;
+}
+
+.create-btn:disabled {
+  opacity: .45;
+  cursor: not-allowed;
+}
+
+.create-btn--error {
+  background: #742424;
+}
+
+/* ==================================================
+   LOGIN LINK
+================================================== */
+
+.login-link {
+  text-align: center;
+  color: #E4E4E4;
+  margin-top: 6px;
+  font-size: .85rem;
+}
+
+.login-link a {
+  color: #C6FF34;
+  text-decoration: none;
+}
+
+/* ==================================================
+   GIF OVERLAY
+================================================== */
+
+.gifOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(68, 30, 139, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn .4s ease;
+}
+
+.gifImage {
+  max-width: 480px;
+  width: 75%;
+  border-radius: 0;
+  background: transparent;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width: 1024px) {
+  .register-container {
+    gap: 32px;
+    padding: 30px;
+  }
+
+  .left-panel {
+    width: 360px;
+  }
+
+  .right-panel {
+    width: 360px;
+  }
+
+  .right-panel h1 {
+    font-size: 3.2rem;
+  }
+}
+
+/* ==================================================
+   MOBILE — oculta imagen, centra formulario
+================================================== */
+
+@media (max-width: 900px) {
+  .register-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+  }
+
+  .left-panel {
+    display: none;
+  }
+
+  .right-panel {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .right-panel h1 {
+    text-align: center;
+  }
+
+  .subtitle {
+    text-align: center;
+  }
+}
+
+/* ==================================================
+   CELULAR
+================================================== */
+
+@media (max-width: 600px) {
+  .register-container {
+    padding: 24px 16px;
+  }
+
+  .right-panel h1 {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: .84rem;
+    margin-bottom: 14px;
+  }
+
+  /* En móvil, primera fila pasa a 1 columna */
+  .double-input {
+    grid-template-columns: 1fr;
+  }
+
+  .input-group {
+    height: 46px;
+  }
+
+  .create-btn {
+    height: 50px;
+  }
+}
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width: 400px) {
+  .register-container {
+    padding: 18px 12px;
+  }
+
+  .right-panel h1 {
+    font-size: 2.6rem;
+  }
+
+  .subtitle {
+    font-size: .80rem;
+  }
+
+  .checkbox-group {
+    font-size: .76rem;
+  }
+
+  .input-group {
+    height: 44px;
+    border-radius: 10px;
+  }
+
+  .create-btn {
+    height: 46px;
+    border-radius: 10px;
+  }
+}

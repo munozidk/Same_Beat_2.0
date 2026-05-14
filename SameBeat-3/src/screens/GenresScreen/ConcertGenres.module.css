@@ -1,0 +1,586 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =========================================
+   WRAPPER
+========================================= */
+
+.wrapper{
+  position:relative;
+
+  width:100%;
+  height:100vh;
+
+  background:#120923;
+
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+
+  overflow:hidden;
+
+  padding:20px;
+
+  font-family:"Poppins", sans-serif;
+
+  box-sizing:border-box;
+}
+
+.wrapper::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background-image:url("https://www.transparenttextures.com/patterns/noise.png");
+
+  opacity:.04;
+
+  pointer-events:none;
+
+  z-index:0;
+}
+
+/* =========================================
+   HIDE SVG
+========================================= */
+
+.svgHide{
+  position:absolute;
+
+  width:0;
+  height:0;
+
+  overflow:hidden;
+}
+
+/* =========================================
+   GOOEY BACKGROUND
+========================================= */
+
+.gooeyContainer{
+  position:absolute;
+
+  top:-20%;
+  left:-20%;
+
+  width:140%;
+  height:140%;
+
+  overflow:hidden;
+
+  background:#120923;
+
+  filter:url(#goo);
+
+  isolation:isolate;
+
+  z-index:0;
+
+  pointer-events:none;
+}
+
+/* =========================================
+   BLOBS
+========================================= */
+
+.blob{
+  position:absolute;
+
+  width:900px;
+  height:900px;
+
+  filter:blur(55px);
+
+  opacity:.82;
+
+  will-change:transform;
+
+  border-radius:
+    63% 37% 54% 46% /
+    55% 48% 52% 45%;
+}
+
+.blob1{
+  background:#7E3BED;
+
+  top:-300px;
+  left:-300px;
+
+  animation:move1 3s linear infinite alternate;
+}
+
+.blob2{
+  background:#a6ff00;
+
+  bottom:-350px;
+  right:-200px;
+
+  animation:move2 3.5s linear infinite alternate;
+}
+
+.blob3{
+  background:#28054a;
+
+  top:10%;
+  left:25%;
+
+  animation:move3 4s linear infinite alternate;
+}
+
+.blob4{
+  background:#EBDFD3;
+
+  top:-200px;
+  right:10%;
+
+  opacity:.08;
+
+  animation:move4 4.5s linear infinite alternate;
+}
+
+.blob5{
+  position:absolute;
+
+  width:850px;
+  height:850px;
+
+  background:#2B1257;
+
+  top:35%;
+  left:40%;
+
+  filter:blur(60px);
+
+  opacity:.75;
+
+  border-radius:
+    60% 40% 30% 70% /
+    60% 30% 70% 40%;
+
+  animation:move5 3.2s linear infinite alternate;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes move1{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      rotate(0deg)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translate(420px,300px)
+      rotate(220deg)
+      scale(1.35);
+  }
+}
+
+@keyframes move2{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      rotate(0deg)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translate(-380px,-280px)
+      rotate(-220deg)
+      scale(1.3);
+  }
+}
+
+@keyframes move3{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      rotate(0deg);
+  }
+
+  100%{
+    transform:
+      translate(320px,-260px)
+      rotate(180deg);
+  }
+}
+
+@keyframes move4{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      rotate(0deg);
+  }
+
+  100%{
+    transform:
+      translate(-300px,300px)
+      rotate(-180deg);
+  }
+}
+
+@keyframes move5{
+
+  0%{
+    transform:
+      translate(0px,0px)
+      rotate(0deg)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translate(-260px,-220px)
+      rotate(160deg)
+      scale(1.25);
+  }
+}
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.container{
+  position:relative;
+
+  z-index:2;
+
+  width:100%;
+  max-width:1100px;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding:
+    28px
+    24px
+    30px;
+}
+
+/* =========================================
+   TEXT
+========================================= */
+
+.title{
+  font-size:3.6rem;
+
+  color:white;
+
+  font-weight:700;
+
+  margin-bottom:8px;
+
+  text-align:center;
+}
+
+.subtitle{
+  color:#d7d7d7;
+
+  font-size:1rem;
+
+  text-align:center;
+
+  margin-bottom:22px;
+}
+
+/* =========================================
+   SEARCH
+========================================= */
+
+.searchBox{
+  width:100%;
+  max-width:700px;
+
+  height:54px;
+
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:0 22px;
+
+  border-radius:20px;
+
+  background:
+    rgba(255,255,255,.08);
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(18px);
+
+  margin-bottom:18px;
+}
+
+.searchBox input{
+  flex:1;
+
+  background:transparent;
+
+  border:none;
+  outline:none;
+
+  color:white;
+
+  font-size:1rem;
+}
+
+.searchBox input::placeholder{
+  color:#dadada;
+}
+
+.searchIcon{
+  color:#d9ff00;
+}
+
+/* =========================================
+   LOCATION
+========================================= */
+
+.locationBox{
+  width:100%;
+  max-width:700px;
+
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  margin-bottom:24px;
+
+  color:white;
+}
+
+.switch{
+  width:64px;
+  height:34px;
+
+  border:none;
+
+  border-radius:999px;
+
+  padding:4px;
+
+  background:#3b2b5d;
+
+  cursor:pointer;
+
+  position:relative;
+
+  transition:.3s ease;
+}
+
+.switchCircle{
+  width:26px;
+  height:26px;
+
+  border-radius:50%;
+
+  background:white;
+
+  transition:.3s ease;
+}
+
+.switchActive{
+  background:#c6ff34;
+}
+
+.switchActive .switchCircle{
+  transform:translateX(30px);
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.genresGrid{
+  width:100%;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(3, minmax(220px, 1fr));
+
+  gap:18px;
+
+  margin-bottom:24px;
+}
+
+/* =========================================
+   CARD
+========================================= */
+
+.genreCard{
+  height:108px;
+
+  border:none;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.03)
+    );
+
+  border:
+    1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(22px);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  gap:10px;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+
+  color:white;
+}
+
+.genreCard:hover{
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(198,255,52,.55);
+
+  box-shadow:
+    0 0 35px rgba(198,255,52,.12);
+}
+
+.genreSelected{
+  background:
+    rgba(198,255,52,.14);
+
+  border:
+    1px solid rgba(198,255,52,.7);
+
+  box-shadow:
+    0 0 35px rgba(198,255,52,.2);
+}
+
+.genreIcon{
+  font-size:1.7rem;
+
+  color:#d9ff00;
+}
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.continueBtn{
+  width:100%;
+  max-width:420px;
+
+  height:52px;
+
+  border:none;
+
+  border-radius:20px;
+
+  background:#7E3BED;
+
+  color:white;
+
+  font-size:1rem;
+  font-weight:600;
+
+  cursor:pointer;
+
+  transition:.3s ease;
+}
+
+.continueBtn:hover{
+  background:#c6ff34;
+
+  color:#120923;
+}
+
+.continueBtn:disabled{
+  opacity:.45;
+
+  cursor:not-allowed;
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width:900px){
+
+  .container{
+    width:100%;
+
+    padding:30px 20px;
+  }
+
+  .title{
+    font-size:3rem;
+  }
+
+  .genresGrid{
+    grid-template-columns:
+      repeat(2, minmax(160px,1fr));
+
+    gap:16px;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width:600px){
+
+  .wrapper{
+    overflow-y:auto;
+    height:auto;
+    min-height:100vh;
+  }
+
+  .container{
+    width:100%;
+
+    padding:
+      30px
+      16px
+      40px;
+  }
+
+  .title{
+    font-size:2.3rem;
+  }
+
+  .subtitle{
+    margin-bottom:18px;
+  }
+
+  .genresGrid{
+    grid-template-columns:1fr;
+
+    gap:14px;
+
+    margin-top:20px;
+  }
+
+  .genreCard{
+    width:100%;
+    height:95px;
+  }
+}

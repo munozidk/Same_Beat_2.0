@@ -1,0 +1,49 @@
+.artist-info {
+    padding-top: 20px;
+}
+
+.artist-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #D9D9D9;
+}
+
+.stats-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.stat-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.vertical-divider {
+    width: 2px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 24px;
+}
+
+.stat-label {
+    font-size: 20px;
+    font-weight: 600;
+    color: #D9D9D9;
+    opacity: 0.9;
+}
+
+.stat-value {
+    font-size: 14px;
+    color: #D9D9D9;
+    opacity: 0.6;
+    margin-top: 4px;
+}
+
+.avatars-wrapper {
+    height: 24px;
+    margin-bottom: 6px;
+}
