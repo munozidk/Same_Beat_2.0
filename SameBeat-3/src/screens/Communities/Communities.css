@@ -1,11 +1,15 @@
+/* Layout de la pantalla dedicada /concert/:id/communities (móvil).
+   Los estilos glass / lista viven en components/Communities/Communities.css */
+
 .communities-screen {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .communities-content {
-    flex: 1;
-    padding: 20px 24px;
-    position: relative;
-    z-index: 10;
+  flex: 1;
+  padding: 0 0 20px;
+  position: relative;
+  z-index: 10;
 }

@@ -2,7 +2,7 @@ import "./Communities.css"
 
 // Importamos el archivo JSON
 // donde están guardadas las comunidades
-import communities from "../../data/communities.json"
+import communities from "../../data/chats/communities.json"
 
 /* 
   Componente Communities

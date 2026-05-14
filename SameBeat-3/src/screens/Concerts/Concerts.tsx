@@ -14,7 +14,7 @@ const ConcertsScreen = () => {
     : concerts;
 
   return (
-    <div className="screen-container">
+    <div className="concerts-page">
       <div className="concerts-list space-y-4">
         {filteredConcerts.length > 0 ? (
           filteredConcerts.map((concert) => (

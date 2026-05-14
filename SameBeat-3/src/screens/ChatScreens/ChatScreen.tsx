@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom"
 
 import "./ChatScreen.css"
 
-import Communities from '../Communities/Communities'
+import CommunitiesSection from '../../components/Communities/Communities'
 import DirectList from '../../components/DirectList/DirectList'
 import TopBar from '../../components/TopBar/TopBar'
 import Suggestions from "../../components/Suggestions/Suggestions"
@@ -78,7 +78,7 @@ const ChatScreen = ({
   // - NO estamos en /map
   // - NO es mobile
   const showChatPreview =
-    location.pathname !== "/map" && !isMobile
+    location.pathname.toLowerCase() !== "/map" && !isMobile
 
   return (
     <>
@@ -86,31 +86,25 @@ const ChatScreen = ({
 
         {/* SECCIÓN PRINCIPAL */}
         <main className="chat-screen__main">
-          
-          {/* BARRA SUPERIOR */}
-          <TopBar>
+          {/* Fijo arriba: barra con buscador */}
+          <div className="chat-screen__top">
+            <TopBar>
+              <SearchBar
+                value={search}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearch(e.target.value)
+                }
+                placeholder="Buscar chats..."
+              />
+            </TopBar>
+          </div>
 
-            {/* Buscador en el TopBar */}
-            <SearchBar
-              value={search}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSearch(e.target.value)
-              }
-              placeholder="Buscar chats..."
-            />
-
-          </TopBar>
-
-          {/* SUGERENCIAS DE USUARIOS */}
-          <Suggestions />
-
-          {/* CONTENEDOR CON SCROLL */}
+          {/* Un solo scroll: sugerencias, comunidades y chats directos (sin scrolls internos) */}
           <section className="chat-screen__content-scrollable">
+            <Suggestions />
 
-            {/* COMUNIDADES */}
-            <Communities />
+            <CommunitiesSection />
 
-            {/* LISTA DE CHATS DIRECTOS */}
             <DirectList
               onSelectChat={(chat) => {
 

@@ -1,9 +1,9 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../SideBar/Sidebar'
+import Sidebar from '../Sidebar/Sidebar'
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
-import HeaderConcerts from '../HeaderConcerts/HeaderConcerts';
+import TopBar from '../TopBar/TopBar';
 import BottomNav from '../BottomNav/BottomNav';
 import ChatList from '../ChatList/ChatList';
 import NowPlaying from '../NowPLaying/NowPlaying';
@@ -23,6 +23,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const isConcertsScreen = location.pathname === '/concerts';
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
 
+
+    // Rutas donde SÍ se muestra el panel derecho (NowPlaying + ChatList)
+    // Del resto de pantallas (chats, map, etc.) se oculta
+    const showRightPanel = ['/home', '/concerts', '/profile', '/discover'].includes(location.pathname);
+
     // =========================
     // CONTEXT
     // =========================
@@ -32,6 +37,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     // =========================
     // CHAT PREVIEWS
     // =========================
+
 
     const chatPreviews = chats.slice(0, 3).map(chat => {
         const user = users.find(u => u.id === chat.userId)
@@ -56,7 +62,8 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
                     <main className="center-content">
                         {isConcertsScreen && (
-                            <section className="filters">
+                            <section className="concerts-controls">
+                                <TopBar title="Concerts" />
                                 <div className="filters-container">
                                     <LocationToggle />
                                     <FilterBar 
@@ -75,14 +82,17 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         </section>
                     </main>
 
-                    <aside className="right-panel">
-                        <section className="right-panel-top">
-                            <ChatList chats={chatPreviews} />
-                        </section>
-                        <section className="right-panel-bottom">
-                            <NowPlaying songs={songs} />
-                        </section>
-                    </aside>
+                    {/* Panel derecho: solo en home, concerts, profile, discovery */}
+                    {showRightPanel && (
+                        <aside className="right-panel">
+                            <section className="right-panel-top">
+                                <ChatList chats={chatPreviews} />
+                            </section>
+                            <section className="right-panel-bottom">
+                                <NowPlaying songs={songs} />
+                            </section>
+                        </aside>
+                    )}
                 </div>
             </div>
 
@@ -90,21 +100,25 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             <div className="mobile-layout">
                 <main className="mobile-main-content">
                     {isConcertsScreen && (
-                        <div className="mobile-filters-top">
-                            <div className="flex justify-center py-4">
-                                <LocationToggle />
+                        <div className="mobile-concerts-stack">
+                            <TopBar title="Concerts" />
+                            <div className="mobile-filters-top">
+                                <div className="flex justify-center py-4">
+                                    <LocationToggle />
+                                </div>
+                                <FilterBar 
+                                    genres={allGenres} 
+                                    selectedGenres={selectedGenres} 
+                                    onToggleGenre={toggleGenre} 
+                                />
                             </div>
-                            <FilterBar 
-                                genres={allGenres} 
-                                selectedGenres={selectedGenres} 
-                                onToggleGenre={toggleGenre} 
-                            />
                         </div>
                     )}
                     {children}
                 </main>
                 <BottomNav />
             </div>
+
 
             {/* =========================
                  MODAL — disponible en
@@ -117,6 +131,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 onSubmit={addPost}
                 currentPosts={posts}
             />
+
 
         </div>
     );
