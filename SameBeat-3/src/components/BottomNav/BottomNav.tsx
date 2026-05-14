@@ -22,7 +22,6 @@ import "./BottomNav.css";
 
 const BottomNav: React.FC = () => {
 
-<<<<<<< HEAD
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
@@ -325,34 +324,6 @@ const BottomNav: React.FC = () => {
 
               </button>
 
-
-    const isHomeActive = pathname === '/home';
-    const isConcertsActive =
-        pathname === '/concerts' || /^\/concert(\/|$)/.test(pathname);
-    const isDiscoverActive = pathname === '/discover';
-    const isProfileActive = pathname === '/profile' || pathname.startsWith('/profile/');
-
-    return (
-        <nav className="bottom-nav" aria-label="Primary mobile navigation">
-            <div className="nav-pill--left">
-                <button
-                    type="button"
-                    className={`nav-btn${isHomeActive ? ' active-btn' : ''}`}
-                    onClick={() => navigate('/home')}
-                    aria-current={isHomeActive ? 'page' : undefined}
-                    aria-label="Home"
-                >
-                    <House size={22} />
-                </button>
-                <button
-                    type="button"
-                    className={`nav-btn${isConcertsActive ? ' active-btn' : ''}`}
-                    onClick={() => navigate('/concerts')}
-                    aria-current={isConcertsActive ? 'page' : undefined}
-                    aria-label="Concerts"
-                >
-                    <Ticket size={22} />
-                </button>
             </div>
 
           )}

@@ -352,7 +352,7 @@
 
     transform: translate(-50%, -50%);
 
-    width: 85%;
+    width: 100%;
     max-width: 330px;
 
     background: #3a1766;
@@ -478,14 +478,4 @@
     );
 }
 
-/* =========================
-   DESKTOP HIDE
-========================= */
 
-@media (min-width: 1024px) {
-
-    .bottom-nav {
-
-        display: none;
-    }
-}
