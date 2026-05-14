@@ -34,7 +34,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
-                    <HeaderConcerts />
+                    
                 </header>
 
                 <div className="desktop-body">
