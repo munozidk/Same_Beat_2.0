@@ -4,120 +4,250 @@ import { useLocation } from "react-router-dom"
 
 import "./ChatScreen.css"
 
-import CommunitiesSection from '../../components/Communities/Communities'
-import DirectList from '../../components/DirectList/DirectList'
-import TopBar from '../../components/TopBar/TopBar'
+// COMPONENTES
+import CommunitiesSection from "../../components/Communities/Communities"
+import DirectList from "../../components/DirectList/DirectList"
+import TopBar from "../../components/TopBar/TopBar"
 import Suggestions from "../../components/Suggestions/Suggestions"
 import LiveMap from "../../components/LiveMap/LiveMap"
 import ChatPreview from "../../components/ChatPreview/ChatPreview"
-import SearchBar from "../../components/SearchBar/SearchBar"
 
-// Interface que define un chat
+// =========================
+// INTERFACES
+// =========================
+
+/* 
+  Interface que define
+  la estructura de un chat
+*/
 interface Chat {
+
   id: number
+
   userId: number
+
   lastMessage: string
+
   timestamp: string
+
   unreadCount: number
 }
 
-// Interface que define qué props recibe este componente
+/* 
+  Props que recibe
+  ChatScreen
+*/
 interface ChatScreenProps {
-  onSelectChat?: (chat: Chat) => void
-  onToggleExpanded?: (expanded: boolean) => void
+
+  onSelectChat?: (
+    chat: Chat
+  ) => void
+
+  onToggleExpanded?: (
+    expanded: boolean
+  ) => void
 }
 
-// Componente principal de chats
+// =========================
+// COMPONENTE PRINCIPAL
+// =========================
+
 const ChatScreen = ({
+
   onSelectChat,
   onToggleExpanded
+
 }: ChatScreenProps) => {
 
-  // Hook que detecta en qué ruta estás
+  // =========================
+  // ROUTER
+  // =========================
+
+  /* 
+    Detecta la ruta actual
+    
+    Ejemplo:
+    /home
+    /map
+    /chat
+  */
   const location = useLocation()
 
-  // Estado: chat seleccionado actualmente
-  const [selectedChat, setSelectedChat] = useState<Chat | null>({
+  // =========================
+  // STATES
+  // =========================
+
+  /* 
+    Chat actualmente seleccionado
+  */
+  const [
+    selectedChat,
+    setSelectedChat
+  ] = useState<Chat | null>({
+
     id: 1,
+
     userId: 123,
-    lastMessage: "Hola, ¿cómo estás?",
-    timestamp: "2026-05-11T10:30:00Z",
+
+    lastMessage:
+      "Hola, ¿cómo estás?",
+
+    timestamp:
+      "2026-05-11T10:30:00Z",
+
     unreadCount: 2
   })
 
-  // Estado: si el chat preview está expandido o minimizado
-  const [isExpanded, setIsExpanded] = useState(true)
+  /* 
+    Estado del ChatPreview
+    
+    true:
+    expandido
+    
+    false:
+    minimizado
+  */
+  const [
+    isExpanded,
+    setIsExpanded
+  ] = useState(true)
 
-  // Estado: texto del buscador
-  const [search, setSearch] = useState("")
+  /* 
+    Detecta si es mobile
+  */
+  const [
+    isMobile,
+    setIsMobile
+  ] = useState(
 
-  // Estado: detecta si es mobile (ancho <= 768px)
-  const [isMobile, setIsMobile] = useState(
     window.innerWidth <= 768
   )
 
-  // Hook que ejecuta código cuando el componente se monta y se desmonta
+  // =========================
+  // EFFECT RESPONSIVE
+  // =========================
+
   useEffect(() => {
 
-    // Función que se ejecuta cada vez que la ventana cambia de tamaño
+    /* 
+      Detecta cambios
+      en el tamaño
+      de la pantalla
+    */
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768)
+
+      setIsMobile(
+
+        window.innerWidth <= 768
+      )
     }
 
-    // Escucha el evento de redimensionar
-    window.addEventListener("resize", handleResize)
+    // Escuchar resize
+    window.addEventListener(
+      "resize",
+      handleResize
+    )
 
-    // Limpia el evento cuando el componente se desmonta
+    // Cleanup
     return () => {
-      window.removeEventListener("resize", handleResize)
+
+      window.removeEventListener(
+        "resize",
+        handleResize
+      )
     }
 
   }, [])
 
-  // Lógica: mostrar ChatPreview solo si:
-  // - NO estamos en /map
-  // - NO es mobile
+  // =========================
+  // CHAT PREVIEW
+  // =========================
+
+  /* 
+    El preview NO aparece:
+    
+    - en mobile
+    - en /map
+  */
   const showChatPreview =
-    location.pathname.toLowerCase() !== "/map" && !isMobile
+
+    location.pathname.toLowerCase()
+      !== "/map" && !isMobile
+
+  // =========================
+  // RENDER
+  // =========================
 
   return (
+
     <>
+
+      {/* =========================
+           CHAT SCREEN
+      ========================= */}
+
       <div className="chat-screen">
 
-        {/* SECCIÓN PRINCIPAL */}
-        <main className="chat-screen__main">
-          {/* Fijo arriba: barra con buscador */}
-          <div className="chat-screen__top">
-            <TopBar title="Chats" />
-            {/* <TopBar>
-              <SearchBar
-                value={search}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearch(e.target.value)
-                }
-                placeholder="Buscar chats..."
-              />
-            </TopBar> */}
-          </div>
+        {/* =========================
+             MAIN CONTENT
+        ========================= */}
 
-          {/* Un solo scroll: sugerencias, comunidades y chats directos (sin scrolls internos) */}
-          <section className="chat-screen__content-scrollable">
+        <main className="chat-screen__main">
+
+          {/* =========================
+               PARTE FIJA
+               
+               ESTA PARTE
+               NO HACE SCROLL
+          ========================= */}
+
+          <div className="chat-screen__fixed-top">
+
+            {/* TOPBAR */}
+
+            <TopBar title="Chats" />
+
+            {/* SUGGESTIONS */}
+
             <Suggestions />
 
+          </div>
+
+          {/* =========================
+               SCROLL AREA
+               
+               SOLO ESTA PARTE
+               HACE SCROLL
+          ========================= */}
+
+          <section
+            className="chat-screen__content-scrollable"
+          >
+
+            {/* COMMUNITIES */}
+
             <CommunitiesSection />
+
+            {/* DIRECT CHATS */}
 
             <DirectList
               onSelectChat={(chat) => {
 
+                // Guardamos chat seleccionado
                 setSelectedChat(chat)
 
+                // Abrimos preview
                 setIsExpanded(true)
 
+                // Callback opcional
                 if (onSelectChat) {
+
                   onSelectChat(chat)
                 }
 
+                // Callback opcional
                 if (onToggleExpanded) {
+
                   onToggleExpanded(true)
                 }
               }}
@@ -127,7 +257,12 @@ const ChatScreen = ({
 
         </main>
 
-        {/* PANEL DERECHO - MAPA */}
+        {/* =========================
+             RIGHT PANEL
+             
+             MAPA LATERAL
+        ========================= */}
+
         <aside className="chat-screen__right-panel">
 
           <LiveMap />
@@ -136,22 +271,35 @@ const ChatScreen = ({
 
       </div>
 
-      {/* PREVIEW DEL CHAT - Flotante en la esquina */}
-      {/* Solo se muestra si cumple las condiciones (showChatPreview) */}
+      {/* =========================
+           CHAT PREVIEW FLOATING
+      ========================= */}
+
       {showChatPreview && createPortal(
 
         <ChatPreview
+
           selectedChat={selectedChat}
+
           isExpanded={isExpanded}
+
           onToggle={() =>
-            setIsExpanded(!isExpanded)
+
+            setIsExpanded(
+              !isExpanded
+            )
           }
         />,
 
         document.body
       )}
+
     </>
   )
 }
+
+// =========================
+// EXPORT
+// =========================
 
 export default ChatScreen

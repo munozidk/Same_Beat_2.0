@@ -1,11 +1,21 @@
 .chat-screen {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  height: 100vh;
-  position: relative;
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+    padding: 1.5rem;
+
+    height: 100vh;
+
+    position: relative;
+
+    /* IMPORTANTE */
+    overflow: hidden;
 }
+
 .chat-screen-wrapper {
 
   width: 100%;
@@ -29,25 +39,42 @@
 }
 
 /* MAIN */
+
 .chat-screen__main {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  height: 100%;
-  min-height: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 1.5rem;
+
+    height: 100%;
+
+    min-height: 0;
+
+    overflow: hidden;
 }
 
 /* SOLO ESTA PARTE HACE SCROLL */
 .chat-screen__content-scrollable {
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  padding-right: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2rem;
+
+    padding-right: 10px;
 }
+
 
 /* SCROLL */
 .chat-screen__content-scrollable::-webkit-scrollbar {
@@ -58,10 +85,9 @@
   background: rgb(198, 255, 52);
   border-radius: 999px;
 }
-
 /* RIGHT PANEL */
 .chat-screen__right-panel {
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 2rem;
 }
@@ -101,19 +127,3 @@
     }
 }
 
-.chat-preview-fixed {
-
-  position: fixed;
-
-  right: 20px;
-  bottom: 20px;
-
-  z-index: 9999;
-
-  pointer-events: none;
-}
-
-.chat-preview-fixed > * {
-
-  pointer-events: auto;
-}
