@@ -1,6 +1,7 @@
 .vertical-ticket {
     width: 320px;
-    height: 640px;
+    min-height: 640px;
+    height: auto;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
@@ -136,3 +137,4 @@
 .vt-liquid {
     display: none;
 }
+

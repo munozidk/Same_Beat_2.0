@@ -1,8 +1,15 @@
 .chat-preview-wrapper {
-  position: fixed;  
+
+  position: fixed;
+
   right: 40px;
   bottom: 8px;
+
   z-index: 999999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 .chat-screen {
   position: relative;
@@ -104,9 +111,11 @@
   padding: 18px;
 
   border-radius: 55px 55px 0px 55px;
+
   box-shadow: 
         0 8px 32px rgba(0, 0, 0, 0.25),
         inset -2px 4px 5px 0px rgba(127, 59, 237, 0.4);
+
   background:
     linear-gradient(
       180deg,
@@ -119,11 +128,10 @@
 
   gap: 14px;
 
-  overflow: visible;
-
   position: relative;
-}
 
+  overflow: hidden;
+}
 /* PURPLE GLOW */
 
 .chat-preview::before {

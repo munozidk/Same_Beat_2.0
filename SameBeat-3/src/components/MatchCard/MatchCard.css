@@ -3,26 +3,46 @@
 ========================= */
 
 .mobile-match-screen {
+
     width: 100%;
+
     height: 100vh;
+
     display: flex;
     flex-direction: column;
+
     overflow: hidden;
+
     padding: 12px;
+
     position: relative;
-    background: linear-gradient(135deg, #1a0033 0%, #2d0052 50%, #1a0033 100%);
+
+    background: linear-gradient(
+        135deg,
+        #1a0033 0%,
+        #2d0052 50%,
+        #1a0033 100%
+    );
 }
 
-/* CONTENEDOR DE LAS CARDS */
+/* =========================
+   CONTENEDOR DE CARDS
+========================= */
+
 .match-card-container {
+
     flex: 1;
+
     display: flex;
+
     justify-content: center;
     align-items: center;
+
     position: relative;
-    margin-top: 0;
-    padding-bottom: 100px;
+
     width: 100%;
+
+    padding-bottom: 100px;
 }
 
 /* =========================
@@ -30,17 +50,20 @@
 ========================= */
 
 .match-card {
+
     position: relative;
 
     width: 80%;
     max-width: 280px;
+
     height: 350px;
 
     border-radius: 38px;
 
-    overflow: visible;
+    overflow: hidden;
 
     cursor: grab;
+
     user-select: none;
 
     margin: 0 auto;
@@ -48,18 +71,28 @@
     transition: transform 0.25s ease;
 
     display: flex;
+
     align-items: flex-end;
     justify-content: center;
 }
 
+/* CURSOR AL ARRASTRAR */
+
 .match-card:active {
+
     cursor: grabbing;
 }
 
-/* IMAGEN */
+/* =========================
+   IMAGEN PRINCIPAL
+========================= */
+
 .match-card img {
+
     width: 100%;
     height: 100%;
+
+    display: block;
 
     object-fit: cover;
 
@@ -68,28 +101,36 @@
     pointer-events: none;
 
     position: relative;
-    z-index: 3;
+
+    z-index: 2;
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,0.45);
+        0 15px 40px rgba(
+            0,
+            0,
+            0,
+            0.45
+        );
 }
 
-
-
-
 /* =========================
-   GLASS INFO
+   OVERLAY GLASS
 ========================= */
 
 .match-info-glass {
+
     position: absolute;
+
     bottom: 0;
+
     width: 100%;
     height: 40%;
+
     padding: 18px;
 
     display: flex;
     flex-direction: column;
+
     justify-content: flex-end;
 
     color: white;
@@ -99,25 +140,43 @@
 
     background: linear-gradient(
         180deg,
-        rgba(20, 20, 20, 0) 0%,
-        rgba(20, 20, 20, 0.9) 100%
+        rgba(20,20,20,0) 0%,
+        rgba(20,20,20,0.9) 100%
     );
 
     border-radius: 0px 0px 26px 26px;
 
-    box-shadow: inset 0 10px 20px rgba(0, 0, 0, 0.3);
+    box-shadow:
+        inset 0 10px 20px rgba(
+            0,
+            0,
+            0,
+            0.3
+        );
+
+    z-index: 4;
 }
 
+/* CONTENIDO INTERNO */
+
 .match-info-content {
+
     display: flex;
     flex-direction: column;
+
     gap: 12px;
 }
 
-/* USER INFO */
+/* =========================
+   INFO USUARIO
+========================= */
+
 .author-info {
+
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     width: fit-content;
@@ -132,87 +191,139 @@
         rgba(127, 59, 237, 0.8)
     );
 
-    border: 1px solid rgba(197, 255, 52, 0.3);
+    border: 1px solid rgba(
+        197,
+        255,
+        52,
+        0.3
+    );
 }
 
+/* FOTO PERFIL */
+
 .comment-profile-pic {
+
     width: 32px;
     height: 32px;
+
     border-radius: 50%;
+
     border: 2px solid #c5ff34;
+
     object-fit: cover;
 }
 
+/* NOMBRE */
+
 .author-name {
+
     font-size: 13px;
+
     font-weight: 700;
+
     color: white;
 }
 
+/* COMPATIBILIDAD */
+
 .compatibility-text {
+
     font-size: 0.85rem;
+
     color: #c5ff34;
+
     font-weight: 600;
 }
 
 /* =========================
-   SWIPE LABELS
+   LABELS SWIPE
 ========================= */
 
 .match-card__label {
+
     position: absolute;
+
     top: 30px;
+
     padding: 8px 16px;
+
     border: 3px solid;
+
     border-radius: 8px;
+
     font-size: 1.4rem;
+
     font-weight: 900;
-    z-index: 10;
+
     letter-spacing: 1px;
+
+    z-index: 10;
 }
 
+/* LABEL LEFT */
+
 .match-card__label.left {
+
     right: 20px;
+
     border-color: #ff4d4d;
+
     color: #ff4d4d;
+
     transform: rotate(15deg);
 }
 
+/* LABEL RIGHT */
+
 .match-card__label.right {
+
     left: 20px;
+
     border-color: #c5ff34;
+
     color: #c5ff34;
+
     transform: rotate(-15deg);
 }
 
-/* Overlay alternativo */
+/* =========================
+   OVERLAY INFO
+========================= */
+
 .overlay {
+
     position: absolute;
 
-    bottom: 18px;
+   top: 240px;
     left: 50%;
+
 
     transform: translateX(-50%);
 
-    width: 95%;
+    width: 85%;
+    height: 25%;
 
-    min-height: 72px;
+    padding: 10px 14px;
 
-    padding: 14px 18px;
-
-    border-radius: 50px;
+    border-radius: 999px;
 
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
 
-    background: rgba(255,255,255,0.92);
+    background: rgba(
+        255,
+        255,
+        255,
+        0.92
+    );
 
     backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
 
     color: #111;
 
-    z-index: 4;
+    z-index: 7;
 
     box-shadow: 
         10px -5px 4px 0 #b796f7 inset,
@@ -220,45 +331,59 @@
         -10px -20px 30px 0 rgba(0, 0, 0, 0.25);
 }
 
-
 .overlay h2 {
+
     margin: 0;
 
-    font-size: 1.4rem;
+    font-size: 1rem;
+
+    font-weight: 800;
+
+    line-height: 1;
+}
+
+.overlay p {
+
+    margin-top: 2px;
+
+    font-size: 5px;
+
+    line-height: 1.1;
+
+    color: #3b3b3b;
+}
+/* TITULO */
+
+.overlay h2 {
+
+    margin: 15px;
+
+    font-size: 20px;
+
     font-weight: 800;
 
     color: #111;
 }
 
+/* DESCRIPCIÓN */
+
 .overlay p {
+
     margin-top: 4px;
 
     font-size: 0.9rem;
+
     line-height: 1.3;
 
     color: #3b3b3b;
 }
+
 /* =========================
-   DESKTOP VERSION
+   CARD PURPLE
 ========================= */
 
-@media (min-width: 1024px) {
-
-    .match-card {
-        width: 100%;
-        max-width: none;
-        height: 100%;
-        border-radius: 24px;
-    }
-
-    .match-card-container {
-        padding-bottom: 0;
-    }
-}
-
-/* REAL CARD PURPLE */
-
 .match-card.purple {
+
     background: linear-gradient(
         180deg,
         #7b3bed,
@@ -266,9 +391,12 @@
     );
 }
 
-/* REAL CARD GREEN */
+/* =========================
+   CARD GREEN
+========================= */
 
 .match-card.green {
+
     background: linear-gradient(
         180deg,
         #d9ff57,
@@ -277,10 +405,11 @@
 }
 
 /* =========================
-   SWIPE REACTIONS
+   REACCIONES SWIPE
 ========================= */
 
 .match-card__reaction {
+
     position: absolute;
 
     top: 40px;
@@ -288,7 +417,9 @@
     z-index: 20;
 
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     padding: 12px 20px;
@@ -296,6 +427,7 @@
     border-radius: 999px;
 
     font-weight: 900;
+
     font-size: 1.2rem;
 
     backdrop-filter: blur(18px);
@@ -312,12 +444,22 @@
 
     color: #d9ff57;
 
-    background: rgba(217,255,87,0.15);
+    background: rgba(
+        217,
+        255,
+        87,
+        0.15
+    );
 
     border: 2px solid #d9ff57;
 
     box-shadow:
-        0 0 30px rgba(217,255,87,0.75);
+        0 0 30px rgba(
+            217,
+            255,
+            87,
+            0.75
+        );
 }
 
 /* NOPE */
@@ -328,19 +470,32 @@
 
     color: #ff4d6d;
 
-    background: rgba(255,77,109,0.15);
+    background: rgba(
+        255,
+        77,
+        109,
+        0.15
+    );
 
     border: 2px solid #ff4d6d;
 
     box-shadow:
-        0 0 30px rgba(255,77,109,0.75);
+        0 0 30px rgba(
+            255,
+            77,
+            109,
+            0.75
+        );
 }
 
-/* ANIMATION */
+/* =========================
+   ANIMACIÓN
+========================= */
 
 @keyframes reactionPop {
 
     from {
+
         opacity: 0;
 
         transform:
@@ -349,10 +504,34 @@
     }
 
     to {
+
         opacity: 1;
 
         transform:
             scale(1)
             rotate(0deg);
+    }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+
+@media (min-width: 1024px) {
+
+    .match-card {
+
+        width: 100%;
+
+        max-width: none;
+
+        height: 100%;
+
+        border-radius: 24px;
+    }
+
+    .match-card-container {
+
+        padding-bottom: 0;
     }
 }

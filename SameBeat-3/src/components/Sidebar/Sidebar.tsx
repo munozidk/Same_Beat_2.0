@@ -332,7 +332,7 @@ const Sidebar = () => {
                     className="sidebar__dropdown-item"
                     onClick={() => {
 
-                      console.log("click en Post"); // 👈
+                      console.log("click en Post"); 
 
                       setModalOpen(true);
 
@@ -443,7 +443,10 @@ const Sidebar = () => {
 
             {/* LOGOUT */}
 
-            <button className="sidebar__logout-btn">
+            <button 
+            className="sidebar__logout-btn"
+            onClick={() => navigate('/login')}
+            >
 
               <LogOut size={22} />
 

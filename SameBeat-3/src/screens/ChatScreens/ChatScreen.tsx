@@ -10,7 +10,6 @@ import TopBar from '../../components/TopBar/TopBar'
 import Suggestions from "../../components/Suggestions/Suggestions"
 import LiveMap from "../../components/LiveMap/LiveMap"
 import ChatPreview from "../../components/ChatPreview/ChatPreview"
-import SearchBar from "../../components/SearchBar/SearchBar"
 
 // Interface que define un chat
 interface Chat {
@@ -48,8 +47,6 @@ const ChatScreen = ({
   // Estado: si el chat preview está expandido o minimizado
   const [isExpanded, setIsExpanded] = useState(true)
 
-  // Estado: texto del buscador
-  const [search, setSearch] = useState("")
 
   // Estado: detecta si es mobile (ancho <= 768px)
   const [isMobile, setIsMobile] = useState(
@@ -89,13 +86,7 @@ const ChatScreen = ({
           {/* Fijo arriba: barra con buscador */}
           <div className="chat-screen__top">
             <TopBar>
-              <SearchBar
-                value={search}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSearch(e.target.value)
-                }
-                placeholder="Buscar chats..."
-              />
+              
             </TopBar>
           </div>
 
