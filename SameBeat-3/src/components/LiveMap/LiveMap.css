@@ -1,10 +1,18 @@
 .live-map-container {
+
     display: flex;
     flex-direction: column;
+
     gap: 16px;
+    
 
     width: 280px;
-    height: 350px;
+
+    height: 280px;
+
+    flex: none;
+
+    align-self: flex-start;
 
     padding: 20px;
 
