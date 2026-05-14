@@ -7,7 +7,9 @@ import TopBar from '../TopBar/TopBar';
 import BottomNav from '../BottomNav/BottomNav';
 import ChatList from '../ChatList/ChatList';
 import NowPlaying from '../NowPLaying/NowPlaying';
+import PostModal from '../PostModal/PostModal';
 import { useFilter } from '../../contexts/FilterContext';
+import { usePostContext } from '../../contexts/PostContext';
 import { chats, users, songs } from '../../data/index';
 import './MainLayout.css';
 
@@ -16,13 +18,27 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+
     const location = useLocation();
     const isConcertsScreen = location.pathname === '/concerts';
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
 
+
     // Rutas donde SÍ se muestra el panel derecho (NowPlaying + ChatList)
     // Del resto de pantallas (chats, map, etc.) se oculta
     const showRightPanel = ['/home', '/concerts', '/profile', '/discover'].includes(location.pathname);
+
+    // =========================
+    // CONTEXT
+    // =========================
+
+    const { posts, addPost, modalOpen, setModalOpen } = usePostContext();
+
+    // =========================
+    // CHAT PREVIEWS
+    // =========================
+
+
     const chatPreviews = chats.slice(0, 3).map(chat => {
         const user = users.find(u => u.id === chat.userId)
         return {
@@ -102,6 +118,20 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </main>
                 <BottomNav />
             </div>
+
+
+            {/* =========================
+                 MODAL — disponible en
+                 desktop y mobile
+            ========================= */}
+
+            <PostModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onSubmit={addPost}
+                currentPosts={posts}
+            />
+
 
         </div>
     );
