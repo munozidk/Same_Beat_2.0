@@ -478,8 +478,13 @@ const Sidebar = () => {
                     className="sidebar__dropdown-item"
                     onClick={() => {
 
+
                       // Abrimos modal
                       setShowPostModal(true);
+
+                      console.log("click en Post"); 
+
+                      setModalOpen(true);
 
                       // Cerramos dropdown
                       setShowCreateMenu(false);
@@ -587,7 +592,20 @@ const Sidebar = () => {
                  LOGOUT
             ========================= */}
 
-            <button className="sidebar__logout-btn">
+            <input
+              type="file"
+              accept="audio/mp3,audio/mpeg"
+              ref={songInputRef}
+              style={{ display: "none" }}
+              onChange={handleSongUpload}
+            />
+
+            {/* LOGOUT */}
+
+            <button 
+            className="sidebar__logout-btn"
+            onClick={() => navigate('/login')}
+            >
 
               <LogOut size={22} />
 
