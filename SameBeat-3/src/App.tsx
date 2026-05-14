@@ -8,6 +8,9 @@ import Communities from './screens/Communities/Communities';
 import ProfileScreen from './screens/Profile/ProfileScreen';
 import MainLayout from './components/MainLayout/MainLayout';
 import { FilterProvider } from './contexts/FilterContext';
+import ChatScreen from './screens/ChatScreens/ChatScreen';
+import MapScreen from './screens/MapScreen/MapScreen';
+import MatchScreen from './screens/MatchScreen/MatchScreen';
 
 export default function App() {
   return (
@@ -23,6 +26,9 @@ export default function App() {
             <Route path="/concert/:id/communities" element={<Communities />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/profile" element={<ProfileScreen />} />
+            <Route path="/profile" element={<ChatScreen />} />
+            <Route path="/profile" element={<MapScreen />} />
+            <Route path="/profile" element={<MatchScreen />} />
           </Routes>
         </MainLayout>
       </Router>
