@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../SideBar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar'
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
 import HeaderConcerts from '../HeaderConcerts/HeaderConcerts';
@@ -34,7 +34,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
             {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
-                    <HeaderConcerts />
+                    
                 </header>
 
                 <div className="desktop-body">

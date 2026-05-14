@@ -17,6 +17,7 @@
     left: 0;
     right: 0;
     bottom: 0;
+    z-index: 0;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -31,6 +32,7 @@
 
 .modalContent {
     position: relative;
+    z-index: 1;
     width: 100%;
     max-width: 1100px;
     height: 85vh; /* Change to fixed height to ensure layout works */
@@ -136,8 +138,12 @@
     justify-content: center;
     background: #391975;
     position: relative;
-    z-index: 10;
+    z-index: 20;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.overlay-description-stats {
+    margin-bottom: 28px;
 }
 
 /* Responsive adjustments */

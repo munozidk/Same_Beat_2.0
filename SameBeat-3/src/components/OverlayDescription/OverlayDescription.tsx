@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ActionButton from '../ActionButton/ActionButton';
 import BackButton from '../BackButton/BackButton';
+import '../ArtistInfo/ArtistInfo.css';
 import './OverlayDescription.css';
 
 interface OverlayDescriptionProps {
@@ -9,6 +10,7 @@ interface OverlayDescriptionProps {
   artist: string;
   tour: string;
   description: string;
+  assistants: string;
   onClose: () => void;
   onViewCommunities: () => void;
 }
@@ -18,6 +20,7 @@ const OverlayDescription: React.FC<OverlayDescriptionProps> = ({
   artist,
   tour,
   description,
+  assistants,
   onClose,
   onViewCommunities
 }) => {
@@ -49,6 +52,16 @@ const OverlayDescription: React.FC<OverlayDescriptionProps> = ({
               <div className="textContainer">
                 <h1 className="tourTitle">{tour}</h1>
                 <h2 className="artistName">{artist}</h2>
+                <div className="stats-container overlay-description-stats">
+                  <div className="stat-box">
+                    <span className="stat-label">Assistants</span>
+                    <span className="stat-value">{assistants}</span>
+                  </div>
+                  <div className="vertical-divider" />
+                  <div className="stat-box">
+                    <span className="stat-label">Communities</span>
+                  </div>
+                </div>
                 <div className="descriptionText">
                   {description}
                 </div>
