@@ -1,0 +1,104 @@
+.chat-screen {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  height: 100vh;
+  position: relative;
+}
+.chat-screen-wrapper {
+
+  width: 100%;
+  height: 100vh;
+
+  position: relative;
+
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .chat-screen {
+    grid-template-columns: 1fr 340px;
+    padding: 1.5rem 1.5rem 1.5rem 0;
+  }
+}
+
+/* MAIN */
+.chat-screen__main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  height: 100%;
+  min-height: 0;
+}
+
+/* SOLO ESTA PARTE HACE SCROLL */
+.chat-screen__content-scrollable {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* SCROLL */
+.chat-screen__content-scrollable::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-screen__content-scrollable::-webkit-scrollbar-thumb {
+  background: rgb(198, 255, 52);
+  border-radius: 999px;
+}
+
+/* RIGHT PANEL */
+.chat-screen__right-panel {
+  display: none;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .chat-screen__right-panel {
+    display: flex;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .chat-screen {
+        display: flex;
+        flex-direction: column;
+        padding: 14px;
+        overflow-y: auto;
+    }
+
+    .chat-screen__right-panel {
+        display: none !important;
+    }
+
+    .chat-screen__content-scrollable {
+        overflow: visible;
+        padding-right: 0;
+    }
+}
+
+.chat-preview-fixed {
+
+  position: fixed;
+
+  right: 20px;
+  bottom: 20px;
+
+  z-index: 9999;
+
+  pointer-events: none;
+}
+
+.chat-preview-fixed > * {
+
+  pointer-events: auto;
+}
