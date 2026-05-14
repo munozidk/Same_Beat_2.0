@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 
 import loginImg from "../../assets/Log in.svg";
+import gifanimado from "../../assets/gifanimado.gif";
 
 function SignupScreen() {
 
@@ -31,6 +32,9 @@ function SignupScreen() {
     useState("");
 
   const [attempted, setAttempted] =
+    useState(false);
+
+  const [showGif, setShowGif] =
     useState(false);
 
   const handleChange = (
@@ -121,7 +125,13 @@ function SignupScreen() {
       JSON.stringify(formData)
     );
 
-    navigate("/genres");
+    setShowGif(true);
+
+    // ✅ 3 segundos
+    setTimeout(() => {
+      setShowGif(false);
+      navigate("/genres");
+    }, 3000);
 
   };
 
@@ -513,6 +523,22 @@ function SignupScreen() {
         </section>
 
       </main>
+
+      {/* GIF OVERLAY — solo fondo morado, sin caja negra */}
+
+      {showGif && (
+
+        <div className={styles.gifOverlay}>
+
+          <img
+            src={gifanimado}
+            alt="Cargando..."
+            className={styles.gifImage}
+          />
+
+        </div>
+
+      )}
 
     </div>
   );
