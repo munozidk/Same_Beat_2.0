@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import { usePostContext } from "../../contexts/PostContext";
 
 // Logo
 import mockis from "../../assets/mockis.png";
@@ -28,8 +29,7 @@ import {
   Pencil,
   Music,
   Video,
- Image as ImageIcon,
-  X,
+  Image as ImageIcon,
 } from "lucide-react";
 
 /* 
@@ -39,13 +39,21 @@ import {
   
   - navegación
   - dropdown create
-  - modal create post
   - subida de imágenes
   - subida de videos
   - subida de canciones mp3
+
+  El modal y los posts viven en HomeScreen
+  a través de PostContext
 */
 
 const Sidebar = () => {
+
+  // =========================
+  // CONTEXT
+  // =========================
+
+  const { setModalOpen } = usePostContext();
 
   // =========================
   // NAVIGATION
@@ -66,34 +74,6 @@ const Sidebar = () => {
     showCreateMenu,
     setShowCreateMenu,
   ] = useState(false);
-
-  // Mostrar modal
-  const [
-    showPostModal,
-    setShowPostModal,
-  ] = useState(false);
-
-  // Texto post
-  const [postText, setPostText] =
-    useState("");
-
-  // Imagen seleccionada
-  const [
-    selectedImage,
-    setSelectedImage,
-  ] = useState<string | null>(null);
-
-  // Video seleccionado
-  const [
-    selectedVideo,
-    setSelectedVideo,
-  ] = useState<string | null>(null);
-
-  // Canción seleccionada
-  const [
-    selectedSong,
-    setSelectedSong,
-  ] = useState<string | null>(null);
 
   // =========================
   // REFS
@@ -128,22 +108,10 @@ const Sidebar = () => {
     // Validación
     if (!file) return;
 
-    // URL temporal
-    const imageUrl =
-      URL.createObjectURL(file);
-
-    // Guardamos imagen
-    setSelectedImage(imageUrl);
-
-    // Limpiamos otros medios
-    setSelectedVideo(null);
-
-    setSelectedSong(null);
-
-    // Abrimos modal
+    // Abrimos modal via context
     setShowCreateMenu(false);
 
-    setShowPostModal(true);
+    setModalOpen(true);
   };
 
   // =========================
@@ -156,26 +124,17 @@ const Sidebar = () => {
 
   ) => {
 
+    // Archivo seleccionado
     const file =
       event.target.files?.[0];
 
+    // Validación
     if (!file) return;
 
-    const videoUrl =
-      URL.createObjectURL(file);
-
-    // Guardamos video
-    setSelectedVideo(videoUrl);
-
-    // Limpiamos otros medios
-    setSelectedImage(null);
-
-    setSelectedSong(null);
-
-    // Abrimos modal
+    // Abrimos modal via context
     setShowCreateMenu(false);
 
-    setShowPostModal(true);
+    setModalOpen(true);
   };
 
   // =========================
@@ -200,54 +159,10 @@ const Sidebar = () => {
     // Validación
     if (!file) return;
 
-    // URL temporal
-    const songUrl =
-      URL.createObjectURL(file);
-
-    // Guardamos canción
-    setSelectedSong(songUrl);
-
-    // Limpiamos otros medios
-    setSelectedImage(null);
-
-    setSelectedVideo(null);
-
-    // Abrimos modal
+    // Abrimos modal via context
     setShowCreateMenu(false);
 
-    setShowPostModal(true);
-  };
-
-  // =========================
-  // CREATE POST
-  // =========================
-
-  const handleCreatePost = () => {
-
-    console.log({
-
-      text: postText,
-
-      image: selectedImage,
-
-      video: selectedVideo,
-
-      song: selectedSong,
-
-    });
-
-    // Cerramos modal
-    setShowPostModal(false);
-
-    // Limpiamos texto
-    setPostText("");
-
-    // Limpiamos medios
-    setSelectedImage(null);
-
-    setSelectedVideo(null);
-
-    setSelectedSong(null);
+    setModalOpen(true);
   };
 
   return (
@@ -417,7 +332,9 @@ const Sidebar = () => {
                     className="sidebar__dropdown-item"
                     onClick={() => {
 
-                      setShowPostModal(true);
+                      console.log("click en Post"); // 👈
+
+                      setModalOpen(true);
 
                       setShowCreateMenu(false);
 
@@ -539,123 +456,6 @@ const Sidebar = () => {
         </div>
 
       </aside>
-
-      {/* =========================
-           MODAL CREATE POST
-      ========================= */}
-
-      {showPostModal && (
-
-        <div className="create-post-modal">
-
-          {/* OVERLAY */}
-
-          <div
-            className="create-post-overlay"
-            onClick={() =>
-
-              setShowPostModal(false)
-
-            }
-          ></div>
-
-          {/* MODAL */}
-
-          <div className="create-post-content">
-
-            {/* HEADER */}
-
-            <div className="create-post-header">
-
-              <h2>New post</h2>
-
-              {/* CLOSE */}
-
-              <button
-                className="close-modal-btn"
-                onClick={() =>
-
-                  setShowPostModal(false)
-
-                }
-              >
-
-                <X size={20} />
-
-              </button>
-
-            </div>
-
-            {/* TEXTAREA */}
-
-            <textarea
-              placeholder="How was the concert?"
-              value={postText}
-              onChange={(e) =>
-
-                setPostText(e.target.value)
-
-              }
-            />
-
-            {/* IMAGE PREVIEW */}
-
-            {selectedImage && (
-
-              <img
-                src={selectedImage}
-                alt="preview"
-                className="post-preview-image"
-              />
-
-            )}
-
-            {/* VIDEO PREVIEW */}
-
-            {selectedVideo && (
-
-              <video
-                src={selectedVideo}
-                controls
-                className="post-preview-video"
-              />
-
-            )}
-
-            {/* SONG PREVIEW */}
-
-            {selectedSong && (
-
-              <audio
-                controls
-                className="post-preview-audio"
-              >
-
-                <source
-                  src={selectedSong}
-                  type="audio/mpeg"
-                />
-
-              </audio>
-
-            )}
-
-            {/* BOTÓN POST */}
-
-            <button
-              className="publish-post-btn"
-              onClick={handleCreatePost}
-            >
-
-              Post
-
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
     </>
   );
 };

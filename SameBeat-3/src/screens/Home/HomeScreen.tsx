@@ -1,33 +1,42 @@
-import { useState } from 'react'
 import PostFeed from '../../components/PostFeed/PostFeed'
-import PostModal from '../../components/PostModal/PostModal'
 import TopBar from '../../components/TopBar/TopBar'
 import Suggestions from '../../components/Suggestions/Suggestions'
-import type { Post } from '../../types'
-import { posts as initialPosts } from '../../data'
+import { usePostContext } from '../../contexts/PostContext'
 import './SHomeScreen.css'
 
-export default function HomeScreen() {
-  const [posts, setPosts] = useState<Post[]>(initialPosts)
-  const [modalOpen, setModalOpen] = useState(false)
+/* 
+  COMPONENTE HOMESCREEN
 
-  function handleNewPost(newPost: Post) {
-    setPosts([newPost, ...posts])
-  }
+  Este componente maneja:
+
+  - feed de posts via PostContext
+  - el modal vive en MainLayout
+*/
+
+export default function HomeScreen() {
+
+  // =========================
+  // CONTEXT
+  // =========================
+
+  const { posts } = usePostContext();
 
   return (
+
     <div className="home-screen">
+
+      {/* TOP BAR */}
+
       <TopBar title="Home" />
 
+      {/* SUGERENCIAS */}
+
       <Suggestions />
+
+      {/* FEED */}
+
       <PostFeed posts={posts} />
 
-      <PostModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        onSubmit={handleNewPost}
-        currentPosts={posts}
-      />
     </div>
-  )
+  );
 }

@@ -4,6 +4,7 @@
     background: transparent;
     color: #D9D9D9;
     overflow: hidden;
+    position: relative;
 }
 
 /* Desktop Layout - Default Hidden */

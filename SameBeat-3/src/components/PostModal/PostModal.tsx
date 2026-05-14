@@ -11,6 +11,7 @@ interface Props {
 }
 
 export default function PostModal({ isOpen, onClose, onSubmit, currentPosts}: Props) {
+    console.log("PostModal isOpen:", isOpen);
     const [text,setText] = useState('');
 
     function handleSubmit() {
