@@ -25,9 +25,9 @@ export default function App() {
             <Route path="/concert/:id/communities" element={<Communities />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/profile" element={<ProfileScreen />} />
-            <Route path="/profile" element={<ChatScreen />} />
-            <Route path="/profile" element={<MapScreen />} />
-            <Route path="/profile" element={<MatchScreen />} />
+            <Route path="/Chat" element={<ChatScreen />} />
+            <Route path="/Map" element={<MapScreen />} />
+            <Route path="/Match" element={<MatchScreen />} />
           </Routes>
         </MainLayout>
       </Router>

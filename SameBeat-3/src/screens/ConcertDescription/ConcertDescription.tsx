@@ -3,14 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { data } from '../../data';
 
-// Components
-import Header from '../../components/Header/Header';
-import HeroImage from '../../components/HeroImage/HeroImage';
-import ArtistInfo from '../../components/ArtistInfo/ArtistInfo';
-import ConcertDescription from '../../components/ConcertDescription/ConcertDescription';
-import ActionButton from '../../components/ActionButton/ActionButton';
 import OverlayDescription from '../../components/OverlayDescription/OverlayDescription';
-import BackButton from '../../components/BackButton/BackButton';
 
 import './ConcertDescription.css';
 
@@ -36,40 +29,12 @@ const ConcertDescriptionScreen: React.FC = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <HeroImage src={concert.image} alt={concert.artist} />
-            
-            <div className="screen-content-wrapper">
-                <Header 
-                    title="Details of Concerts" 
-                    onBack={() => navigate(-1)}
-                    profilePic="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop"
-                    hideProfileOnDesktop={true}
-                />
-
-                <div className="scrollable-body">
-                    <div className="content-padding">
-                        <ArtistInfo 
-                            name={concert.tour}
-                            assistants={concert.capacity}
-                        />
-
-                        <ConcertDescription text={concert.description || ""} />
-
-                        <div className="action-button-container">
-                            <ActionButton 
-                                label="view all communities"
-                                onClick={() => navigate(`/concert/${concert.id}/communities`)}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <OverlayDescription 
                 image={concert.image}
                 artist={concert.artist}
                 tour={concert.tour}
                 description={concert.description || ""}
+                assistants={concert.capacity}
                 onClose={() => navigate(-1)}
                 onViewCommunities={() => navigate(`/concert/${concert.id}/communities`)}
             />

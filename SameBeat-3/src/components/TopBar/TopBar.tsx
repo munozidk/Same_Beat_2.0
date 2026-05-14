@@ -3,11 +3,12 @@ import "./TopBar.css"
 import profile from "../../assets/profile.jpg"
 // Interface que define qué props puede recibir el componente
 interface TopBarProps {
-  children?: React.ReactNode  // children es opcional (?)
+  children?: React.ReactNode
+  title?: string
 }
 
 // Componente TopBar (barra superior de la app)
-const TopBar = ({ children }: TopBarProps) => {
+const TopBar = ({ children, title = "Chats" }: TopBarProps) => {
 
   
   return (
@@ -15,11 +16,12 @@ const TopBar = ({ children }: TopBarProps) => {
 
       {/* SECCIÓN IZQUIERDA - Título */}
       <div className="topbar__left">
-        <h1>Chats</h1>
+        <h1>{title}</h1>
       </div>
 
-      {/* SECCIÓN CENTRAL - Contenido que viene desde otro componente */}
-      {children}
+      <div className="topbar__center">
+        {children}
+      </div>
 
       {/* SECCIÓN DERECHA - Avatar, notificaciones y configuración */}
       <div className="topbar__actions">
