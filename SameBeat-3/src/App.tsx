@@ -11,6 +11,7 @@ import { FilterProvider } from './contexts/FilterContext';
 import ChatScreen from './screens/ChatScreens/ChatScreen';
 import MapScreen from './screens/MapScreen/MapScreen';
 import MatchScreen from './screens/MatchScreen/MatchScreen';
+import EditProfileScreen from './screens/EditProfileScreen/EditProfileScreen';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
             <Route path="/Chat" element={<ChatScreen />} />
             <Route path="/Map" element={<MapScreen />} />
             <Route path="/Match" element={<MatchScreen />} />
+            <Route path="/profile/edit" element={<EditProfileScreen />} />
           </Routes>
         </MainLayout>
       </Router>
