@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomeScreen from './screens/Home/HomeScreen';
-import Discover from './screens/Discover/Discover';
+import Discover from './screens/Discover/DiscoverScreen';
 import Concerts from './screens/Concerts/Concerts';
 import ConcertDetails from './screens/ConcertDetails/ConcertDetails';
 import ConcertDescription from './screens/ConcertDescription/ConcertDescription';
