@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../SideBar/Sidebar';
+import Sidebar from '../Sidebar/Sidebar'
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
 import TopBar from '../TopBar/TopBar';
