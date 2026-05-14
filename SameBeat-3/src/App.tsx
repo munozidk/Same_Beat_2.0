@@ -12,11 +12,13 @@ import ChatScreen from './screens/ChatScreens/ChatScreen';
 import MapScreen from './screens/MapScreen/MapScreen';
 import MatchScreen from './screens/MatchScreen/MatchScreen';
 import EditProfileScreen from './screens/EditProfileScreen/EditProfileScreen';
+import { PostProvider } from './contexts/PostContext';
 
 
 export default function App() {
   return (
     <FilterProvider>
+      <PostProvider>
       <Router>
         <MainLayout>
           <Routes> 
@@ -43,6 +45,7 @@ export default function App() {
           </Routes>
         </MainLayout>
       </Router>
+      </PostProvider>
     </FilterProvider>
   );
 }

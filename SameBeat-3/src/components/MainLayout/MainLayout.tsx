@@ -1,13 +1,15 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../Sidebar/Sidebar'
+import Sidebar from '../SideBar/Sidebar'
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
 import HeaderConcerts from '../HeaderConcerts/HeaderConcerts';
 import BottomNav from '../BottomNav/BottomNav';
 import ChatList from '../ChatList/ChatList';
 import NowPlaying from '../NowPLaying/NowPlaying';
+import PostModal from '../PostModal/PostModal';
 import { useFilter } from '../../contexts/FilterContext';
+import { usePostContext } from '../../contexts/PostContext';
 import { chats, users, songs } from '../../data/index';
 import './MainLayout.css';
 
@@ -16,9 +18,20 @@ interface MainLayoutProps {
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+
     const location = useLocation();
     const isConcertsScreen = location.pathname === '/concerts';
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
+
+    // =========================
+    // CONTEXT
+    // =========================
+
+    const { posts, addPost, modalOpen, setModalOpen } = usePostContext();
+
+    // =========================
+    // CHAT PREVIEWS
+    // =========================
 
     const chatPreviews = chats.slice(0, 3).map(chat => {
         const user = users.find(u => u.id === chat.userId)
@@ -31,6 +44,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     return (
         <div className="app-container screen-container">
+
             {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
@@ -91,6 +105,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </main>
                 <BottomNav />
             </div>
+
+            {/* =========================
+                 MODAL — disponible en
+                 desktop y mobile
+            ========================= */}
+
+            <PostModal
+                isOpen={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onSubmit={addPost}
+                currentPosts={posts}
+            />
+
         </div>
     );
 };
