@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import { usePostContext } from "../../contexts/PostContext";
 
 // Logo
 import mockis from "../../assets/mockis.png";
@@ -29,7 +30,6 @@ import {
   Music,
   Video,
   Image as ImageIcon,
-  X,
 } from "lucide-react";
 
 /* 
@@ -39,178 +39,85 @@ import {
   
   - navegación
   - dropdown create
-  - modal para crear posts
   - subida de imágenes
   - subida de videos
+  - subida de canciones mp3
+
+  El modal y los posts viven en HomeScreen
+  a través de PostContext
 */
 
 const Sidebar = () => {
 
   // =========================
+  // CONTEXT
+  // =========================
+
+  const { setModalOpen } = usePostContext();
+
+  // =========================
   // NAVIGATION
   // =========================
 
-  /* 
-    useNavigate
-    
-    Sirve para movernos
-    entre páginas
-  */
   const navigate = useNavigate();
 
   // =========================
   // STATES
   // =========================
 
-  /* 
-    active
-    
-    Guarda el botón
-    activo del sidebar
-    
-    Ejemplo:
-    Home, Concerts, etc
-  */
+  // Botón activo
   const [active, setActive] =
     useState("Home");
 
-  /* 
-    showCreateMenu
-    
-    Abre o cierra
-    el menú dropdown
-    del botón Create
-  */
+  // Mostrar dropdown create
   const [
     showCreateMenu,
     setShowCreateMenu,
   ] = useState(false);
 
-  /* 
-    showPostModal
-    
-    Controla si el modal
-    de crear post está abierto
-  */
-  const [
-    showPostModal,
-    setShowPostModal,
-  ] = useState(false);
-
-  /* 
-    postText
-    
-    Guarda el texto
-    escrito en el textarea
-  */
-  const [postText, setPostText] =
-    useState("");
-
-  /* 
-    selectedImage
-    
-    Guarda la imagen
-    seleccionada por el usuario
-  */
-  const [
-    selectedImage,
-    setSelectedImage,
-  ] = useState<string | null>(null);
-
-  /* 
-    selectedVideo
-    
-    Guarda el video
-    seleccionado por el usuario
-  */
-  const [
-    selectedVideo,
-    setSelectedVideo,
-  ] = useState<string | null>(null);
-
   // =========================
   // REFS
   // =========================
 
-  /* 
-    imageInputRef
-    
-    Referencia al input file
-    de imágenes
-    
-    Nos permite abrirlo
-    desde un botón
-  */
+  // Input imagen
   const imageInputRef =
     useRef<HTMLInputElement | null>(null);
 
-  /* 
-    videoInputRef
-    
-    Referencia al input file
-    de videos
-  */
+  // Input video
   const videoInputRef =
+    useRef<HTMLInputElement | null>(null);
+
+  // Input canción
+  const songInputRef =
     useRef<HTMLInputElement | null>(null);
 
   // =========================
   // IMAGE UPLOAD
   // =========================
 
-  /* 
-    Esta función se ejecuta
-    cuando el usuario
-    selecciona una imagen
-  */
   const handleImageUpload = (
 
     event: React.ChangeEvent<HTMLInputElement>
 
   ) => {
 
-    // Obtenemos el archivo
+    // Archivo seleccionado
     const file =
       event.target.files?.[0];
 
-    // Si no hay archivo
-    // detenemos función
+    // Validación
     if (!file) return;
 
-    /* 
-      URL.createObjectURL
-      
-      Convierte el archivo
-      en una URL temporal
-      
-      para poder mostrarlo
-      en pantalla
-    */
-    const imageUrl =
-      URL.createObjectURL(file);
-
-    // Guardamos imagen
-    setSelectedImage(imageUrl);
-
-    // Eliminamos video
-    setSelectedVideo(null);
-
-    // Cerramos dropdown
+    // Abrimos modal via context
     setShowCreateMenu(false);
 
-    // Abrimos modal
-    setShowPostModal(true);
+    setModalOpen(true);
   };
 
   // =========================
   // VIDEO UPLOAD
   // =========================
 
-  /* 
-    Funciona igual
-    que image upload
-    
-    pero para videos
-  */
   const handleVideoUpload = (
 
     event: React.ChangeEvent<HTMLInputElement>
@@ -224,67 +131,39 @@ const Sidebar = () => {
     // Validación
     if (!file) return;
 
-    // Creamos URL temporal
-    const videoUrl =
-      URL.createObjectURL(file);
-
-    // Guardamos video
-    setSelectedVideo(videoUrl);
-
-    // Limpiamos imagen
-    setSelectedImage(null);
-
-    // Cerramos menú
+    // Abrimos modal via context
     setShowCreateMenu(false);
 
-    // Abrimos modal
-    setShowPostModal(true);
+    setModalOpen(true);
   };
 
   // =========================
-  // CREATE POST
+  // SONG UPLOAD
   // =========================
 
   /* 
-    Esta función se ejecuta
-    cuando el usuario
-    publica un post
+    Permite subir
+    canciones mp3
   */
-  const handleCreatePost = () => {
 
-    /* 
-      Por ahora solo hacemos
-      console.log
-      
-      después esto se conecta
-      al Home
-    */
-    console.log({
+  const handleSongUpload = (
 
-      text: postText,
+    event: React.ChangeEvent<HTMLInputElement>
 
-      image: selectedImage,
+  ) => {
 
-      video: selectedVideo,
+    // Archivo seleccionado
+    const file =
+      event.target.files?.[0];
 
-    });
+    // Validación
+    if (!file) return;
 
-    // Cerramos modal
-    setShowPostModal(false);
+    // Abrimos modal via context
+    setShowCreateMenu(false);
 
-    // Limpiamos textarea
-    setPostText("");
-
-    // Limpiamos imagen
-    setSelectedImage(null);
-
-    // Limpiamos video
-    setSelectedVideo(null);
+    setModalOpen(true);
   };
-
-  // =========================
-  // JSX
-  // =========================
 
   return (
 
@@ -295,9 +174,7 @@ const Sidebar = () => {
 
       <aside className="sidebar">
 
-        {/* =========================
-             LOGO
-        ========================= */}
+        {/* LOGO */}
 
         <div className="sidebar__logo">
 
@@ -309,24 +186,18 @@ const Sidebar = () => {
 
         </div>
 
-        {/* =========================
-             TOP SECTION
-        ========================= */}
+        {/* TOP */}
 
         <div className="sidebar__top">
 
-          {/* =========================
-               NAVIGATION
-          ========================= */}
+          {/* NAVIGATION */}
 
           <nav
             className="sidebar__nav"
             aria-label="Navegación principal"
           >
 
-            {/* =========================
-                 HOME
-            ========================= */}
+            {/* HOME */}
 
             <button
               className={`sidebar__nav-btn ${
@@ -336,10 +207,8 @@ const Sidebar = () => {
               }`}
               onClick={() => {
 
-                // Cambiamos estado activo
                 setActive("Home");
 
-                // Navegamos página
                 navigate("/home");
 
               }}
@@ -351,9 +220,7 @@ const Sidebar = () => {
 
             </button>
 
-            {/* =========================
-                 CONCERTS
-            ========================= */}
+            {/* CONCERTS */}
 
             <button
               className={`sidebar__nav-btn ${
@@ -376,9 +243,7 @@ const Sidebar = () => {
 
             </button>
 
-            {/* =========================
-                 MUSIC
-            ========================= */}
+            {/* MUSIC */}
 
             <button
               className={`sidebar__nav-btn ${
@@ -401,9 +266,7 @@ const Sidebar = () => {
 
             </button>
 
-            {/* =========================
-                 PROFILE
-            ========================= */}
+            {/* PROFILE */}
 
             <button
               className={`sidebar__nav-btn ${
@@ -432,12 +295,7 @@ const Sidebar = () => {
 
             <div className="sidebar__dropdown">
 
-              {/* 
-                BOTÓN CREATE
-                
-                Abre o cierra
-                el dropdown
-              */}
+              {/* BOTÓN CREATE */}
 
               <button
                 className={`sidebar__nav-btn create-btn ${
@@ -462,31 +320,22 @@ const Sidebar = () => {
 
               </button>
 
-              {/* =========================
-                   MENU DROPDOWN
-              ========================= */}
+              {/* MENU */}
 
               {showCreateMenu && (
 
                 <div className="sidebar__dropdown-menu">
 
-                  {/* =========================
-                       POST
-                  ========================= */}
+                  {/* POST */}
 
                   <button
                     className="sidebar__dropdown-item"
                     onClick={() => {
 
-
-                      // Abrimos modal
-                      setShowPostModal(true);
-
                       console.log("click en Post"); 
 
                       setModalOpen(true);
 
-                      // Cerramos dropdown
                       setShowCreateMenu(false);
 
                     }}
@@ -498,35 +347,30 @@ const Sidebar = () => {
 
                   </button>
 
-                  {/* =========================
-                      SONG
-                  ========================= */}
-
-<button
-  className="sidebar__dropdown-item"
-  onClick={() =>
-
-    // Abrimos selector canciones
-    songInputRef.current?.click()
-
-  }
->dc
-
-  <Music size={18} />
-
-  <span>Song</span>
-
-</button>
-
-                  {/* =========================
-                       VIDEO
-                  ========================= */}
+                  {/* SONG */}
 
                   <button
                     className="sidebar__dropdown-item"
                     onClick={() =>
 
-                      // Abrimos selector videos
+                      // Abrimos selector mp3
+                      songInputRef.current?.click()
+
+                    }
+                  >
+
+                    <Music size={18} />
+
+                    <span>Song</span>
+
+                  </button>
+
+                  {/* VIDEO */}
+
+                  <button
+                    className="sidebar__dropdown-item"
+                    onClick={() =>
+
                       videoInputRef.current?.click()
 
                     }
@@ -538,15 +382,12 @@ const Sidebar = () => {
 
                   </button>
 
-                  {/* =========================
-                       PHOTO
-                  ========================= */}
+                  {/* PHOTO */}
 
                   <button
                     className="sidebar__dropdown-item"
                     onClick={() =>
 
-                      // Abrimos selector imágenes
                       imageInputRef.current?.click()
 
                     }
@@ -565,7 +406,7 @@ const Sidebar = () => {
             </div>
 
             {/* =========================
-                 INPUT IMAGEN OCULTO
+                 INPUT IMAGEN
             ========================= */}
 
             <input
@@ -577,7 +418,7 @@ const Sidebar = () => {
             />
 
             {/* =========================
-                 INPUT VIDEO OCULTO
+                 INPUT VIDEO
             ========================= */}
 
             <input
@@ -589,7 +430,7 @@ const Sidebar = () => {
             />
 
             {/* =========================
-                 LOGOUT
+                 INPUT SONG MP3
             ========================= */}
 
             <input
@@ -618,125 +459,8 @@ const Sidebar = () => {
         </div>
 
       </aside>
-
-      {/* =========================
-           MODAL CREATE POST
-      ========================= */}
-
-      {showPostModal && (
-
-        <div className="create-post-modal">
-
-          {/* 
-            OVERLAY
-            
-            Fondo oscuro
-            
-            al darle click
-            se cierra modal
-          */}
-
-          <div
-            className="create-post-overlay"
-            onClick={() =>
-
-              setShowPostModal(false)
-
-            }
-          ></div>
-
-          {/* =========================
-               CONTENIDO MODAL
-          ========================= */}
-
-          <div className="create-post-content">
-
-            {/* HEADER */}
-
-            <div className="create-post-header">
-
-              <h2>New post</h2>
-
-              {/* BOTÓN CERRAR */}
-
-              <button
-                className="close-modal-btn"
-                onClick={() =>
-
-                  setShowPostModal(false)
-
-                }
-              >
-
-                <X size={20} />
-
-              </button>
-
-            </div>
-
-            {/* =========================
-                 TEXTAREA
-            ========================= */}
-
-            <textarea
-              placeholder="How was the concert?"
-              value={postText}
-              onChange={(e) =>
-
-                setPostText(e.target.value)
-
-              }
-            />
-
-            {/* =========================
-                 PREVIEW IMAGEN
-            ========================= */}
-
-            {selectedImage && (
-
-              <img
-                src={selectedImage}
-                alt="preview"
-                className="post-preview-image"
-              />
-
-            )}
-
-            {/* =========================
-                 PREVIEW VIDEO
-            ========================= */}
-
-            {selectedVideo && (
-
-              <video
-                src={selectedVideo}
-                controls
-                className="post-preview-video"
-              />
-
-            )}
-
-            {/* =========================
-                 BOTÓN PUBLICAR
-            ========================= */}
-
-            <button
-              className="publish-post-btn"
-              onClick={handleCreatePost}
-            >
-
-              Post
-
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
     </>
   );
 };
 
-// Exportamos componente
 export default Sidebar;
