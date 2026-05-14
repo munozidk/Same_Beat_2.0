@@ -125,13 +125,14 @@
 
     /* Right Panel */
     .right-panel {
-        width: 25%;
+        width: 16%;
         min-width: 280px;
         max-width: 400px;
         height: 100vh;
         /* ✅ también ocupa toda la altura */
         display: flex;
         flex-direction: column;
+
         background: transparent;
         border-left: 1px solid rgba(255, 255, 255, 0.05);
     }
