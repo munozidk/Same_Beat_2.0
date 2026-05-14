@@ -1,0 +1,73 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.modal-box {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(139, 77, 243, 0.40);
+    border-radius: 16px;
+    padding: 28px 24px;
+    width: 85%;
+    max-width: 340px;
+    backdrop-filter: blur(12px);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.modal.title {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    flex: 1;
+    text-align: center;
+}
+
+.close-btn {
+    background: rgba(198, 255, 52, 0.15);
+    border: 1px solid rgba(198, 255, 52, 0.3);
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-textarea {
+  min-height: 120px;
+  padding: 12px;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(198,255,52,0.2);
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  font-family: inherit;
+}
+
+.submit-btn {
+  padding: 8px 24px;
+  background: linear-gradient(0deg, rgba(205,255,77,0.70) 0%, rgba(133,177,22,0.70) 81%);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  width: 100%;
+}

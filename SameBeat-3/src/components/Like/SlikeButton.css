@@ -1,0 +1,25 @@
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: white;
+}
+
+.like-count {
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 50px;
+}
+
+.heart-active {
+    fill: #C6FF34;
+    stroke: #C6FF34;
+}
+
+.heart-inactive {
+    fill: transparent;
+    stroke: white;
+}

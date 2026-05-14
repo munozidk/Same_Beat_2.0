@@ -1,0 +1,23 @@
+.share-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: white;
+}
+
+.share-count {
+    font-size: 12px;
+    font-weight: 600;
+    padding-top: 50px;
+}
+
+.repeat-active {
+    stroke: #C6FF34;
+}
+
+.repeat-inactive {
+    stroke: white;
+}
