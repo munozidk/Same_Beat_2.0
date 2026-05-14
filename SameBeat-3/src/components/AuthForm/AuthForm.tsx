@@ -1,16 +1,30 @@
 import "./AuthForm.css";
+
 import mascota from "../../assets/mascota.svg";
+
 import { useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 
-function AuthForm() {
+type AuthFormProps = {
+  setLoading?: React.Dispatch<
+    React.SetStateAction<boolean>
+  >;
+};
+
+function AuthForm({
+  setLoading,
+}: AuthFormProps) {
 
   const navigate = useNavigate();
 
   /* ESTADOS */
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
 
   /* VALIDACIÓN */
 
@@ -23,6 +37,7 @@ function AuthForm() {
     <div className="right">
 
       {/* Mascota */}
+
       <img
         src={mascota}
         alt="Mascota"
@@ -36,16 +51,23 @@ function AuthForm() {
       </p>
 
       {/* BOTONES */}
+
       <div className="social">
 
         <button>
+
           <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" />
+
           Google
+
         </button>
 
         <button>
+
           <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" />
+
           Apple
+
         </button>
 
       </div>
@@ -55,6 +77,7 @@ function AuthForm() {
       </p>
 
       {/* INPUT EMAIL */}
+
       <div className="input-box">
 
         <img
@@ -68,12 +91,15 @@ function AuthForm() {
           autoComplete="email"
           placeholder="Phone number or email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) =>
+            setEmail(e.target.value)
+          }
         />
 
       </div>
 
       {/* INPUT PASSWORD */}
+
       <div className="input-box">
 
         <img
@@ -87,25 +113,55 @@ function AuthForm() {
           autoComplete="current-password"
           placeholder="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) =>
+            setPassword(e.target.value)
+          }
         />
 
       </div>
 
       {/* BOTÓN */}
+
       <button
-        className={`signup ${isDisabled ? "disabled" : ""}`}
+        className={`signup ${
+          isDisabled
+            ? "disabled"
+            : ""
+        }`}
         disabled={isDisabled}
-        onClick={() => navigate("/genres")}
+        onClick={() => {
+
+          if (setLoading) {
+            setLoading(true);
+          }
+
+          setTimeout(() => {
+
+            navigate("/genres");
+
+          }, 2500);
+
+        }}
       >
+
         Log In
+
       </button>
 
+      {/* LOGIN */}
+
       <p className="login">
+
         Don’t have an account?{" "}
 
-        <span onClick={() => navigate("/signup")}>
+        <span
+          onClick={() =>
+            navigate("/signup")
+          }
+        >
+
           Sign Up
+
         </span>
 
       </p>
