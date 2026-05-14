@@ -1,0 +1,29 @@
+.discover-screen {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+  padding: 24px;
+  overflow: hidden;
+}
+
+/* Título */
+.discover-screen__title {
+  font-size: 22px;
+  font-weight: 700;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  margin: 0 0 16px 0;
+}
+
+/* Grid de discover cards */
+.discover-screen__grid {
+  display: flex;
+  justify-content: center;   /* Centra horizontalmente */
+  align-items: center;       /* Centra verticalmente */
+  flex: 1;                   /* ocupa el espacio restante debajo de filtros */
+}
+
+.discover-screen__grid > * {
+  max-width: 300px;          /* la card no se expande */
+}
