@@ -3,28 +3,72 @@
     "id": 1,
     "username": "Loli Bahia",
     "age": 20,
-    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=300&auto=format&fit=crop",
-    "compatibility": "They have a 85% compatibility"
+    "theme": "purple",
+    "image": "/assets/loliBahia.jpg",
+    "compatibility": "They have a 85% compatibility",
+    "bio": "Music lover and creative soul"
   },
   {
     "id": 2,
     "username": "Yoongi",
+    "theme": "green",
     "age": 27,
-    "image": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&h=300&auto=format&fit=crop",
-    "compatibility": "They have a 60% compatibility"
+    "image": "/assets/yoongi.jpg",
+    "compatibility": "They have a 60% compatibility",
+    "bio": "Producer, coffee addict and night owl"
   },
   {
     "id": 3,
     "username": "Hyunjin",
+    "theme": "purple",
     "age": 20,
-    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=300&auto=format&fit=crop",
-    "compatibility": "They have a 62% compatibility"
+    "image": "/assets/hyujin.jpg",
+    "compatibility": "They have a 62% compatibility",
+    "bio": "Dance enthusiast and fashion lover"
   },
   {
     "id": 4,
     "username": "Harry Tomilson",
+    "theme": "green",
     "age": 19,
-    "image": "https://images.unsplash.com/photo-1488161628813-04466f872be2?q=80&w=200&h=300&auto=format&fit=crop",
-    "compatibility": "They have a 58% compatibility"
+    "image": "/assets/harry.jpg",
+    "compatibility": "They have a 58% compatibility",
+    "bio": "Singer, traveler and dreamer"
+  },
+  {
+    "id": 5,
+    "username": "Brad Pitt",
+    "theme": "purple",
+    "age": 30,
+    "image": "assets/bradpitt.jpg",
+    "compatibility": "They have a 48% compatibility",
+    "bio": "Cinema fan and vintage collector"
+  },
+  {
+    "id": 6,
+    "username": "Michael Jordan",
+    "theme": "green",
+    "age": 32,
+    "image": "assets/michael.jpg",
+    "compatibility": "They have a 68% compatibility",
+    "bio": "Basketball legend and entrepreneur"
+  },
+  {
+    "id": 7,
+    "username": "Aron Piper",
+    "theme": "purple",
+    "age": 29,
+    "image": "assets/AronPiper.jpg",
+    "compatibility": "They have a 98% compatibility",
+    "bio": "Actor, musician and minimalist"
+  },
+  {
+    "id": 8,
+    "username": "Samuel Pear",
+    "theme": "purple",
+    "age": 29,
+    "image": "assets/avatar3.jpg",
+    "compatibility": "They have a 98% compatibility",
+    "bio": "Photographer and sunset chaser"
   }
 ]

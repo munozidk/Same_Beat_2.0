@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "username": "Kat",
+    "age": 22,
+    "compatibility": "Indie vibes & late night talks",
+    "image": "/src/assets/kat.png"
+  },
+
+  {
+    "id": 2,
+    "username": "Manon",
+    "age": 24,
+    "compatibility": "Kpop & matcha addict",
+    "image": "/src/assets/manon.png"
+  },
+
+  {
+    "id": 3,
+    "username": "Joseph",
+    "age": 25,
+    "compatibility": "Metro Boomin & gym rat",
+    "image": "/src/assets/joseph.png"
+  },
+
+  {
+    "id": 4,
+    "username": "Patrick",
+    "age": 23,
+    "compatibility": "Gaming & synthwave nights",
+    "image": "/src/assets/patrick.png"
+  }
+]
