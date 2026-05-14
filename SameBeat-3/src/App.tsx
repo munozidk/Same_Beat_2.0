@@ -25,12 +25,11 @@ export default function App() {
       <Router>
         <MainLayout>
           <Routes>
-            <Route path="/" element={<Concerts />} />
+            <Route path="/home" element={<Home />} /> 
+            <Route path="/concerts" element={<Concerts />} /> 
             <Route path="/concert/:id" element={<ConcertDetails />} />
             <Route path="/concert/:id/description" element={<ConcertDescription />} />
             <Route path="/concert/:id/communities" element={<Communities />} />
-            <Route path="/profile" element={<ProfileScreen />} />
-            <Route path="/" element={<Home />} />
             <Route path="/discover" element={<Discover />} />
             <Route path="/profile" element={<ProfileScreen />} />
           </Routes>
