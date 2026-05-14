@@ -2,7 +2,7 @@ import DiscoverCard from '../../components/DiscoverCard/DiscoverCard'
 import Suggestions from '../../components/Suggestions/Suggestions'
 import FilterBar from '../../components/FilterBar/FilterBar'
 import { useFilter } from '../../contexts/FilterContext'
-import './SDiscoverScreen.css'
+import './DiscoverScreen.css'
 
 const discoverSongs = [
   {

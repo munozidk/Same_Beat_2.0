@@ -4,7 +4,7 @@
   flex: 1;
   height: 100%;
   padding: 24px;
-  overflow: hidden;
+  overflow-y: auto; /* scroll si hay más contenido */
 }
 
 /* Título */
@@ -20,10 +20,10 @@
 .discover-screen__grid {
   display: flex;
   justify-content: center;   /* Centra horizontalmente */
-  align-items: center;       /* Centra verticalmente */
-  flex: 1;                   /* ocupa el espacio restante debajo de filtros */
+  margin-top: 5px;          /* separa del filtro toco ponerlo de 5px para que en el repsonsive no se oculten los filtros */
 }
 
+/* La tarjeta mantiene su tamaño natural */
 .discover-screen__grid > * {
-  max-width: 300px;          /* la card no se expande */
+  max-width: 300px;
 }
