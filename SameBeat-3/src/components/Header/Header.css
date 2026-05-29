@@ -48,3 +48,41 @@
         display: none;
     }
 }
+
+@media (max-width: 767px) {
+    .generic-header {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr) 52px;
+        gap: 8px;
+        padding: 18px 24px 10px;
+        height: auto;
+        min-height: 82px;
+    }
+
+    .header-back-btn {
+        justify-self: start;
+    }
+
+    .header-title {
+        position: static;
+        transform: none;
+        min-width: 0;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        font-size: 22px;
+        line-height: 1.15;
+    }
+
+    .profile-pic-container {
+        width: 52px;
+        height: 52px;
+        justify-self: end;
+        flex-shrink: 0;
+    }
+
+    .header-placeholder {
+        width: 52px;
+    }
+}

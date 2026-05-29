@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Camera } from "lucide-react";
 import './SEditProfile.css';
 import type { UserProfile } from "../../types/index"; // importa el ts global
+import { imageMap } from "../../utils/imageMap";
 
 interface Toggle {
   id: string;
@@ -16,6 +17,7 @@ interface Props {
 
 export default function EditProfile({ initialData, onSave }: Props) {
   const [form, setForm] = useState<UserProfile>(initialData);
+  const profileImage = form.image ? imageMap[form.image] ?? form.image : "";
   const [toggles, setToggles] = useState<Toggle[]>([
     { id: 'spotify', label: 'Connect with Spotify', value: true },
     { id: 'topTrack', label: 'Mostrar top 1 track', value: true },
@@ -42,7 +44,7 @@ export default function EditProfile({ initialData, onSave }: Props) {
       <div className="edit-profile__photo-section">
         <div className="edit-profile__avatar-wrapper">
           <img
-            src="assets/avatar 1.jpg"
+            src={profileImage}
             alt="Profile"
             className="edit-profile__avatar"
           />

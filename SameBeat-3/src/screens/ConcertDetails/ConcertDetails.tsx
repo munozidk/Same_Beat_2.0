@@ -6,14 +6,17 @@ import { data } from '../../data';
 // Components
 import Header from '../../components/Header/Header';
 import VerticalConcertCard from '../../components/VerticalConcertCard/VerticalConcertCard';
-import BackButton from '../../components/BackButton/BackButton';
+import { useUserProfile } from '../../contexts/UserProfileContext';
+import { imageMap } from '../../utils/imageMap';
 
 import './ConcertDetails.css';
 
 const ConcertDetails: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
-    const { concerts, userProfile } = data;
+    const { concerts } = data;
+    const { userProfile } = useUserProfile();
+    const profileImage = userProfile.image ? imageMap[userProfile.image] ?? userProfile.image : undefined;
     const concert = concerts.find(c => c.id === Number(id));
 
     if (!concert) {
@@ -40,7 +43,7 @@ const ConcertDetails: React.FC = () => {
             <Header 
                 title="Details of Concerts" 
                 onBack={() => navigate(-1)}
-                profilePic="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop"
+                profilePic={profileImage}
                 hideProfileOnDesktop={true}
             />
 
