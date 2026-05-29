@@ -1,5 +1,6 @@
 import React from 'react';
 import "./ConcertCard.css";
+import { resolveAsset } from '../../utils/imageMap';
 
 interface ConcertCardProps {
   image?: string;
@@ -24,12 +25,14 @@ const ConcertCard: React.FC<ConcertCardProps> = ({
   openingTime,
   onClick
 }) => {
+  const resolvedImage = resolveAsset(image);
+
   return (
     <div className="ticket-card" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
       {/* Imagen con fade */}
       <div
         className="ticket-bg"
-        style={{ backgroundImage: `url(${image})` }}
+        style={{ backgroundImage: `url(${resolvedImage})` }}
       />
 
       {/* Contenido */}

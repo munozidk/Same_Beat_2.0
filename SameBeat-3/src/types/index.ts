@@ -46,6 +46,7 @@ export interface UserProfile {
   id: number
   name: string
   username: string
+  image?: string
   age: number
   bio: string
   city: string

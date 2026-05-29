@@ -9,10 +9,13 @@ import BackButton from '../../components/BackButton/BackButton';
 import StoriesSection from '../../components/Stories/StoriesSection';
 import StoryViewerScreen from '../../screens/Stories/StoryViewerScreen';
 import { data } from '../../data';
+import { useUserProfile } from '../../contexts/UserProfileContext';
+import { imageMap } from '../../utils/imageMap';
 import styles from './ProfileScreen.module.css';
 
 const ProfileScreen: React.FC = () => {
-  const { userProfile } = data;
+  const { userProfile } = useUserProfile();
+  const profileImage = userProfile.image ? imageMap[userProfile.image] ?? userProfile.image : undefined;
   const navigate = useNavigate();
 
   const storiesData = data.concerts.map(c => ({
@@ -51,6 +54,7 @@ const ProfileScreen: React.FC = () => {
         <div className={styles.contentScroll}>
           <ProfileHeaderInfo 
             name={userProfile.name}
+            image={profileImage}
             age={userProfile.age}
             followers={userProfile.followers}
             following={userProfile.following}

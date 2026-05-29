@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { SkipBack, SkipForward, Play, Pause } from "lucide-react";
 import type { Song } from "../../types";
-import { imageMap } from "../../utils/imageMap";
+import { resolveAsset } from "../../utils/imageMap";
 import './SNowPlaying.css';
 
 interface Props {
@@ -47,7 +47,7 @@ export default function NowPlaying({ songs }: Props) {
       {/* Portada */}
       <div className="cover-container">
         <img
-          src={imageMap[song.image] ?? song.image}
+          src={resolveAsset(song.image)}
           alt={song.name}
           className="cover-image"
         />
@@ -74,7 +74,7 @@ export default function NowPlaying({ songs }: Props) {
       {/* Audio */}
       <audio
         ref={audioRef}
-        src={imageMap[song.audio] ?? song.audio}
+        src={resolveAsset(song.audio)}
         onEnded={handleNext}
       />
 

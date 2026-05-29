@@ -2,21 +2,9 @@ import { Link } from "react-router-dom";
 import "./Suggestions.css";
 import usersData from "../../data/users/users.json";
 import { Plus } from "lucide-react";
-import yoongi from "../../assets/yoongi.jpg";
-import hyujin from "../../assets/hyujin.jpg";
-import loliBahia from '../../assets/loliBahia.jpg';
-import harry from '../../assets/harry.jpg';
-import avatar3 from '../../assets/avatar 2.jpg';
+import { resolveAsset } from "../../utils/imageMap";
 
 const Suggestions = () => {
-  const imageMap: Record<string, string> = {
-    "/assets/yoongi.jpg": yoongi,
-    "/assets/hyujin.jpg": hyujin,
-    "/assets/loliBahia.jpg": loliBahia,
-    "/assets/harry.jpg": harry,
-    "/assets/avatar3.jpg": avatar3
-  };
-
   const suggestions = usersData.slice(0, 4);
 
   return (
@@ -35,7 +23,7 @@ const Suggestions = () => {
         {suggestions.map((user) => (
           <article key={user.id} className="suggestion-card">
             <img
-              src={imageMap[user.image as keyof typeof imageMap]}
+              src={resolveAsset(user.image)}
               alt={user.username}
               className="suggestion-card__image"
             />
