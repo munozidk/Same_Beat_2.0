@@ -11,13 +11,17 @@
 
     padding-right: 6px;
 
-    max-height: 350px;
+    max-height: 100%;
+
+    padding-bottom: 24px;
 }
 
 .direct-pill {
     display: flex;
     align-items: center;
-    padding: 10px 30px;
+    min-height: 62px;
+
+    padding: 10px 22px;
     border-radius: 80px;
     background: #31303045;
     box-shadow:
@@ -25,7 +29,6 @@
         inset 0 -6px 20px rgba(95, 25, 200, 0.984),
         0 10px 30px rgba(74, 73, 73, 0.505);
     border-radius: 80px;
-    min-height: 70px;
     gap: 20px;
 }
 

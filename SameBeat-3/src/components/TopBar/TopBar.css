@@ -1,7 +1,10 @@
 .topbar {
+
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+
+    width: 94%;
     min-height: 78px;
 
     display: flex;

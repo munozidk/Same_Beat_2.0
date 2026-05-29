@@ -1,10 +1,17 @@
 import styles from "./LoginScreen.module.css";
 
+import { useState } from "react";
+
 import AuthForm from "../../components/AuthForm/AuthForm";
 
 import loginImg from "../../assets/Log in.svg";
 
+import gifanimado from "../../assets/gifanimado-transparent.gif";
+
 function LoginScreen() {
+
+  const [loading, setLoading] =
+    useState(false);
 
   return (
 
@@ -71,6 +78,22 @@ function LoginScreen() {
 
       </div>
 
+      {/* LOADING SCREEN */}
+
+      {loading && (
+
+        <div className={styles.loadingScreen}>
+
+          <img
+            src={gifanimado}
+            alt="Loading..."
+            className={styles.loadingGif}
+          />
+
+        </div>
+
+      )}
+
       {/* CONTENT */}
 
       <main
@@ -95,7 +118,9 @@ function LoginScreen() {
 
         {/* RIGHT */}
 
-        <AuthForm />
+        <AuthForm
+          setLoading={setLoading}
+        />
 
       </main>
 

@@ -75,6 +75,11 @@ const Sidebar = () => {
     setShowCreateMenu,
   ] = useState(false);
 
+  const [
+    showLogoutConfirm,
+    setShowLogoutConfirm,
+  ] = useState(false);
+
   // =========================
   // REFS
   // =========================
@@ -163,6 +168,20 @@ const Sidebar = () => {
     setShowCreateMenu(false);
 
     setModalOpen(true);
+  };
+
+  const handleLogoutClick = () => {
+
+    setShowCreateMenu(false);
+
+    setShowLogoutConfirm(true);
+  };
+
+  const handleConfirmLogout = () => {
+
+    setShowLogoutConfirm(false);
+
+    navigate("/login");
   };
 
   return (
@@ -332,7 +351,7 @@ const Sidebar = () => {
                     className="sidebar__dropdown-item"
                     onClick={() => {
 
-                      console.log("click en Post"); // 👈
+                      console.log("click en Post"); 
 
                       setModalOpen(true);
 
@@ -443,7 +462,10 @@ const Sidebar = () => {
 
             {/* LOGOUT */}
 
-            <button className="sidebar__logout-btn">
+            <button 
+            className="sidebar__logout-btn"
+            onClick={handleLogoutClick}
+            >
 
               <LogOut size={22} />
 
@@ -456,6 +478,42 @@ const Sidebar = () => {
         </div>
 
       </aside>
+
+      {showLogoutConfirm && (
+
+        <div className="logout-confirm-screen" role="dialog" aria-modal="true" aria-labelledby="logout-confirm-title">
+
+          <div className="logout-confirm-overlay" onClick={() => setShowLogoutConfirm(false)} />
+
+          <section className="logout-confirm-card">
+
+            <h2 id="logout-confirm-title">Estas seguro que quieres salir?</h2>
+
+            <div className="logout-confirm-actions">
+
+              <button
+                type="button"
+                className="logout-confirm-btn logout-confirm-btn--confirm"
+                onClick={handleConfirmLogout}
+              >
+                Confirmar
+              </button>
+
+              <button
+                type="button"
+                className="logout-confirm-btn logout-confirm-btn--cancel"
+                onClick={() => setShowLogoutConfirm(false)}
+              >
+                Cancelar
+              </button>
+
+            </div>
+
+          </section>
+
+        </div>
+
+      )}
     </>
   );
 };
