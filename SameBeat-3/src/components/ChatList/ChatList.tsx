@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { imageMap } from '../../utils/imageMap';
 import './SChatList.css'
 
@@ -12,11 +13,17 @@ interface Props {
 }
 
 export default function ChatList({ chats }: Props) {
+    const navigate = useNavigate();
+
     return (
         <div className='chat-list__glass-frame'>
             <div className='chat-list'>
                 {chats.map(chat => (
-                    <div key={chat.id} className='chat-item'>
+                    <div
+                        key={chat.id}
+                        className='chat-item'
+                        onClick={() => navigate('/chats')}
+                    >
                         <img
                             src={imageMap[chat.image] ?? chat.image} //para utilizar el imagemap
                             alt={chat.name}
