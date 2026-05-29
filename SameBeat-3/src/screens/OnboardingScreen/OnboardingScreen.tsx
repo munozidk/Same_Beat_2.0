@@ -22,7 +22,7 @@ const CARDS = [
     icon: "🎵",
     title: (
       <>
-        Your next music <span>journey here</span>
+        Your next music <span> journey here </span>
       </>
     ),
     desc: "Meet people and discover concerts you'll love.",
@@ -53,7 +53,7 @@ const CARDS = [
   {
     id: "c4",
     icon: "⭐",
-    title: <>Never go to a concert alone.</>,
+    title: <>Never go <span> to aconcert alone.</span></>,
     desc: "Find people to enjoy live concerts with.",
   },
 ];

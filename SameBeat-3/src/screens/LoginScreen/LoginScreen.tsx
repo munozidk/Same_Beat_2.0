@@ -6,7 +6,7 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 
 import loginImg from "../../assets/Log in.svg";
 
-import gifanimado from "../../assets/gifanimado.gif";
+import gifanimado from "../../assets/gifanimado-transparent.gif";
 
 function LoginScreen() {
 

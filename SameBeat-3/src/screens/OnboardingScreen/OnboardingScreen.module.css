@@ -7,8 +7,10 @@
 .onboardingScreen{
   width:100%;
   min-height:100vh;
+  min-height:100dvh;
   position:relative;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   background:#05010F;
   font-family:'Poppins', sans-serif;
 }
@@ -28,7 +30,7 @@
 ================================================== */
 
 .onb-gooey-container{
-  position:absolute;
+  position:fixed;
   inset:-20%;
   overflow:hidden;
   filter:url(#goo);
@@ -38,8 +40,8 @@
 
 .onb-blob{
   position:absolute;
-  width:850px;
-  height:550px;
+  width:clamp(420px, 60vw, 850px);
+  height:clamp(320px, 42vw, 550px);
   border-radius:50%;
   filter:blur(60px);
   opacity:.8;
@@ -76,8 +78,8 @@
 
 .onb-blob5{
   position:absolute;
-  width:900px;
-  height:900px;
+  width:clamp(420px, 62vw, 900px);
+  height:clamp(420px, 62vw, 900px);
   border-radius:50%;
   background:#120923;
   bottom:-300px;
@@ -140,6 +142,7 @@
   width:100%;
   max-width:1440px;
   min-height:100vh;
+  min-height:100dvh;
 
   margin:0 auto;
 
@@ -150,7 +153,8 @@
   flex-direction:column;
   align-items:center;
 
-  padding-top:36px;
+  padding:54px 20px 120px;
+  box-sizing:border-box;
 }
 
 /* ==================================================
@@ -159,15 +163,12 @@
 
 .onb-bottom-circle{
   position:absolute;
-
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width:850px;
   height:850px;
-
   border-radius:50%;
-
-  bottom:-620px;
-  left:50%;
-
   transform:translateX(-50%);
 
   background:
@@ -188,10 +189,10 @@
 ================================================== */
 
 .onb-logo{
-  width:400px;
+  width:clamp(185px, 32vw, 400px);
   position:relative;
   z-index:20;
-  margin-bottom:-50px;
+  margin-bottom:0;
 }
 
 /* ==================================================
@@ -201,8 +202,8 @@
 .onb-cards{
   position:relative;
   width:100%;
-  height:550px;
-  margin-top:-10px;
+  height:clamp(280px, 300vh, 350px);
+  margin-top:8px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -215,14 +216,15 @@
 .onb-card{
   position:absolute;
 
-  width:250px;
-  height:350px;
+  width:clamp(210px, 22vw, 250px);
+  height:clamp(300px, 85vh, 350px);
   text-align:center;
   align-items:center;
 
   border-radius:42px;
 
   padding:26px 22px;
+  box-sizing:border-box;
 
   background:
     linear-gradient(
@@ -311,6 +313,9 @@
 
   margin-bottom:28px;
 
+  margin-left:auto;
+  margin-right:auto;
+
   border:
     1px solid rgba(255,255,255,.08);
 }
@@ -343,11 +348,11 @@
 ================================================== */
 
 .onb-mascot{
-  width:220px;
+  width:clamp(150px, 18vw, 190px);
 
   position:absolute;
 
-  bottom:90px;
+  bottom:85px;
   left:50%;
 
   transform:translateX(-50%);
@@ -362,7 +367,7 @@
 .onb-btn{
   position:absolute;
 
-  bottom:50px;
+  bottom:38px;
 
   left:50%;
 
@@ -480,45 +485,55 @@
 @media (max-width:600px){
 
   .onb-container{
-
-  padding-top:28px;
-  justify-content:center;
-  padding-bottom:40px;
-}
+    justify-content:flex-start;
+    padding:18px 12px 104px;
+  }
 
   .onb-logo{
-    width:185px;
+    width:min(86vw, 360px);
+    margin-bottom:-8px;
   }
 
   .onb-cards{
-    height:420px;
-    margin-top:12px;
+    height:430px;
+    min-height:430px;
+    margin-top:46px;
     overflow:hidden;
   }
 
   .onb-card{
-    width:230px;
-    height:340px;
-    padding:20px 18px;
+    width:min(258px, 68vw);
+    height:384px;
+    padding:28px 24px;
+    border-radius:26px;
   }
 
   .onb-icon-circle{
-    display:none;
+    display:flex;
+    width:66px;
+    height:66px;
+    margin:0 auto 28px;
+    font-size:1.6rem;
   }
 
   .onb-card h2{
-    font-size:1.8rem;
+    font-size:1.85rem;
     margin-bottom:16px;
+    text-align:center;
+  }
+
+  .onb-card p{
+    font-size:.82rem;
   }
 
   .card-main{
-    transform:scale(1);
+    transform:translate(-50%, -50%) scale(1);
     opacity:1;
   }
 
   .card-1{
     transform:
-      translateX(-190px)
+      translate(calc(-50% - 220px), -50%)
       rotate(-10deg)
       scale(.75);
 
@@ -527,7 +542,7 @@
 
   .card-2{
     transform:
-      translateX(-110px)
+      translate(calc(-50% - 140px), -50%)
       rotate(-6deg)
       scale(.86);
 
@@ -536,7 +551,7 @@
 
   .card-4{
     transform:
-      translateX(110px)
+      translate(calc(-50% + 140px), -50%)
       rotate(6deg)
       scale(.86);
 
@@ -545,7 +560,7 @@
 
   .card-5{
     transform:
-      translateX(190px)
+      translate(calc(-50% + 220px), -50%)
       rotate(10deg)
       scale(.75);
 
@@ -554,13 +569,24 @@
 
   .onb-mascot{
     width:190px;
-    bottom:90px;
+    bottom:72px;
   }
 
   .onb-btn{
-    bottom:45px;
+    bottom:26px;
+    width:min(220px, calc(100vw - 32px));
+    height:54px;
     padding:14px 34px;
     font-size:.95rem;
+  }
+
+  .onb-btn:hover,
+  .onb-btn:focus-visible,
+  .onb-btn:active{
+    background:#C6FF34;
+    color:#120923;
+    transform:translateX(-50%) translateY(-4px);
+    box-shadow:0 20px 45px rgba(126,59,237,.5);
   }
 }
 
@@ -575,12 +601,12 @@
   }
 
   .onb-card{
-    width:200px;
-    height:300px;
+    width:min(244px, 70vw);
+    height:360px;
   }
 
   .onb-card h2{
-    font-size:1.5rem;
+    font-size:1.65rem;
   }
 
   .onb-card p{
@@ -588,7 +614,7 @@
   }
 
   .onb-mascot{
-    width:160px;
+    width:168px;
   }
 }
 
@@ -600,22 +626,15 @@
 
   .onb-container{
 
-    justify-content: center;
-
-    padding-top: 0;
-
-    padding-bottom: 40px;
+    justify-content: flex-start;
 
     min-height: 100vh;
+    min-height: 100dvh;
   }
 
   .onb-cards{
 
     margin-top: 0;
-
-    height: auto;
-
-    min-height: 420px;
 
     display: flex;
 
@@ -629,8 +648,56 @@
     top: 50%;
 
     left: 50%;
-
-    transform: translate(-50%, -50%) !important;
   }
 
 }
+
+@media (max-width: 600px){
+
+  .onb-cards{
+    margin-top:46px;
+  }
+}
+
+@media (max-height: 700px) and (max-width: 600px){
+
+  .onb-container{
+    padding-top:16px;
+    padding-bottom:104px;
+  }
+
+  .onb-logo{
+    width:min(82vw, 300px);
+  }
+
+  .onb-cards{
+    height:330px;
+    min-height:330px;
+  }
+
+  .onb-card{
+    width:min(230px, 68vw);
+    height:320px;
+    padding:22px 18px;
+  }
+
+  .onb-card h2{
+    font-size:1.45rem;
+  }
+
+  .onb-card p{
+    font-size:.72rem;
+  }
+
+  .onb-mascot{
+    width:142px;
+    bottom:66px;
+  }
+
+  .onb-btn{
+    height:48px;
+    bottom:18px;
+  }
+}
+
+
