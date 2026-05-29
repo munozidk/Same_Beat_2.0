@@ -259,7 +259,7 @@ export default function ConcertGenres() {
           disabled={selected.size === 0}
         >
 
-          Continue
+          Begin
 
         </button>
 

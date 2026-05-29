@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 
 import loginImg from "../../assets/Log in.svg";
-import gifanimado from "../../assets/gifanimado.gif";
+import gifanimado from "../../assets/gifanimado-transparent.gif";
 
 function SignupScreen() {
 
