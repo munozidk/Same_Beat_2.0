@@ -21,6 +21,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
 
     const location = useLocation();
     const isConcertsScreen = location.pathname === '/concerts';
+    const isConcertDescriptionScreen = /^\/concert\/\d+\/description$/.test(location.pathname);
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
 
 
@@ -116,7 +117,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                     )}
                     {children}
                 </main>
-                <BottomNav />
+                {!isConcertDescriptionScreen && <BottomNav />}
             </div>
 
 

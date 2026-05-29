@@ -23,13 +23,15 @@ import MatchScreen from './screens/MatchScreen/MatchScreen';
 import MainLayout from './components/MainLayout/MainLayout';
 import { FilterProvider } from './contexts/FilterContext';
 import { PostProvider } from './contexts/PostContext';
+import { UserProfileProvider } from './contexts/UserProfileContext';
 
 export default function App() {
   return (
     <FilterProvider>
       <PostProvider>
-        <Router>
-          <Routes>
+        <UserProfileProvider>
+          <Router>
+            <Routes>
 
             {/* Rutas sin MainLayout (onboarding) */}
             <Route path="/" element={<OnboardingScreen />} />
@@ -67,8 +69,9 @@ export default function App() {
               }
             />
 
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
+        </UserProfileProvider>
       </PostProvider>
     </FilterProvider>
   );

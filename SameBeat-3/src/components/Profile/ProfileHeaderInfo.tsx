@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './ProfileHeaderInfo.module.css';
-import profile from "../../assets/profile.jpg"
 interface ProfileHeaderInfoProps {
   name: string;
+  image?: string;
   age: number;
   followers: number;
   following: number;
@@ -11,6 +11,7 @@ interface ProfileHeaderInfoProps {
 
 const ProfileHeaderInfo: React.FC<ProfileHeaderInfoProps> = ({ 
   name, 
+  image,
   age, 
   followers, 
   following, 
@@ -24,7 +25,7 @@ const ProfileHeaderInfo: React.FC<ProfileHeaderInfoProps> = ({
       <div className={styles.avatarWrapper}>
 
         <img
-          src={profile}
+          src={image}
           alt="profile"
           className={styles.avatar}
         />

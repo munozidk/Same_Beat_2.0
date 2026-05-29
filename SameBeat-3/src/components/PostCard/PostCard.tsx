@@ -3,7 +3,7 @@ import { MessageCircle, Send } from "lucide-react";
 import type { Post, Comment } from "../../types";
 import LikeButton from "../Like/LikeButton";
 import ShareButton from "../Share/ShareButton";
-import { imageMap } from "../../utils/imageMap";
+import { resolveAsset } from "../../utils/imageMap";
 import './SPostCard.css';
 
 interface Props {
@@ -49,7 +49,7 @@ export default function PostCard({ post }: Props) {
         <div className="author-info">
           <span className="author-name">{post.user}</span>
           <img
-            src={imageMap[post.image] ?? post.image}
+            src={resolveAsset(post.image)}
             alt={post.user}
             className="avatar"
           />
@@ -65,7 +65,7 @@ export default function PostCard({ post }: Props) {
           {comments.map(c => (
             <div key={c.id} className="comment-item">
               <img
-                src={imageMap[c.image] ?? c.image}
+                src={resolveAsset(c.image)}
                 alt={c.user}
                 className="comment-avatar"
               />
@@ -77,7 +77,7 @@ export default function PostCard({ post }: Props) {
           ))}
 
           <div className="input-row">
-            <img src="assets/avatar 1.jpg" alt="You" className="comment-avatar" />
+            <img src={resolveAsset("assets/avatar 1.jpg")} alt="You" className="comment-avatar" />
 
             <input
               type="text"
