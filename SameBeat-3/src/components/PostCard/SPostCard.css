@@ -172,3 +172,23 @@
   justify-content: center;
   flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+  .post-header {
+    height: 65px;
+    padding: 8px 16px;
+  }
+
+  .author-info {
+    min-width: unset;
+    padding: 8px 10px 8px 12px;
+  }
+
+  .author-name {
+    font-size: 13px;
+  }
+
+  .post-actions {
+    gap: 10px;
+  }
+}
