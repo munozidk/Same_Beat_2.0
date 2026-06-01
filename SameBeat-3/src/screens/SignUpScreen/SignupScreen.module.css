@@ -312,6 +312,13 @@
   text-align: center;
 }
 
+.success-message {
+  color: #C6FF34;
+  font-size: .80rem;
+  margin-top: -2px;
+  text-align: center;
+}
+
 /* ==================================================
    BUTTON
 ================================================== */

@@ -9,6 +9,7 @@ import { useState } from "react";
 
 import loginImg from "../../assets/Log in.svg";
 import gifanimado from "../../assets/gifanimado-transparent.gif";
+import { supabase } from "../../lib/supabaseClient";
 
 function SignupScreen() {
 
@@ -37,6 +38,12 @@ function SignupScreen() {
   const [showGif, setShowGif] =
     useState(false);
 
+  const [successMessage, setSuccessMessage] =
+    useState("");
+
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -63,13 +70,14 @@ function SignupScreen() {
       formData.confirmPassword &&
     accepted;
 
-  const handleSubmit = (
+  const handleSubmit = async (
     e: React.FormEvent
   ) => {
 
     e.preventDefault();
 
     setError("");
+    setSuccessMessage("");
 
     if (!accepted) {
 
@@ -94,35 +102,40 @@ function SignupScreen() {
 
     }
 
-    const users = JSON.parse(
-      localStorage.getItem("users") || "[]"
-    );
+    setIsSubmitting(true);
 
-    const emailExists = users.some(
-      (user: any) =>
-        user.email === formData.email
-    );
+    const { data, error } =
+      await supabase.auth.signUp({
+        email: formData.email.trim(),
+        password: formData.password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/login`,
+          data: {
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            username: formData.username,
+            phone: formData.phone,
+            dateOfBirth: formData.dateOfBirth,
+          },
+        },
+      });
 
-    if (emailExists) {
-
-      setError(
-        "This email is already registered."
-      );
-
+    if (error) {
+      setIsSubmitting(false);
+      setError(error.message);
       return;
-
     }
 
-    users.push(formData);
+    if (data.user?.identities?.length === 0) {
+      setIsSubmitting(false);
+      setError("This email is already registered.");
+      return;
+    }
 
-    localStorage.setItem(
-      "users",
-      JSON.stringify(users)
-    );
-
-    localStorage.setItem(
-      "currentUser",
-      JSON.stringify(formData)
+    setSuccessMessage(
+      data.session
+        ? "Account created successfully."
+        : "Check your email to verify your account before logging in."
     );
 
     setShowGif(true);
@@ -130,7 +143,7 @@ function SignupScreen() {
     // ✅ 3 segundos
     setTimeout(() => {
       setShowGif(false);
-      navigate("/genres");
+      navigate(data.session ? "/genres" : "/login");
     }, 3000);
 
   };
@@ -482,6 +495,18 @@ function SignupScreen() {
 
             )}
 
+            {successMessage && (
+
+              <p
+                className={
+                  styles["success-message"]
+                }
+              >
+                {successMessage}
+              </p>
+
+            )}
+
             {/* BUTTON */}
 
             <button
@@ -495,10 +520,10 @@ function SignupScreen() {
                     : ""
                 }
               `}
-              disabled={!isFormValid}
+              disabled={!isFormValid || isSubmitting}
             >
 
-              Create
+              {isSubmitting ? "Creating..." : "Create"}
 
             </button>
 

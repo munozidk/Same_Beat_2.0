@@ -150,6 +150,13 @@
   filter: brightness(0) invert(0.8);
 }
 
+.auth-error {
+  margin: 12px 0 0;
+  color: #ff8d8d;
+  font-size: .85rem;
+  text-align: center;
+}
+
 /* BOTÓN LOG IN */
 
 .signup {
