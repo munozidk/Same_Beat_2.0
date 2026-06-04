@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { data } from '../data';
 import type { UserProfile } from '../types';
 import { supabase } from '../lib/supabaseClient';
+import type { User } from '@supabase/supabase-js';
 
 interface UserProfileContextValue {
   userProfile: UserProfile;
@@ -14,6 +15,12 @@ const UserProfileContext = createContext<UserProfileContextValue | null>(null);
 interface UserProfileProviderProps {
   children: ReactNode;
 }
+
+type ProfileRow = {
+  username: string | null;
+  full_name: string | null;
+  age: number | null;
+};
 
 function getAgeFromDate(dateOfBirth?: string) {
   if (!dateOfBirth) return data.userProfile.age;
@@ -49,19 +56,77 @@ function buildProfileFromMetadata(metadata: Record<string, unknown>): UserProfil
   };
 }
 
+function buildProfileFromRow(row: ProfileRow, metadata: Record<string, unknown>): UserProfile {
+  const metadataProfile = buildProfileFromMetadata(metadata);
+
+  return {
+    ...metadataProfile,
+    name: row.full_name || metadataProfile.name,
+    username: row.username || metadataProfile.username,
+    age: row.age ?? metadataProfile.age,
+  };
+}
+
+async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
+  const metadata = authUser.user_metadata;
+
+  const { data: existingProfile, error: selectError } =
+    await supabase
+      .from('profiles')
+      .select('username, full_name, age')
+      .eq('auth_user_id', authUser.id)
+      .maybeSingle();
+
+  if (selectError) {
+    return buildProfileFromMetadata(metadata);
+  }
+
+  if (existingProfile) {
+    return buildProfileFromRow(existingProfile, metadata);
+  }
+
+  const fallbackProfile = buildProfileFromMetadata(metadata);
+
+  const { data: createdProfile, error: insertError } =
+    await supabase
+      .from('profiles')
+      .insert({
+        auth_user_id: authUser.id,
+        username: fallbackProfile.username,
+        full_name: fallbackProfile.name,
+        age: fallbackProfile.age,
+        is_seed_user: false,
+      })
+      .select('username, full_name, age')
+      .single();
+
+  if (insertError || !createdProfile) {
+    return fallbackProfile;
+  }
+
+  return buildProfileFromRow(createdProfile, metadata);
+}
+
 export function UserProfileProvider({ children }: UserProfileProviderProps) {
   const [userProfile, setUserProfile] = useState<UserProfile>(data.userProfile as UserProfile);
 
   useEffect(() => {
     let isMounted = true;
 
+    async function applyAuthProfile(authUser: User) {
+      const nextProfile = await getOrCreateProfile(authUser);
+
+      if (!isMounted) return;
+
+      setUserProfile(nextProfile);
+    }
+
     async function loadAuthProfile() {
       const { data: authData } = await supabase.auth.getUser();
-      const authUser = authData.user;
 
-      if (!isMounted || !authUser) return;
+      if (!isMounted || !authData.user) return;
 
-      setUserProfile(buildProfileFromMetadata(authUser.user_metadata));
+      await applyAuthProfile(authData.user);
     }
 
     loadAuthProfile();
@@ -70,7 +135,7 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
       if (!isMounted) return;
 
       if (session?.user) {
-        setUserProfile(buildProfileFromMetadata(session.user.user_metadata));
+        void applyAuthProfile(session.user);
       } else {
         setUserProfile(data.userProfile as UserProfile);
       }
