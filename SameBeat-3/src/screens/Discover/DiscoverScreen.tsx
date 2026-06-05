@@ -2,22 +2,23 @@ import DiscoverCard from '../../components/DiscoverCard/DiscoverCard'
 import Suggestions from '../../components/Suggestions/Suggestions'
 import FilterBar from '../../components/FilterBar/FilterBar'
 import { useFilter } from '../../contexts/FilterContext'
+import { useSongs } from '../../hooks/useSongs';
 import './DiscoverScreen.css'
 
-const discoverSongs = [
-  {
-    id: 1,
-    title: 'De mi enamórate',
-    artists: ['Mentiras: La Serie', 'Diana Bovio'],
-    coverImage: 'assets/cover.jpg',
-    artistImage: 'assets/avatar 1.jpg',
-    audio: 'assets/dardos.mp3'
-  }
-]
 
 export default function DiscoverScreen() {
-  // Se Usa el contexto global en vez de useState local
   const { selectedGenres, toggleGenre, allGenres } = useFilter();
+  const { songs, isLoading } = useSongs();
+
+  // Adapta canciones de Supabase al formato que usa DiscoverCard.
+  const discoverSongs = songs.map((song) => ({
+    id: song.id,
+    title: song.name,
+    artists: [song.artist],
+    coverImage: song.image,
+    artistImage: song.image,
+    audio: song.audio,
+  }));
 
   return (
     <div className="discover-screen">
@@ -25,7 +26,6 @@ export default function DiscoverScreen() {
 
       <h2 className="discover-screen__title">Discover</h2>
 
-      {/* Filtros ahora vienen del contexto */}
       <FilterBar
         genres={allGenres}
         selectedGenres={selectedGenres}
@@ -33,10 +33,18 @@ export default function DiscoverScreen() {
       />
 
       <div className="discover-screen__grid">
-        {discoverSongs.map(song => (
-          <DiscoverCard key={song.id} songs={[song]} />
-        ))}
+        {isLoading ? (
+          <p className="discover-screen__empty">Loading songs...</p>
+        ) : discoverSongs.length > 0 ? (
+          discoverSongs.map(song => (
+            <DiscoverCard key={song.id} songs={[song]} />
+          ))
+        ) : (
+          <p className="discover-screen__empty">
+            No songs available yet.
+          </p>
+        )}
       </div>
     </div>
-  )
+  );
 }
