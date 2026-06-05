@@ -115,10 +115,12 @@ const ProfileScreen: React.FC = () => {
     let isMounted = true;
 
     async function loadCurrentProfileId() {
+      // Obtenemos los datos del usuario autenticado actualmente.
       const { data: authData } = await supabase.auth.getUser();
 
       if (!authData.user) return;
 
+      // Aquí buscamos el ID del perfil que corresponde al usuario autenticado.
       const { data: profile } = await supabase
         .from('profiles')
         .select('id')
@@ -143,6 +145,7 @@ const ProfileScreen: React.FC = () => {
     async function loadProfile() {
       setIsLoadingProfile(true);
 
+      // Esta consulta trae la información completa del perfil desde la base de datos de Supabase.
       const query = supabase
         .from('profiles')
         .select('*');
@@ -183,6 +186,7 @@ const ProfileScreen: React.FC = () => {
 
       setIsLoadingPosts(true);
 
+      // Esta consulta trae únicamente las publicaciones creadas por este perfil desde la base de datos.
       const { data: posts, error } = await supabase
         .from('posts')
         .select(`

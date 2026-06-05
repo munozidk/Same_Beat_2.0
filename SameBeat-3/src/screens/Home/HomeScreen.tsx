@@ -2,6 +2,7 @@ import PostFeed from '../../components/PostFeed/PostFeed'
 import TopBar from '../../components/TopBar/TopBar'
 import Suggestions from '../../components/Suggestions/Suggestions'
 import { usePostContext } from '../../contexts/PostContext'
+import { useFilter } from '../../contexts/FilterContext'
 import './SHomeScreen.css'
 
 /* 
@@ -20,6 +21,13 @@ export default function HomeScreen() {
   // =========================
 
   const { posts } = usePostContext();
+  const { searchQuery } = useFilter();
+
+  // Filtramos las publicaciones según el texto de búsqueda ingresado en el TopBar.
+  const filteredPosts = posts.filter(post => 
+    post.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    post.user.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
 
@@ -35,7 +43,7 @@ export default function HomeScreen() {
 
       {/* FEED */}
 
-      <PostFeed posts={posts} />
+      <PostFeed posts={filteredPosts} />
 
     </div>
   );

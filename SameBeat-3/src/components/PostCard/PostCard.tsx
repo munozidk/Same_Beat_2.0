@@ -34,6 +34,7 @@ export default function PostCard({ post }: Props) {
     let isMounted = true;
 
     async function loadComments() {
+      // Esta consulta obtiene los comentarios asociados al post actual desde la base de datos de Supabase, incluyendo la información de su respectivo autor.
       const { data, error } = await supabase
         .from("comments")
         .select(`
@@ -81,6 +82,7 @@ export default function PostCard({ post }: Props) {
     const text = inputText.trim();
     if (!text) return;
 
+    // Obtenemos los datos del usuario autenticado actualmente.
     const { data: authData, error: authError } = await supabase.auth.getUser();
     const authUser = authData.user;
 
@@ -89,6 +91,7 @@ export default function PostCard({ post }: Props) {
       return;
     }
 
+    // Aquí buscamos el ID del perfil que corresponde al usuario autenticado.
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("id")
@@ -100,6 +103,7 @@ export default function PostCard({ post }: Props) {
       return;
     }
 
+    // Este comentario se guarda asociado al post donde fue creado.
     const { data: insertedComment, error: insertError } = await supabase
       .from("comments")
       .insert({

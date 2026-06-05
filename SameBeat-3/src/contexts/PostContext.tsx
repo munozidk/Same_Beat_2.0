@@ -88,6 +88,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const loadPosts = useCallback(async () => {
+    // Esta consulta trae los posts desde la base de datos, incluyendo la información de su autor y los comentarios correspondientes.
     const { data, error } = await supabase
       .from("posts")
       .select(`
@@ -128,6 +129,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   async function createPostInSupabase(post: Post) {
+    // Obtenemos los datos del usuario autenticado actualmente.
     const { data: authData, error: authError } = await supabase.auth.getUser();
     const authUser = authData.user;
 
@@ -136,6 +138,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    // Aquí buscamos el ID del perfil que corresponde al usuario autenticado.
     const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("id")
@@ -147,6 +150,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    // Este insert guarda un nuevo post en la tabla posts.
     const { error: insertError } = await supabase
       .from("posts")
       .insert({
@@ -161,6 +165,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    // Después de guardar en Supabase recargamos los datos para mostrar los cambios en pantalla.
     await loadPosts();
   }
 
