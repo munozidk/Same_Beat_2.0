@@ -4,7 +4,7 @@
   flex: 1;
   height: 100%;
   padding: 24px;
-  overflow-y: auto; /* scroll si hay más contenido */
+  overflow-y: auto; /* scroll hacia abajo */
 }
 
 /* Título */
@@ -14,16 +14,27 @@
   color: white;
   font-family: 'Poppins', sans-serif;
   margin: 0 0 16px 0;
+  flex-shrink: 0;
 }
 
-/* Grid de discover cards */
+/* Bloque de filtros sticky */
+.discover-screen__filters {
+  position: sticky;
+  padding: 8px 0;
+  margin-bottom: 16px;
+}
+
+/* Grid de discover cards en columna */
 .discover-screen__grid {
   display: flex;
-  justify-content: center;   /* Centra horizontalmente */
-  margin-top: 5px;          /* separa del filtro toco ponerlo de 5px para que en el repsonsive no se oculten los filtros */
+  flex-direction: column;   /* columna vertical */
+  align-items: center;      /* centra horizontalmente */
+  gap: 16px;
+  flex: 1;                  /* ocupa el espacio restante */
 }
 
-/* La tarjeta mantiene su tamaño natural */
+/* Cada card mantiene su tamaño natural */
 .discover-screen__grid > * {
   max-width: 300px;
+  width: 100%;
 }

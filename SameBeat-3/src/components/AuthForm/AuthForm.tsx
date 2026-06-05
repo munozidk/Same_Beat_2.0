@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 
+import { supabase } from "../../lib/supabaseClient";
+
 type AuthFormProps = {
   setLoading?: React.Dispatch<
     React.SetStateAction<boolean>
@@ -26,11 +28,52 @@ function AuthForm({
   const [password, setPassword] =
     useState("");
 
-  /* VALIDACIÓN */
+  const [error, setError] =
+    useState("");
+
+  const [isSubmitting, setIsSubmitting] =
+    useState(false);
+
+  /* VALIDACION */
 
   const isDisabled =
     email.trim() === "" ||
-    password.trim() === "";
+    password.trim() === "" ||
+    isSubmitting;
+
+  const handleLogin = async () => {
+    setError("");
+    setIsSubmitting(true);
+
+    if (setLoading) {
+      setLoading(true);
+    }
+
+    // Aquí Supabase revisa si el correo y la contraseña son correctos.
+    const { error } =
+      await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password,
+      });
+
+    if (error) {
+      if (setLoading) {
+        setLoading(false);
+      }
+
+      setIsSubmitting(false);
+      setError(
+        error.message === "Email not confirmed"
+          ? "Please verify your email before logging in."
+          : "Invalid email or password."
+      );
+      return;
+    }
+
+    setTimeout(() => {
+      navigate("/genres");
+    }, 2500);
+  };
 
   return (
 
@@ -86,10 +129,10 @@ function AuthForm({
         />
 
         <input
-          type="text"
+          type="email"
           name="email"
           autoComplete="email"
-          placeholder="Phone number or email"
+          placeholder="Email"
           value={email}
           onChange={(e) =>
             setEmail(e.target.value)
@@ -120,7 +163,13 @@ function AuthForm({
 
       </div>
 
-      {/* BOTÓN */}
+      {error && (
+        <p className="auth-error">
+          {error}
+        </p>
+      )}
+
+      {/* BOTON */}
 
       <button
         className={`signup ${
@@ -129,22 +178,10 @@ function AuthForm({
             : ""
         }`}
         disabled={isDisabled}
-        onClick={() => {
-
-          if (setLoading) {
-            setLoading(true);
-          }
-
-          setTimeout(() => {
-
-            navigate("/genres");
-
-          }, 2500);
-
-        }}
+        onClick={handleLogin}
       >
 
-        Log In
+        {isSubmitting ? "Logging in..." : "Log In"}
 
       </button>
 
@@ -152,7 +189,7 @@ function AuthForm({
 
       <p className="login">
 
-        Don’t have an account?{" "}
+        Don&apos;t have an account?{" "}
 
         <span
           onClick={() =>

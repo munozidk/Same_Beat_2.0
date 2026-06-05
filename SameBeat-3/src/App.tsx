@@ -23,13 +23,15 @@ import MatchScreen from './screens/MatchScreen/MatchScreen';
 import MainLayout from './components/MainLayout/MainLayout';
 import { FilterProvider } from './contexts/FilterContext';
 import { PostProvider } from './contexts/PostContext';
+import { UserProfileProvider } from './contexts/UserProfileContext';
 
 export default function App() {
   return (
     <FilterProvider>
       <PostProvider>
-        <Router>
-          <Routes>
+        <UserProfileProvider>
+          <Router>
+            <Routes>
 
             {/* Rutas sin MainLayout (onboarding) */}
             <Route path="/" element={<OnboardingScreen />} />
@@ -50,6 +52,7 @@ export default function App() {
                     <Route path="/concert/:id/description" element={<ConcertDescription />} />
                     <Route path="/concert/:id/communities" element={<Communities />} />
                     <Route path="/profile" element={<ProfileScreen />} />
+                    <Route path="/profile/:profileId" element={<ProfileScreen />} />
                     <Route path="/profile/edit" element={<EditProfileScreen />} />
                     <Route path="/chats" element={<ChatScreen />} />
                     <Route path="/chat" element={<ChatScreen />} />
@@ -67,8 +70,9 @@ export default function App() {
               }
             />
 
-          </Routes>
-        </Router>
+            </Routes>
+          </Router>
+        </UserProfileProvider>
       </PostProvider>
     </FilterProvider>
   );

@@ -1,7 +1,5 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, EffectFade, Autoplay } from 'swiper/modules';
+import { motion } from 'framer-motion';
 import StoryHeader from '../../components/Stories/StoryHeader';
 import StoryFooter from '../../components/Stories/StoryFooter';
 import StoryCarousel from '../../components/Stories/StoryCarousel';
