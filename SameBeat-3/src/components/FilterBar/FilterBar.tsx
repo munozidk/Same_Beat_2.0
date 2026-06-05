@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { Settings2, Circle } from 'lucide-react';
 import './FilterBar.css';
 

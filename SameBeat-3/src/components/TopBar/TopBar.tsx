@@ -1,8 +1,8 @@
-import { useState } from "react"
 import { Bell, Settings } from "lucide-react"
 import "./TopBar.css"
 import profile from "../../assets/profile.jpg"
 import SearchBar from "../SearchBar/SearchBar"
+import { useFilter } from "../../contexts/FilterContext"
 
 // Interface que define qué props puede recibir el componente
 interface TopBarProps {
@@ -13,8 +13,8 @@ interface TopBarProps {
 // Componente TopBar (barra superior de la app)
 const TopBar = ({ children, title = "Chats" }: TopBarProps) => {
 
-  // Estado local para la búsqueda
-  const [search, setSearch] = useState("")
+  // Usamos el estado global de búsqueda del FilterContext
+  const { searchQuery, setSearchQuery } = useFilter();
 
   return (
     <header className="topbar">
@@ -27,8 +27,8 @@ const TopBar = ({ children, title = "Chats" }: TopBarProps) => {
       {/* SECCIÓN CENTRAL - SearchBar siempre visible */}
       <div className="topbar__center">
         <SearchBar
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Buscar..."
         />
         {/* Children adicionales si se pasan */}

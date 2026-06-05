@@ -5,12 +5,15 @@ interface FilterContextType {
   selectedGenres: string[];
   toggleGenre: (genre: string) => void;
   allGenres: string[];
+  searchQuery: string;
+  setSearchQuery: (query: string) => void;
 }
 
 const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
 export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const allGenres = useMemo(() => {
     const genres = data.concerts.map(c => c.genre);
@@ -24,7 +27,7 @@ export const FilterProvider: React.FC<{ children: ReactNode }> = ({ children }) 
   };
 
   return (
-    <FilterContext.Provider value={{ selectedGenres, toggleGenre, allGenres }}>
+    <FilterContext.Provider value={{ selectedGenres, toggleGenre, allGenres, searchQuery, setSearchQuery }}>
       {children}
     </FilterContext.Provider>
   );

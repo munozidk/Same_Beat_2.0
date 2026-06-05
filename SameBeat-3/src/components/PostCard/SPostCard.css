@@ -72,12 +72,25 @@
     font-weight: 400;
 }
 
+.author-profile-link {
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.author-profile-link:disabled {
+    cursor: default;
+}
+
 .avatar {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 2px solid #C6FF34;
     object-fit: cover;
+    cursor: pointer;
 }
 
 /* Content */
