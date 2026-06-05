@@ -53,7 +53,7 @@ const Sidebar = () => {
   // CONTEXT
   // =========================
 
-  const { setModalOpen } = usePostContext();
+  const { setModalOpen, setPendingPostMedia } = usePostContext();
 
   // =========================
   // NAVIGATION
@@ -115,7 +115,7 @@ const Sidebar = () => {
 
     // Abrimos modal via context
     setShowCreateMenu(false);
-
+    setPendingPostMedia({ type: 'image', file });
     setModalOpen(true);
   };
 
@@ -164,9 +164,8 @@ const Sidebar = () => {
     // Validación
     if (!file) return;
 
-    // Abrimos modal via context
     setShowCreateMenu(false);
-
+    setPendingPostMedia({ type: 'audio', file });
     setModalOpen(true);
   };
 

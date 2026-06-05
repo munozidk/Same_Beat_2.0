@@ -32,7 +32,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const { songs } = useSongs();
 
   const showRightPanel = ['/home', '/concerts', '/profile', '/discover'].includes(location.pathname);
-  const { posts, addPost, modalOpen, setModalOpen } = usePostContext();
+  const { addPost, modalOpen, setModalOpen } = usePostContext();
 
   const chatPreviews = useMemo(() => chats.slice(0, 3).map((chat, index) => {
     const profile = seedProfiles[index];
@@ -117,7 +117,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         isOpen={modalOpen}
         onClose={() => setModalOpen(false)}
         onSubmit={addPost}
-        currentPosts={posts}
       />
     </div>
   );
