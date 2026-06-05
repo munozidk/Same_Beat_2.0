@@ -2,6 +2,7 @@ import "./DirectList.css"
 
 // Importamos los chats desde el archivo JSON
 import chatsData from "../../data/chats/chats.json"
+import { useSeedProfiles } from "../../hooks/useSeedProfiles"
 
 /* 
   Interface Chat
@@ -48,7 +49,7 @@ interface DirectListProps {
   
   - lista de chats directos
   - avatar usuario
-  - nombre
+  - nombre (desde base de datos)
   - último mensaje
 */
 const DirectList = ({
@@ -56,6 +57,15 @@ const DirectList = ({
   onSelectChat
 
 }: DirectListProps) => {
+
+  // Hook para traer perfiles desde la base de datos
+  const { profiles, isLoading } = useSeedProfiles()
+
+  // Función auxiliar para obtener el nombre del usuario
+  const getUserName = (userId: number) => {
+    const user = profiles.find(u => u.id === userId)
+    return user ? user.username : "Desconocido"
+  }
 
   return (
 
@@ -77,83 +87,87 @@ const DirectList = ({
       */}
       <div className="directs-list">
 
-        {/* 
-          map()
-          
-          Recorre todos los chats
-          del archivo JSON
-        */}
-        {chatsData.map((chat) => (
-
+        {isLoading ? (
+          <p>Cargando usuarios...</p>
+        ) : (
           /* 
-            Cada chat se muestra
-            como una pill/tarjeta
+            map()
+            
+            Recorre todos los chats
+            del archivo JSON
           */
-          <div
-            key={chat.id}
-            className="direct-pill"
+          chatsData.map((chat) => (
 
             /* 
-              Cuando el usuario hace click
-              se ejecuta onSelectChat()
-              
-              y enviamos el chat seleccionado
+              Cada chat se muestra
+              como una pill/tarjeta
             */
-            onClick={() => onSelectChat(chat)}
-          >
-
-            {/* Avatar usuario */}
-            <img
+            <div
+              key={chat.id}
+              className="direct-pill"
 
               /* 
-                Imagen dinámica
+                Cuando el usuario hace click
+                se ejecuta onSelectChat()
                 
-                Si userId es par:
-                avatar mujer
-                
-                Si es impar:
-                avatar hombre
+                y enviamos el chat seleccionado
               */
-              src={
-                chat.userId % 2 === 0
+              onClick={() => onSelectChat(chat)}
+            >
 
-                  ? `https://randomuser.me/api/portraits/women/${chat.userId}.jpg`
+              {/* Avatar usuario */}
+              <img
 
-                  : `https://randomuser.me/api/portraits/men/${chat.userId}.jpg`
-              }
+                /* 
+                  Imagen dinámica
+                  
+                  Si userId es par:
+                  avatar mujer
+                  
+                  Si es impar:
+                  avatar hombre
+                */
+                src={
+                  chat.userId % 2 === 0
 
-              alt="user"
+                    ? `https://randomuser.me/api/portraits/women/${chat.userId}.jpg`
 
-              className="direct-pill__avatar"
-            />
+                    : `https://randomuser.me/api/portraits/men/${chat.userId}.jpg`
+                }
 
-            {/* 
-              Información del chat
-              
-              Contiene:
-              - nombre
-              - último mensaje
-            */}
-            <div className="direct-pill__info">
+                alt="user"
 
-              {/* Nombre usuario */}
-              <span className="direct-pill__name">
+                className="direct-pill__avatar"
+              />
 
-                {chat.name}
+              {/* 
+                Información del chat
+                
+                Contiene:
+                - nombre (desde base de datos)
+                - último mensaje
+              */}
+              <div className="direct-pill__info">
 
-              </span>
+                {/* Nombre usuario */}
+                <span className="direct-pill__name">
 
-              {/* Último mensaje */}
-              <p className="direct-pill__last">
+                  {getUserName(chat.userId)}
 
-                {chat.lastMessage}
+                </span>
 
-              </p>
+                {/* Último mensaje */}
+                <p className="direct-pill__last">
+
+                  {chat.lastMessage}
+
+                </p>
+
+              </div>
 
             </div>
-
-          </div>
-        ))}
+          ))
+        )}
 
       </div>
 
