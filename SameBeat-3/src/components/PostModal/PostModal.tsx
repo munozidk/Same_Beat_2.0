@@ -22,7 +22,8 @@ export default function PostModal({ isOpen, onClose, onSubmit, currentPosts}: Pr
             id: currentPosts.length + 1,
             user: 'You',
             text: trimmed,
-            image: 'assets/avatar 1.jpg',
+            // Cambiamos el avatar por defecto del post creado localmente a la foto de perfil del usuario actual (assets/profile.jpg)
+            image: 'assets/profile.jpg',
             likes: 0,
             reposts: 0,
             comments: []

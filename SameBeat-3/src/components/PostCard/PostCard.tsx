@@ -8,6 +8,7 @@ import { resolveAsset } from "../../utils/imageMap";
 import { supabase } from "../../lib/supabaseClient";
 import { mapSupabaseCommentToComment } from "../../contexts/PostContext";
 import type { SupabaseCommentRow } from "../../contexts/PostContext";
+import { useUserProfile } from "../../contexts/UserProfileContext";
 import './SPostCard.css';
 
 interface Props {
@@ -19,6 +20,15 @@ export default function PostCard({ post }: Props) {
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>(post.comments || []);
   const [inputText, setInputText] = useState('');
+
+  // Obtenemos la información del perfil del usuario autenticado actual.
+  const { userProfile } = useUserProfile();
+
+  // Determinamos si el post actual fue creado por el usuario autenticado comparando nombre y username.
+  const isOwnPost = userProfile && (
+    (userProfile.name && post.user === userProfile.name) ||
+    (userProfile.username && post.user === userProfile.username)
+  );
 
   useEffect(() => {
     let isMounted = true;
@@ -149,7 +159,8 @@ export default function PostCard({ post }: Props) {
             {post.user}
           </button>
           <img
-            src={resolveAsset(post.image)}
+            // Si es nuestra publicación, usamos la imagen única assets/profile.jpg.
+            src={isOwnPost ? resolveAsset("assets/profile.jpg") : resolveAsset(post.image)}
             alt={post.user}
             className="avatar"
             onClick={openAuthorProfile}
@@ -163,22 +174,31 @@ export default function PostCard({ post }: Props) {
 
       {showComments && (
         <div className="comments-section">
-          {comments.map(c => (
-            <div key={c.id} className="comment-item">
-              <img
-                src={resolveAsset(c.image)}
-                alt={c.user}
-                className="comment-avatar"
-              />
-              <div className="comment-bubble">
-                <span className="comment-user">{c.user}</span>
-                <p className="comment-text">{c.text}</p>
+          {comments.map(c => {
+            // Comparamos el autor del comentario con los datos de nuestro perfil autenticado.
+            const isOwnComment = userProfile && (
+              (userProfile.name && c.user === userProfile.name) ||
+              (userProfile.username && c.user === userProfile.username)
+            );
+            return (
+              <div key={c.id} className="comment-item">
+                <img
+                  // Si el comentario es nuestro, usamos la imagen única assets/profile.jpg.
+                  src={isOwnComment ? resolveAsset("assets/profile.jpg") : resolveAsset(c.image)}
+                  alt={c.user}
+                  className="comment-avatar"
+                />
+                <div className="comment-bubble">
+                  <span className="comment-user">{c.user}</span>
+                  <p className="comment-text">{c.text}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
 
           <div className="input-row">
-            <img src={resolveAsset("assets/avatar 1.jpg")} alt="You" className="comment-avatar" />
+            {/* Mostramos la foto de perfil única del usuario actual al lado de la caja de comentarios */}
+            <img src={resolveAsset("assets/profile.jpg")} alt="You" className="comment-avatar" />
 
             <input
               type="text"
