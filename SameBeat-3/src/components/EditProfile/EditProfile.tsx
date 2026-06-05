@@ -12,10 +12,11 @@ interface Toggle {
 
 interface Props {
   initialData: UserProfile;
-  onSave: (data: UserProfile) => void;
+  onSave: (data: UserProfile) => void | Promise<void>;
+  isSaving?: boolean;
 }
 
-export default function EditProfile({ initialData, onSave }: Props) {
+export default function EditProfile({ initialData, onSave, isSaving = false }: Props) {
   const [form, setForm] = useState<UserProfile>(initialData);
   const profileImage = form.image ? imageMap[form.image] ?? form.image : "";
   const [toggles, setToggles] = useState<Toggle[]>([
@@ -34,8 +35,8 @@ export default function EditProfile({ initialData, onSave }: Props) {
     ));
   }
 
-  function handleSave() {
-    onSave(form);
+  async function handleSave() {
+    await onSave(form);
   }
 
   return (
@@ -156,8 +157,12 @@ export default function EditProfile({ initialData, onSave }: Props) {
       </div>
 
       {/* Guardar */}
-      <button className="edit-profile__save-btn" onClick={handleSave}>
-        Guardar cambios
+      <button
+        className="edit-profile__save-btn"
+        onClick={() => void handleSave()}
+        disabled={isSaving}
+      >
+        {isSaving ? "Guardando..." : "Guardar cambios"}
       </button>
     </div>
   );
