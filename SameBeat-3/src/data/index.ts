@@ -2,9 +2,6 @@ import chats from './chats/chats.json';
 import communities from './chats/communities.json';
 import concertsJson from './concerts/concerts.json';
 import songsFromJson from './music/songs.json';
-import posts from './posts/posts.json';
-import userProfileList from './profile/userProfile.json';
-import users from './users/users.json';
 import type { Concert } from '../types';
 import coverDardo from "../assets/cover.jpg";
 import dardosSong from '../assets/dardos.mp3';
@@ -35,10 +32,6 @@ const songs = (songsFromJson as SongJson[]).map((s) => {
     return s;
 });
 
-/**
- * Las URLs en concerts.json (p. ej. "./src/assets/...") no sirven en el navegador:
- * Vite solo empaqueta imágenes importadas en código. Aquí enlazamos cada id a su asset real.
- */
 const concertImageById: Record<number, string> = {
     1: concertImgAlvaro,
     2: concertImgOneDirection,
@@ -54,19 +47,11 @@ const concerts: Concert[] = (concertsJson as Concert[]).map((c) => ({
     image: concertImageById[c.id] ?? c.image,
 }));
 
-const userProfile = userProfileList[0];
-if (!userProfile) {
-    throw new Error('userProfile.json must contain at least one profile');
-}
-
 export const data = {
     chats,
     communities,
     concerts,
     songs,
-    posts,
-    userProfile,
-    users,
 };
 
-export { chats, communities, concerts, posts, users, songs };
+export { chats, communities, concerts, songs };

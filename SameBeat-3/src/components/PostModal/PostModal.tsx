@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
 import type { Post } from "../../types";
+import { DEFAULT_AVATAR } from "../../lib/profileUtils";
 import './SPostModal.css';
 
 interface Props {
@@ -22,8 +23,7 @@ export default function PostModal({ isOpen, onClose, onSubmit, currentPosts}: Pr
             id: currentPosts.length + 1,
             user: 'You',
             text: trimmed,
-            // Cambiamos el avatar por defecto del post creado localmente a la foto de perfil del usuario actual (assets/profile.jpg)
-            image: 'assets/profile.jpg',
+            image: DEFAULT_AVATAR,
             likes: 0,
             reposts: 0,
             comments: []

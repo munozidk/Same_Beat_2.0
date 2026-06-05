@@ -5,6 +5,7 @@ import type { Post, Comment } from "../../types";
 import LikeButton from "../Like/LikeButton";
 import ShareButton from "../Share/ShareButton";
 import { resolveAsset } from "../../utils/imageMap";
+import { DEFAULT_AVATAR } from "../../lib/profileUtils";
 import { supabase } from "../../lib/supabaseClient";
 import { mapSupabaseCommentToComment } from "../../contexts/PostContext";
 import type { SupabaseCommentRow } from "../../contexts/PostContext";
@@ -24,7 +25,8 @@ export default function PostCard({ post }: Props) {
   // Obtenemos la información del perfil del usuario autenticado actual.
   const { userProfile } = useUserProfile();
 
-  // Determinamos si el post actual fue creado por el usuario autenticado comparando nombre y username.
+  const ownAvatar = resolveAsset(userProfile.image || DEFAULT_AVATAR);
+
   const isOwnPost = userProfile && (
     (userProfile.name && post.user === userProfile.name) ||
     (userProfile.username && post.user === userProfile.username)
@@ -163,8 +165,7 @@ export default function PostCard({ post }: Props) {
             {post.user}
           </button>
           <img
-            // Si es nuestra publicación, usamos la imagen única assets/profile.jpg.
-            src={isOwnPost ? resolveAsset("assets/profile.jpg") : resolveAsset(post.image)}
+            src={isOwnPost ? ownAvatar : resolveAsset(post.image)}
             alt={post.user}
             className="avatar"
             onClick={openAuthorProfile}
@@ -187,8 +188,7 @@ export default function PostCard({ post }: Props) {
             return (
               <div key={c.id} className="comment-item">
                 <img
-                  // Si el comentario es nuestro, usamos la imagen única assets/profile.jpg.
-                  src={isOwnComment ? resolveAsset("assets/profile.jpg") : resolveAsset(c.image)}
+                  src={isOwnComment ? ownAvatar : resolveAsset(c.image)}
                   alt={c.user}
                   className="comment-avatar"
                 />
@@ -202,7 +202,7 @@ export default function PostCard({ post }: Props) {
 
           <div className="input-row">
             {/* Mostramos la foto de perfil única del usuario actual al lado de la caja de comentarios */}
-            <img src={resolveAsset("assets/profile.jpg")} alt="You" className="comment-avatar" />
+            <img src={ownAvatar} alt="You" className="comment-avatar" />
 
             <input
               type="text"

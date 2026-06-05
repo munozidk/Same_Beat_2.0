@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import "./Suggestions.css";
-import usersData from "../../data/users/users.json";
 import { Plus } from "lucide-react";
 import { resolveAsset } from "../../utils/imageMap";
+import { DEFAULT_AVATAR } from "../../lib/profileUtils";
+import { useSeedProfiles } from "../../hooks/useSeedProfiles";
 
 const Suggestions = () => {
-  const suggestions = usersData.slice(0, 4);
+  const { profiles: suggestions } = useSeedProfiles(4);
 
   return (
     <section className="suggestions">
       <h2 className="suggestions__title">Suggestions</h2>
 
       <div className="suggestions__scroll">
-        {/* Card Make a Match solo en móvil */}
         <Link to="/match" className="suggestion-card suggestion-card--add mobile-only">
           <h3>Make a match</h3>
           <div className="suggestion-card__add-btn">
@@ -20,16 +20,16 @@ const Suggestions = () => {
           </div>
         </Link>
 
-        {suggestions.map((user) => (
-          <article key={user.id} className="suggestion-card">
+        {suggestions.map((profile) => (
+          <article key={String(profile.id)} className="suggestion-card">
             <img
-              src={resolveAsset(user.image)}
-              alt={user.username}
+              src={resolveAsset(profile.avatar_url || DEFAULT_AVATAR)}
+              alt={profile.username || profile.full_name || "User"}
               className="suggestion-card__image"
             />
             <div className="suggestion-card__overlay">
-              <h3>{user.username}</h3>
-              <p>{user.compatibility}</p>
+              <h3>{profile.username || profile.full_name || "User"}</h3>
+              <p>{profile.compatibility || ""}</p>
             </div>
           </article>
         ))}

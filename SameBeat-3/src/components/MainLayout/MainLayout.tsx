@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Sidebar from '../Sidebar/Sidebar'
 import LocationToggle from '../LocationToggle/LocationToggle';
@@ -10,7 +10,9 @@ import NowPlaying from '../NowPLaying/NowPlaying';
 import PostModal from '../PostModal/PostModal';
 import { useFilter } from '../../contexts/FilterContext';
 import { usePostContext } from '../../contexts/PostContext';
-import { chats, users, songs } from '../../data/index';
+import { chats, songs } from '../../data/index';
+import { DEFAULT_AVATAR } from '../../lib/profileUtils';
+import { useSeedProfiles } from '../../hooks/useSeedProfiles';
 import './MainLayout.css';
 
 interface MainLayoutProps {
@@ -23,36 +25,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
     const isConcertsScreen = location.pathname === '/concerts';
     const isConcertDescriptionScreen = /^\/concert\/\d+\/description$/.test(location.pathname);
     const { selectedGenres, toggleGenre, allGenres } = useFilter();
+    const { profiles: seedProfiles } = useSeedProfiles();
 
-
-    // Rutas donde SÍ se muestra el panel derecho (NowPlaying + ChatList)
-    // Del resto de pantallas (chats, map, etc.) se oculta
     const showRightPanel = ['/home', '/concerts', '/profile', '/discover'].includes(location.pathname);
-
-    // =========================
-    // CONTEXT
-    // =========================
 
     const { posts, addPost, modalOpen, setModalOpen } = usePostContext();
 
-    // =========================
-    // CHAT PREVIEWS
-    // =========================
-
-
-    const chatPreviews = chats.slice(0, 3).map(chat => {
-        const user = users.find(u => u.id === chat.userId)
+    const chatPreviews = useMemo(() => chats.slice(0, 3).map((chat, index) => {
+        const profile = seedProfiles[index];
         return {
             id: chat.id,
-            name: user?.username ?? 'Unknown',
-            image: user?.image ?? ''
-        }
-    })
+            name: profile?.username || profile?.full_name || 'Unknown',
+            image: profile?.avatar_url || DEFAULT_AVATAR,
+        };
+    }), [seedProfiles]);
 
     return (
         <div className="app-container screen-container">
 
-            {/* Desktop Layout */}
             <div className="desktop-layout">
                 <header className="header">
                     
@@ -83,7 +73,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                         </section>
                     </main>
 
-                    {/* Panel derecho: solo en home, concerts, profile, discovery */}
                     {showRightPanel && (
                         <aside className="right-panel">
                             <section className="right-panel-top">
@@ -97,7 +86,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 </div>
             </div>
 
-            {/* Mobile Layout */}
             <div className="mobile-layout">
                 <main className="mobile-main-content">
                     {isConcertsScreen && (
@@ -120,19 +108,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 {!isConcertDescriptionScreen && <BottomNav />}
             </div>
 
-
-            {/* =========================
-                 MODAL — disponible en
-                 desktop y mobile
-            ========================= */}
-
             <PostModal
                 isOpen={modalOpen}
                 onClose={() => setModalOpen(false)}
                 onSubmit={addPost}
                 currentPosts={posts}
             />
-
 
         </div>
     );
