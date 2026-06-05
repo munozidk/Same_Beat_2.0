@@ -1,4 +1,8 @@
-import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+
+import React, { createContext, useContext, useState, useMemo } from 'react';
+import type { ReactNode } from 'react';
+
 import { data } from '../data';
 
 interface FilterContextType {
