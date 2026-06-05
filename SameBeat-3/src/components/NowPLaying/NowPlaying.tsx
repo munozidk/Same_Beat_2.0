@@ -15,14 +15,20 @@ export default function NowPlaying({ songs }: Props) {
 
   const song = songs[currentIndex];
 
+  // Si la tabla songs esta vacia, el reproductor no se muestra.
+  if (!song) {
+    return null;
+  }
+
   function togglePlay() {
     if (!audioRef.current) return;
 
     if (isPlaying) {
       audioRef.current.pause();
     } else {
-      audioRef.current.play();
+      void audioRef.current.play();
     }
+
     setIsPlaying(!isPlaying);
   }
 
@@ -44,7 +50,6 @@ export default function NowPlaying({ songs }: Props) {
     <section className="now-playing">
       <h3 className="now-playing-title">Now Playing</h3>
 
-      {/* Portada */}
       <div className="cover-container">
         <img
           src={resolveAsset(song.image)}
@@ -53,11 +58,9 @@ export default function NowPlaying({ songs }: Props) {
         />
       </div>
 
-      {/* Nombre canción */}
       <p className="song-name">{song.name}</p>
       <p className="artist-name">{song.artist}</p>
 
-      {/* Barras animadas */}
       <div className="bars-container">
         {[0, 0.1, 0.2, 0.3, 0.4].map((delay, i) => (
           <span
@@ -71,14 +74,13 @@ export default function NowPlaying({ songs }: Props) {
         ))}
       </div>
 
-      {/* Audio */}
+      {/* El audio sale de song.audio, que viene de songs.audio_url en Supabase. */}
       <audio
         ref={audioRef}
         src={resolveAsset(song.audio)}
         onEnded={handleNext}
       />
 
-      {/* Controles */}
       <div className="controls">
         <button onClick={handlePrev} className="ctrl-btn">
           <SkipBack size={18} color="#C6FF34" />
