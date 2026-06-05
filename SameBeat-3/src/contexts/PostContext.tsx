@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import type { Comment, Post } from "../types";
 import { supabase } from "../lib/supabaseClient";
+import { DEFAULT_AVATAR } from "../lib/profileUtils";
 
 // =========================
 // TIPOS
@@ -59,7 +60,7 @@ export function mapSupabaseCommentToComment(comment: SupabaseCommentRow): Commen
     postId: comment.post_id ?? undefined,
     authorProfileId: comment.author_profile_id ?? undefined,
     user: author?.full_name || author?.username || "Unknown",
-    image: author?.avatar_url || "assets/avatar 1.jpg",
+    image: author?.avatar_url || DEFAULT_AVATAR,
     text: comment.text ?? "",
   };
 }
@@ -71,7 +72,7 @@ export function mapSupabasePostToPost(post: SupabasePostRow): Post {
     id: post.id,
     authorProfileId: post.author_profile_id ?? undefined,
     user: author?.full_name || author?.username || "Unknown",
-    image: author?.avatar_url || "assets/avatar 1.jpg",
+    image: author?.avatar_url || DEFAULT_AVATAR,
     text: post.text ?? "",
     likes: post.likes ?? 0,
     reposts: post.reposts ?? 0,

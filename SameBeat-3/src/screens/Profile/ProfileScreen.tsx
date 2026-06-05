@@ -10,25 +10,13 @@ import StoriesSection from '../../components/Stories/StoriesSection';
 import StoryViewerScreen from '../../screens/Stories/StoryViewerScreen';
 import PostFeed from '../../components/PostFeed/PostFeed';
 import { data } from '../../data';
-import { useUserProfile } from '../../contexts/UserProfileContext';
 import { mapSupabasePostToPost } from '../../contexts/PostContext';
 import type { SupabasePostRow } from '../../contexts/PostContext';
 import { supabase } from '../../lib/supabaseClient';
 import type { Post, UserProfile } from '../../types';
+import { DEFAULT_AVATAR, EMPTY_USER_PROFILE, type ProfileRow } from '../../lib/profileUtils';
 import { imageMap, resolveAsset } from '../../utils/imageMap';
 import styles from './ProfileScreen.module.css';
-
-type ProfileRow = Record<string, unknown> & {
-  id?: string | number;
-  username?: string | null;
-  full_name?: string | null;
-  avatar_url?: string | null;
-  age?: number | null;
-  bio?: string | null;
-  city?: string | null;
-  country?: string | null;
-  compatibility?: string | null;
-};
 
 type DisplayProfile = UserProfile & {
   profileId?: string | number;
@@ -43,52 +31,43 @@ function getNumber(value: unknown, fallback: number) {
   return typeof value === 'number' && Number.isFinite(value) ? value : fallback;
 }
 
-function getFallbackSeedProfile(row?: ProfileRow | null) {
-  const name = getString(row?.full_name) || getString(row?.username);
+function buildDisplayProfile(row: ProfileRow | null): DisplayProfile {
+  if (!row) {
+    return {
+      ...EMPTY_USER_PROFILE,
+      profileId: undefined,
+      compatibility: '',
+    };
+  }
 
-  return data.users.find(user =>
-    user.username === name ||
-    user.username === row?.full_name ||
-    user.username === row?.username
-  );
-}
-
-function buildDisplayProfile(row: ProfileRow | null, fallbackProfile: UserProfile): DisplayProfile {
-  const seedProfile = getFallbackSeedProfile(row);
-  const avatarUrl = getString(row?.avatar_url, seedProfile?.image ?? fallbackProfile.image);
-  const favoriteArtist = getString(
-    row?.favorite_artist ?? row?.favoriteArtist,
-    fallbackProfile.favoriteArtist
-  );
-  const favoriteSong = getString(
-    row?.favorite_song ?? row?.favoriteSong,
-    fallbackProfile.favoriteSong
-  );
+  const numericId =
+    typeof row.id === 'number'
+      ? row.id
+      : Number.parseInt(String(row.id ?? ''), 10) || 0;
 
   return {
-    ...fallbackProfile,
-    profileId: row?.id,
-    name: getString(row?.full_name, seedProfile?.username ?? fallbackProfile.name),
-    username: getString(row?.username, fallbackProfile.username),
-    image: avatarUrl,
-    age: getNumber(row?.age, seedProfile?.age ?? fallbackProfile.age),
-    bio: getString(row?.bio, seedProfile?.bio ?? fallbackProfile.bio),
-    city: getString(row?.city, fallbackProfile.city),
-    country: getString(row?.country, fallbackProfile.country),
-    followers: getNumber(row?.followers ?? row?.followers_count, fallbackProfile.followers),
-    following: getNumber(row?.following ?? row?.following_count, fallbackProfile.following),
-    concerts: getNumber(row?.concerts ?? row?.concerts_count, fallbackProfile.concerts),
-    favoriteArtist,
-    favoriteSong,
-    compatibility: getString(row?.compatibility, seedProfile?.compatibility ?? ''),
+    id: numericId,
+    profileId: row.id,
+    name: getString(row.full_name) || getString(row.username) || 'User',
+    username: getString(row.username),
+    image: getString(row.avatar_url) || DEFAULT_AVATAR,
+    age: getNumber(row.age, 0),
+    bio: getString(row.bio),
+    city: getString(row.city),
+    country: getString(row.country),
+    followers: getNumber(row.followers ?? row.followers_count, 0),
+    following: getNumber(row.following ?? row.following_count, 0),
+    concerts: getNumber(row.concerts ?? row.concerts_count, 0),
+    favoriteArtist: getString(row.favorite_artist ?? row.favoriteArtist),
+    favoriteSong: getString(row.favorite_song ?? row.favoriteSong),
+    compatibility: getString(row.compatibility),
   };
 }
 
 const ProfileScreen: React.FC = () => {
-  const { userProfile } = useUserProfile();
   const { profileId } = useParams<{ profileId?: string }>();
   const navigate = useNavigate();
-  const [displayProfile, setDisplayProfile] = useState<DisplayProfile>(userProfile);
+  const [displayProfile, setDisplayProfile] = useState<DisplayProfile>(EMPTY_USER_PROFILE);
   const [currentProfileId, setCurrentProfileId] = useState<string | number | null>(null);
   const [profilePosts, setProfilePosts] = useState<Post[]>([]);
   const [isLoadingProfile, setIsLoadingProfile] = useState(false);
@@ -97,7 +76,7 @@ const ProfileScreen: React.FC = () => {
 
   const profileImage = displayProfile.image
     ? resolveAsset(imageMap[displayProfile.image] ?? displayProfile.image)
-    : undefined;
+    : resolveAsset(DEFAULT_AVATAR);
 
   const targetProfileId = displayProfile.profileId;
   const isOwnProfile = targetProfileId !== undefined && String(targetProfileId) === String(currentProfileId);
@@ -115,12 +94,10 @@ const ProfileScreen: React.FC = () => {
     let isMounted = true;
 
     async function loadCurrentProfileId() {
-      // Obtenemos los datos del usuario autenticado actualmente.
       const { data: authData } = await supabase.auth.getUser();
 
       if (!authData.user) return;
 
-      // Aquí buscamos el ID del perfil que corresponde al usuario autenticado.
       const { data: profile } = await supabase
         .from('profiles')
         .select('id')
@@ -145,7 +122,6 @@ const ProfileScreen: React.FC = () => {
     async function loadProfile() {
       setIsLoadingProfile(true);
 
-      // Esta consulta trae la información completa del perfil desde la base de datos de Supabase.
       const query = supabase
         .from('profiles')
         .select('*');
@@ -163,7 +139,7 @@ const ProfileScreen: React.FC = () => {
         console.error('Error loading profile:', error.message);
       }
 
-      setDisplayProfile(buildDisplayProfile(profile as ProfileRow | null, userProfile));
+      setDisplayProfile(buildDisplayProfile(profile as ProfileRow | null));
       setIsLoadingProfile(false);
     }
 
@@ -172,7 +148,7 @@ const ProfileScreen: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [profileId, userProfile]);
+  }, [profileId]);
 
   useEffect(() => {
     let isMounted = true;
@@ -186,7 +162,6 @@ const ProfileScreen: React.FC = () => {
 
       setIsLoadingPosts(true);
 
-      // Esta consulta trae únicamente las publicaciones creadas por este perfil desde la base de datos.
       const { data: posts, error } = await supabase
         .from('posts')
         .select(`

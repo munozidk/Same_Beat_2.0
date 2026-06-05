@@ -1,9 +1,15 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
-import { data } from '../data';
 import type { UserProfile } from '../types';
 import { supabase } from '../lib/supabaseClient';
 import type { User } from '@supabase/supabase-js';
+import {
+  buildProfileFromMetadata,
+  buildProfileFromRow,
+  EMPTY_USER_PROFILE,
+  PROFILE_SELECT_FIELDS,
+  type ProfileRow,
+} from '../lib/profileUtils';
 
 interface UserProfileContextValue {
   userProfile: UserProfile;
@@ -16,65 +22,13 @@ interface UserProfileProviderProps {
   children: ReactNode;
 }
 
-type ProfileRow = {
-  username: string | null;
-  full_name: string | null;
-  age: number | null;
-};
-
-function getAgeFromDate(dateOfBirth?: string) {
-  if (!dateOfBirth) return data.userProfile.age;
-
-  const birthDate = new Date(dateOfBirth);
-  if (Number.isNaN(birthDate.getTime())) return data.userProfile.age;
-
-  const today = new Date();
-  let age = today.getFullYear() - birthDate.getFullYear();
-  const monthDifference = today.getMonth() - birthDate.getMonth();
-  const birthdayHasNotPassed =
-    monthDifference < 0 ||
-    (monthDifference === 0 && today.getDate() < birthDate.getDate());
-
-  if (birthdayHasNotPassed) {
-    age -= 1;
-  }
-
-  return age;
-}
-
-function buildProfileFromMetadata(metadata: Record<string, unknown>): UserProfile {
-  const firstName = String(metadata.firstName ?? '').trim();
-  const lastName = String(metadata.lastName ?? '').trim();
-  const username = String(metadata.username ?? '').trim();
-  const dateOfBirth = String(metadata.dateOfBirth ?? '').trim();
-
-  return {
-    ...data.userProfile,
-    name: `${firstName} ${lastName}`.trim() || data.userProfile.name,
-    username: username || data.userProfile.username,
-    age: getAgeFromDate(dateOfBirth),
-  };
-}
-
-function buildProfileFromRow(row: ProfileRow, metadata: Record<string, unknown>): UserProfile {
-  const metadataProfile = buildProfileFromMetadata(metadata);
-
-  return {
-    ...metadataProfile,
-    name: row.full_name || metadataProfile.name,
-    username: row.username || metadataProfile.username,
-    age: row.age ?? metadataProfile.age,
-  };
-}
-
 async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
   const metadata = authUser.user_metadata;
 
-  // Esta consulta busca el perfil asociado al usuario autenticado.
   const { data: existingProfile, error: selectError } =
     await supabase
       .from('profiles')
-      .select('username, full_name, age')
+      .select(PROFILE_SELECT_FIELDS)
       .eq('auth_user_id', authUser.id)
       .maybeSingle();
 
@@ -83,12 +37,11 @@ async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
   }
 
   if (existingProfile) {
-    return buildProfileFromRow(existingProfile, metadata);
+    return buildProfileFromRow(existingProfile as ProfileRow, metadata);
   }
 
   const fallbackProfile = buildProfileFromMetadata(metadata);
 
-  // Si el perfil no existe, se crea automáticamente.
   const { data: createdProfile, error: insertError } =
     await supabase
       .from('profiles')
@@ -99,18 +52,18 @@ async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
         age: fallbackProfile.age,
         is_seed_user: false,
       })
-      .select('username, full_name, age')
+      .select(PROFILE_SELECT_FIELDS)
       .single();
 
   if (insertError || !createdProfile) {
     return fallbackProfile;
   }
 
-  return buildProfileFromRow(createdProfile, metadata);
+  return buildProfileFromRow(createdProfile as ProfileRow, metadata);
 }
 
 export function UserProfileProvider({ children }: UserProfileProviderProps) {
-  const [userProfile, setUserProfile] = useState<UserProfile>(data.userProfile as UserProfile);
+  const [userProfile, setUserProfile] = useState<UserProfile>(EMPTY_USER_PROFILE);
 
   useEffect(() => {
     let isMounted = true;
@@ -124,7 +77,6 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
     }
 
     async function loadAuthProfile() {
-      // Aquí se obtiene el usuario que inició sesión.
       const { data: authData } = await supabase.auth.getUser();
 
       if (!isMounted || !authData.user) return;
@@ -132,16 +84,15 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
       await applyAuthProfile(authData.user);
     }
 
-    loadAuthProfile();
+    void loadAuthProfile();
 
-    // Este listener actualiza el perfil cuando cambia la sesión.
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!isMounted) return;
 
       if (session?.user) {
         void applyAuthProfile(session.user);
       } else {
-        setUserProfile(data.userProfile as UserProfile);
+        setUserProfile(EMPTY_USER_PROFILE);
       }
     });
 

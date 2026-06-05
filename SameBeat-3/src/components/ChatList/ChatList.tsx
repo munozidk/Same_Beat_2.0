@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { imageMap } from '../../utils/imageMap';
+import { resolveAsset } from '../../utils/imageMap';
 import './SChatList.css'
 
 interface Chat {
@@ -26,7 +26,7 @@ export default function ChatList({ chats }: Props) {
                         style={{ cursor: 'pointer' }}
                     >
                         <img
-                            src={imageMap[chat.image] ?? chat.image}
+                            src={resolveAsset(chat.image)}
                             alt={chat.name}
                             className='chat-item__avatar'
                         />

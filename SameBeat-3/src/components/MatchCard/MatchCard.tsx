@@ -11,12 +11,7 @@ import { useState } from "react"
 // Heart = like
 // X = nope
 import { Heart, X } from "lucide-react"
-
-// Imágenes reales
-import kat from "../../assets/kat.png"
-import manon from "../../assets/manon.png"
-import joseph from "../../assets/joseph.png"
-import patrick from "../../assets/patrick.png"
+import { resolveAsset } from "../../utils/imageMap"
 
 /* 
   Props del componente
@@ -60,29 +55,7 @@ function MatchCard({
 
 }: Props) {
 
-  /* 
-    IMÁGENES REALES
-    
-    Asociamos cada ID
-    con una imagen local
-  */
-  const userImages: Record<number, string> = {
-
-    1: kat,
-    2: manon,
-    3: joseph,
-    4: patrick
-  }
-
-  /* 
-    FINAL IMAGE
-    
-    Busca la imagen
-    correspondiente al ID
-  */
-  const finalImage =
-
-    userImages[user.id] || user.image
+  const finalImage = resolveAsset(user.image)
 
   /* 
     startX
