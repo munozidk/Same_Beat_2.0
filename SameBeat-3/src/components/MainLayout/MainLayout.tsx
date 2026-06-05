@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
-import Sidebar from '../SideBar/Sidebar';
+import SideBar from '../SideBar/Sidebar';
 import LocationToggle from '../LocationToggle/LocationToggle';
 import FilterBar from '../FilterBar/FilterBar';
 import TopBar from '../TopBar/TopBar';
@@ -50,7 +50,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
         <header className="header" />
 
         <div className="desktop-body">
-          <Sidebar />
+          <SideBar />
 
           <main className="center-content">
             {isConcertsScreen && (

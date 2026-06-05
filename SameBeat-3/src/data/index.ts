@@ -1,10 +1,9 @@
 import chats from './chats/chats.json';
 import communities from './chats/communities.json';
 import concertsJson from './concerts/concerts.json';
-import songsFromJson from './music/songs.json';
+
 import type { Concert } from '../types';
-import coverDardo from "../assets/cover.jpg";
-import dardosSong from '../assets/dardos.mp3';
+
 import concertImgAlvaro from '../assets/alvaro_diaz.jpeg';
 import concertImgOneDirection from '../assets/one_direction.jpeg';
 import concertImgMichaelJackson from '../assets/michael_jackson.jpeg';
@@ -13,24 +12,8 @@ import concertImgGrupoGuayacan from '../assets/grupo_guayacan.jpeg';
 import concertImgThreeDaysGrace from '../assets/three_days_grace.jpeg';
 import concertImg5sos from '../assets/5sos.jpeg';
 
-type SongJson = {
-    id: number;
-    name: string;
-    artist: string;
-    image: string;
-    audio: string;
-};
 
-const songs = (songsFromJson as SongJson[]).map((s) => {
-    if (s.id === 1) {
-        return {
-            ...s,
-            image: coverDardo,
-            audio: dardosSong,
-        };
-    }
-    return s;
-});
+
 
 const concertImageById: Record<number, string> = {
     1: concertImgAlvaro,
@@ -51,7 +34,7 @@ export const data = {
     chats,
     communities,
     concerts,
-    songs,
+
 };
 
-export { chats, communities, concerts, songs };
+export { chats, communities, concerts };
