@@ -70,6 +70,7 @@ function buildProfileFromRow(row: ProfileRow, metadata: Record<string, unknown>)
 async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
   const metadata = authUser.user_metadata;
 
+  // Esta consulta busca el perfil asociado al usuario autenticado.
   const { data: existingProfile, error: selectError } =
     await supabase
       .from('profiles')
@@ -87,6 +88,7 @@ async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
 
   const fallbackProfile = buildProfileFromMetadata(metadata);
 
+  // Si el perfil no existe, se crea automáticamente.
   const { data: createdProfile, error: insertError } =
     await supabase
       .from('profiles')
@@ -122,6 +124,7 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
     }
 
     async function loadAuthProfile() {
+      // Aquí se obtiene el usuario que inició sesión.
       const { data: authData } = await supabase.auth.getUser();
 
       if (!isMounted || !authData.user) return;
@@ -131,6 +134,7 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
 
     loadAuthProfile();
 
+    // Este listener actualiza el perfil cuando cambia la sesión.
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (!isMounted) return;
 

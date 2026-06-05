@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MessageCircle, Send } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import type { Post, Comment } from "../../types";
 import LikeButton from "../Like/LikeButton";
 import ShareButton from "../Share/ShareButton";
 import { resolveAsset } from "../../utils/imageMap";
+import { supabase } from "../../lib/supabaseClient";
+import { mapSupabaseCommentToComment } from "../../contexts/PostContext";
+import type { SupabaseCommentRow } from "../../contexts/PostContext";
 import './SPostCard.css';
 
 interface Props {
@@ -11,22 +15,111 @@ interface Props {
 }
 
 export default function PostCard({ post }: Props) {
+  const navigate = useNavigate();
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<Comment[]>(post.comments || []);
   const [inputText, setInputText] = useState('');
 
-  function handleAddComment() {
+  useEffect(() => {
+    let isMounted = true;
+
+    async function loadComments() {
+      const { data, error } = await supabase
+        .from("comments")
+        .select(`
+          id,
+          post_id,
+          author_profile_id,
+          text,
+          created_at,
+          profiles (
+            username,
+            full_name,
+            avatar_url
+          )
+        `)
+        .eq("post_id", post.id)
+        .order("created_at", { ascending: true });
+
+      if (!isMounted) return;
+
+      if (error) {
+        console.error("Error loading comments:", error.message);
+        setComments(post.comments || []);
+        return;
+      }
+
+      setComments((data ?? []).map(comment =>
+        mapSupabaseCommentToComment(comment as SupabaseCommentRow)
+      ));
+    }
+
+    void loadComments();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [post.id, post.comments]);
+
+  function openAuthorProfile() {
+    if (!post.authorProfileId) return;
+
+    navigate(`/profile/${encodeURIComponent(String(post.authorProfileId))}`);
+  }
+
+  async function handleAddComment() {
     const text = inputText.trim();
     if (!text) return;
 
-    const newComment: Comment = {
-      id: comments.length + 1,
-      user: 'You',
-      image: 'https://i.pravatar.cc/150?img=1',
-      text
-    };
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    const authUser = authData.user;
 
-    setComments([...comments, newComment]);
+    if (authError || !authUser) {
+      console.error("Error getting authenticated user:", authError?.message);
+      return;
+    }
+
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("id")
+      .eq("auth_user_id", authUser.id)
+      .maybeSingle();
+
+    if (profileError || !profile) {
+      console.error("Error getting comment author profile:", profileError?.message);
+      return;
+    }
+
+    const { data: insertedComment, error: insertError } = await supabase
+      .from("comments")
+      .insert({
+        post_id: post.id,
+        author_profile_id: profile.id,
+        text,
+      })
+      .select(`
+        id,
+        post_id,
+        author_profile_id,
+        text,
+        created_at,
+        profiles (
+          username,
+          full_name,
+          avatar_url
+        )
+      `)
+      .single();
+
+    if (insertError || !insertedComment) {
+      console.error("Error creating comment:", insertError?.message);
+      return;
+    }
+
+    setComments([
+      ...comments,
+      mapSupabaseCommentToComment(insertedComment as SupabaseCommentRow),
+    ]);
     setInputText('');
   }
 
@@ -47,11 +140,19 @@ export default function PostCard({ post }: Props) {
         </div>
 
         <div className="author-info">
-          <span className="author-name">{post.user}</span>
+          <button
+            type="button"
+            className="author-name author-profile-link"
+            onClick={openAuthorProfile}
+            disabled={!post.authorProfileId}
+          >
+            {post.user}
+          </button>
           <img
             src={resolveAsset(post.image)}
             alt={post.user}
             className="avatar"
+            onClick={openAuthorProfile}
           />
         </div>
       </div>

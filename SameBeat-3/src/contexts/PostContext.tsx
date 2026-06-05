@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import type { Post } from "../types";
+import type { Comment, Post } from "../types";
 import { supabase } from "../lib/supabaseClient";
 
 // =========================
@@ -25,12 +25,22 @@ type SupabasePostAuthor = {
   avatar_url: string | null;
 };
 
-type SupabasePostRow = {
+export type SupabaseCommentRow = {
   id: number;
+  post_id: number | null;
+  author_profile_id: string | number | null;
+  text: string | null;
+  profiles: SupabasePostAuthor | SupabasePostAuthor[] | null;
+};
+
+export type SupabasePostRow = {
+  id: number;
+  author_profile_id: string | number | null;
   text: string | null;
   likes: number | null;
   reposts: number | null;
   profiles: SupabasePostAuthor | SupabasePostAuthor[] | null;
+  comments?: SupabaseCommentRow[] | null;
 };
 
 function getAuthorProfile(profiles: SupabasePostRow["profiles"]) {
@@ -41,17 +51,31 @@ function getAuthorProfile(profiles: SupabasePostRow["profiles"]) {
   return profiles;
 }
 
-function mapSupabasePostToPost(post: SupabasePostRow): Post {
+export function mapSupabaseCommentToComment(comment: SupabaseCommentRow): Comment {
+  const author = getAuthorProfile(comment.profiles);
+
+  return {
+    id: comment.id,
+    postId: comment.post_id ?? undefined,
+    authorProfileId: comment.author_profile_id ?? undefined,
+    user: author?.full_name || author?.username || "Unknown",
+    image: author?.avatar_url || "assets/avatar 1.jpg",
+    text: comment.text ?? "",
+  };
+}
+
+export function mapSupabasePostToPost(post: SupabasePostRow): Post {
   const author = getAuthorProfile(post.profiles);
 
   return {
     id: post.id,
+    authorProfileId: post.author_profile_id ?? undefined,
     user: author?.full_name || author?.username || "Unknown",
     image: author?.avatar_url || "assets/avatar 1.jpg",
     text: post.text ?? "",
     likes: post.likes ?? 0,
     reposts: post.reposts ?? 0,
-    comments: [],
+    comments: (post.comments ?? []).map(mapSupabaseCommentToComment),
   };
 }
 
@@ -68,6 +92,7 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
       .from("posts")
       .select(`
         id,
+        author_profile_id,
         text,
         likes,
         reposts,
@@ -75,6 +100,18 @@ export function PostProvider({ children }: { children: React.ReactNode }) {
           username,
           full_name,
           avatar_url
+        ),
+        comments (
+          id,
+          post_id,
+          author_profile_id,
+          text,
+          created_at,
+          profiles (
+            username,
+            full_name,
+            avatar_url
+          )
         )
       `)
       .order("created_at", { ascending: false });

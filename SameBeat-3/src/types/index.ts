@@ -1,5 +1,7 @@
 export interface Comment {
   id: number
+  postId?: number
+  authorProfileId?: string | number
   user: string
   image: string
   text: string
@@ -7,6 +9,7 @@ export interface Comment {
 
 export interface Post {
   id: number
+  authorProfileId?: string | number
   user: string
   image: string
   text: string

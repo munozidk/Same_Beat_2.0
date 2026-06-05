@@ -52,6 +52,7 @@ export default function App() {
                     <Route path="/concert/:id/description" element={<ConcertDescription />} />
                     <Route path="/concert/:id/communities" element={<Communities />} />
                     <Route path="/profile" element={<ProfileScreen />} />
+                    <Route path="/profile/:profileId" element={<ProfileScreen />} />
                     <Route path="/profile/edit" element={<EditProfileScreen />} />
                     <Route path="/chats" element={<ChatScreen />} />
                     <Route path="/chat" element={<ChatScreen />} />

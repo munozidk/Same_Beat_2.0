@@ -104,6 +104,7 @@ function SignupScreen() {
 
     setIsSubmitting(true);
 
+    // Aquí se registra el usuario en Supabase con los datos del formulario.
     const { data, error } =
       await supabase.auth.signUp({
         email: formData.email.trim(),

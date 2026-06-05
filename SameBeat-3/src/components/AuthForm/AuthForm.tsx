@@ -49,6 +49,7 @@ function AuthForm({
       setLoading(true);
     }
 
+    // Aquí Supabase revisa si el correo y la contraseña son correctos.
     const { error } =
       await supabase.auth.signInWithPassword({
         email: email.trim(),
