@@ -5,12 +5,10 @@ import { useFilter } from '../../contexts/FilterContext'
 import { useSongs } from '../../hooks/useSongs';
 import './DiscoverScreen.css'
 
-
 export default function DiscoverScreen() {
   const { selectedGenres, toggleGenre, allGenres } = useFilter();
   const { songs, isLoading } = useSongs();
 
-  // Adapta canciones de Supabase al formato que usa DiscoverCard.
   const discoverSongs = songs.map((song) => ({
     id: song.id,
     title: song.name,
@@ -26,11 +24,13 @@ export default function DiscoverScreen() {
 
       <h2 className="discover-screen__title">Discover</h2>
 
-      <FilterBar
-        genres={allGenres}
-        selectedGenres={selectedGenres}
-        onToggleGenre={toggleGenre}
-      />
+      <div className="discover-screen__filters">
+        <FilterBar
+          genres={allGenres}
+          selectedGenres={selectedGenres}
+          onToggleGenre={toggleGenre}
+        />
+      </div>
 
       <div className="discover-screen__grid">
         {isLoading ? (
