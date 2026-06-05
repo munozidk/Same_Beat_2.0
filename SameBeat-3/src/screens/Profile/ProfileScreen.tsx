@@ -15,6 +15,7 @@ import type { SupabasePostRow } from '../../contexts/PostContext';
 import { supabase } from '../../lib/supabaseClient';
 import type { Post, UserProfile } from '../../types';
 import { DEFAULT_AVATAR, EMPTY_USER_PROFILE, type ProfileRow } from '../../lib/profileUtils';
+import { useUserProfile } from '../../contexts/UserProfileContext';
 import { imageMap, resolveAsset } from '../../utils/imageMap';
 import styles from './ProfileScreen.module.css';
 
@@ -55,9 +56,9 @@ function buildDisplayProfile(row: ProfileRow | null): DisplayProfile {
     bio: getString(row.bio),
     city: getString(row.city),
     country: getString(row.country),
-    followers: getNumber(row.followers ?? row.followers_count, 0),
-    following: getNumber(row.following ?? row.following_count, 0),
-    concerts: getNumber(row.concerts ?? row.concerts_count, 0),
+    followers: getNumber(row.followers, 0),
+    following: getNumber(row.following, 0),
+    concerts: getNumber(row.concerts, 0),
     favoriteArtist: getString(row.favorite_artist ?? row.favoriteArtist),
     favoriteSong: getString(row.favorite_song ?? row.favoriteSong),
     compatibility: getString(row.compatibility),
@@ -66,6 +67,7 @@ function buildDisplayProfile(row: ProfileRow | null): DisplayProfile {
 
 const ProfileScreen: React.FC = () => {
   const { profileId } = useParams<{ profileId?: string }>();
+  const { profileRevision } = useUserProfile();
   const navigate = useNavigate();
   const [displayProfile, setDisplayProfile] = useState<DisplayProfile>(EMPTY_USER_PROFILE);
   const [currentProfileId, setCurrentProfileId] = useState<string | number | null>(null);
@@ -114,7 +116,7 @@ const ProfileScreen: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [profileRevision]);
 
   useEffect(() => {
     let isMounted = true;
@@ -148,7 +150,7 @@ const ProfileScreen: React.FC = () => {
     return () => {
       isMounted = false;
     };
-  }, [profileId]);
+  }, [profileId, profileRevision]);
 
   useEffect(() => {
     let isMounted = true;

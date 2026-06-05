@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { UserProfile } from '../types';
 import { supabase } from '../lib/supabaseClient';
@@ -8,12 +8,19 @@ import {
   buildProfileFromRow,
   EMPTY_USER_PROFILE,
   PROFILE_SELECT_FIELDS,
+  updateProfileInSupabase,
   type ProfileRow,
 } from '../lib/profileUtils';
 
+type SaveUserProfileResult = {
+  ok: boolean;
+  error?: string;
+};
+
 interface UserProfileContextValue {
   userProfile: UserProfile;
-  updateUserProfile: (nextProfile: UserProfile) => void;
+  profileRevision: number;
+  saveUserProfile: (nextProfile: UserProfile) => Promise<SaveUserProfileResult>;
 }
 
 const UserProfileContext = createContext<UserProfileContextValue | null>(null);
@@ -64,6 +71,30 @@ async function getOrCreateProfile(authUser: User): Promise<UserProfile> {
 
 export function UserProfileProvider({ children }: UserProfileProviderProps) {
   const [userProfile, setUserProfile] = useState<UserProfile>(EMPTY_USER_PROFILE);
+  const [profileRevision, setProfileRevision] = useState(0);
+
+  const saveUserProfile = useCallback(async (nextProfile: UserProfile): Promise<SaveUserProfileResult> => {
+    const { data: authData, error: authError } = await supabase.auth.getUser();
+    const authUser = authData.user;
+
+    if (authError || !authUser) {
+      return { ok: false, error: 'No authenticated user' };
+    }
+
+    await getOrCreateProfile(authUser);
+
+    const { data, error } = await updateProfileInSupabase(authUser.id, nextProfile);
+
+    if (error || !data) {
+      return { ok: false, error: error ?? 'Could not update profile' };
+    }
+
+    const savedProfile = buildProfileFromRow(data, authUser.user_metadata);
+    setUserProfile(savedProfile);
+    setProfileRevision((revision) => revision + 1);
+
+    return { ok: true };
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -105,9 +136,10 @@ export function UserProfileProvider({ children }: UserProfileProviderProps) {
   const value = useMemo(
     () => ({
       userProfile,
-      updateUserProfile: setUserProfile,
+      profileRevision,
+      saveUserProfile,
     }),
-    [userProfile]
+    [userProfile, profileRevision, saveUserProfile]
   );
 
   return (
