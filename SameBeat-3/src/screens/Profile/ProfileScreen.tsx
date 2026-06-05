@@ -172,6 +172,8 @@ const ProfileScreen: React.FC = () => {
           text,
           likes,
           reposts,
+          media_image,
+          media_song,
           created_at,
           profiles (
             username,

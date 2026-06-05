@@ -71,3 +71,69 @@
   cursor: pointer;
   width: 100%;
 }
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.modal-media-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.modal-media-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(198, 255, 52, 0.25);
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.modal-media-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-media-preview--audio {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.modal-media-image {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.modal-audio-name {
+  color: white;
+  font-size: 13px;
+  word-break: break-word;
+}
+
+.modal-media-remove {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #C6FF34;
+  cursor: pointer;
+  font-size: 12px;
+  padding: 0;
+}
+
+.modal-error {
+  margin: 0;
+  color: #ffb4b4;
+  font-size: 13px;
+}
