@@ -29,11 +29,8 @@ export type ProfileRow = {
   city?: string | null;
   country?: string | null;
   followers?: number | null;
-  followers_count?: number | null;
   following?: number | null;
-  following_count?: number | null;
   concerts?: number | null;
-  concerts_count?: number | null;
   favorite_artist?: string | null;
   favorite_song?: string | null;
   favoriteArtist?: string | null;
@@ -52,7 +49,7 @@ export type SeedProfileRow = {
 };
 
 const PROFILE_SELECT_FIELDS =
-  'id, username, full_name, age, avatar_url, bio, city, country, followers_count, following_count, concerts_count, favorite_artist, favorite_song';
+  'id, username, full_name, age, avatar_url, bio, city, country, followers, following, concerts, favorite_artist, favorite_song';
 
 export function getAgeFromDate(dateOfBirth?: string, fallback = 0) {
   if (!dateOfBirth) return fallback;
@@ -110,9 +107,9 @@ export function buildProfileFromRow(
     bio: row.bio ?? '',
     city: row.city ?? '',
     country: row.country ?? '',
-    followers: row.followers ?? row.followers_count ?? 0,
-    following: row.following ?? row.following_count ?? 0,
-    concerts: row.concerts ?? row.concerts_count ?? 0,
+    followers: row.followers ?? 0,
+    following: row.following ?? 0,
+    concerts: row.concerts ?? 0,
     favoriteArtist: row.favorite_artist ?? row.favoriteArtist ?? '',
     favoriteSong: row.favorite_song ?? row.favoriteSong ?? '',
   };
@@ -134,6 +131,57 @@ export function mapSeedProfileToUser(
     image: profile.avatar_url || DEFAULT_AVATAR,
     compatibility: profile.compatibility || '',
   };
+}
+
+export type ProfileUpdatePayload = {
+  full_name: string;
+  username: string;
+  age: number;
+  bio: string;
+  city: string;
+  country: string;
+  favorite_artist: string;
+  favorite_song: string;
+  avatar_url: string | null;
+};
+
+export function mapUserProfileToUpdatePayload(profile: UserProfile): ProfileUpdatePayload {
+  return {
+    full_name: profile.name.trim(),
+    username: profile.username.trim(),
+    age: Number.isFinite(profile.age) ? profile.age : 0,
+    bio: profile.bio.trim(),
+    city: profile.city.trim(),
+    country: profile.country.trim(),
+    favorite_artist: profile.favoriteArtist.trim(),
+    favorite_song: profile.favoriteSong.trim(),
+    avatar_url:
+      profile.image && profile.image !== DEFAULT_AVATAR ? profile.image : null,
+  };
+}
+
+export async function updateProfileInSupabase(
+  authUserId: string,
+  profile: UserProfile
+): Promise<{ data: ProfileRow | null; error: string | null }> {
+  const payload = mapUserProfileToUpdatePayload(profile);
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .update(payload)
+    .eq('auth_user_id', authUserId)
+    .select(PROFILE_SELECT_FIELDS)
+    .maybeSingle();
+
+  if (error) {
+    return { data: null, error: error.message };
+  }
+
+  if (!data) {
+    return { data: null, error: 'Profile row not found for authenticated user' };
+  }
+
+  return { data: data as ProfileRow, error: null };
 }
 
 export async function fetchSeedProfiles(limit?: number): Promise<SeedProfileRow[]> {
