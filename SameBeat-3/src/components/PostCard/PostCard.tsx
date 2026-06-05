@@ -174,7 +174,21 @@ export default function PostCard({ post }: Props) {
       </div>
 
       <div className="post-content">
-        <p className="post-text">{post.text}</p>
+        {post.text && <p className="post-text">{post.text}</p>}
+
+        {post.mediaImage && (
+          <img
+            src={post.mediaImage}
+            alt="Post media"
+            className="post-media-image"
+          />
+        )}
+
+        {post.mediaSong && (
+          <audio controls preload="metadata" className="post-media-audio">
+            <source src={post.mediaSong} />
+          </audio>
+        )}
       </div>
 
       {showComments && (
